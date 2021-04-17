@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+
+<!-- Bootstrap Select -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">  
+
+  <!-- Our styles -->
+  <link rel="stylesheet" href="../../commom/css/index.css">
+  <link rel="stylesheet" href="css/busca.css">
+  
+  <link rel="icon" type="image/png" href="../../commom/img/logos/coinlogo2.svg"/>
+  <title>La Pechincha Brasil</title>
+</head>
+
+<body>
+
+  <!-- Navbar Begin -->
+  <div id="header" class="bg-dark border-bottom">
+    <div class="container " style="min-width: 92%;">
+      <div id="header_top" class="row align-items-center">
+        <div class="col-auto">
+          <a href="#">
+            <img id="header_logo_left" alt="logo" src="../../commom/img/logos/coinlogo2.svg" width="50px" />
+
+            <img id="header_logo_right" alt="" src="../../commom/img/logos/brand.png"
+              style="height:36px;width:86px; margin-left: 10px; margin-right: 30px; margin-top: 5px;" />
+          </a>
+        </div>
+        <div id="search-input" class="col">
+          <form action="/search" method="get" role="search" id="custom-search-input">
+            <label for="keywords" class="sr-only"></label>
+            <div class="input-group">
+              <input id="keywords" name="keywords" type="text" class="form-control" id="search-field"
+                placeholder="Buscar produtos, marcas e mais">
+              <span class="input-group-append">
+                <button type="submit" class="btn btn-info btn-lg"><i class="bi bi-search"
+                    aria-hidden="true"></i></button>
+              </span>
+            </div>
+          </form>
+        </div>
+
+        <div id="header_cart" class="col-auto">
+          <a href="#" class="text-warning">
+            <i class="bi bi-basket2 text-warning" style="font-size: 1.6rem; color: white;"></i>
+            <span class="badge bg-warning rounded-circle text-dark"
+              style="position: relative; right: 16px; top: -16px; font-size: 14px;">4</span>
+          </a>
+        </div>
+      </div>
+
+      <nav class=" row navbar-expand-lg navbar-dark" style="margin-top: 10px;">
+        <button class="navbar-toggler text-warning" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          Menu <i class="bi bi-chevron-down" style="font-size: 1.2rem; color: white;" aria-hidden="true"></i>
+        </button>
+
+        <div class="row align-items-center">
+          <div class="col-lg-2"> </div>
+
+          <div class="collapse navbar-collapse col-lg-5 justify-content-start" id="navbarSupportedContent">
+
+            <ul class="navbar-nav" style="font-size: 15px;">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Categorias
+                </a>
+                <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item text-warning" href="#">Action</a></li>
+                  <li><a class="dropdown-item text-warning" href="#">Another action</a></li>
+                  <li><a class="dropdown-item text-warning" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="nav-link text-warning" href="#"> Ofertas do dia</a>
+              </li>
+              <li>
+                <a class="nav-link text-warning" href="#"> Histórico</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-warning" href="#"> Supermercado</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-warning" href="#"> Contato</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3"></div>
+          <div class="collapse navbar-collapse col-lg-2 justify-content-end" id="navbarSupportedContent"
+            style="padding: 0;">
+            <ul class="navbar-nav" style="font-size: 15px;">
+              <li class="nav-item">
+                <a class="nav-link text-warning" href="#">
+                  <i class="bi bi-box-arrow-in-right text-warning me-2" style="font-size: 1.4rem; color: white;"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-warning" href="#">
+                  <i class="bi bi-bell text-warning me-2" style="font-size: 1.4rem; color: white;"></i>
+                </a>
+              </li>
+              <li class="nav-item" style="margin-top: 5px;">
+                <a class="nav-link text-warning" href="#">
+                  Compras
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+
+    </div>
+  </div>
+  <!-- NavBar End -->
+
+  <div class="container" style="min-width: 90%; margin-top: 30px;">
+
+    <div class="row">
+        <div class="col-md-3">
+        <nav class="page-path" aria-label="breadcrumb">
+            <ol class="breadcrumb text-center pl-0 mb-0">
+                <li class="me-1"><a href="#">Home</a><i class="bi bi-chevron-right"  aria-hidden="true"></i></li>
+                <li class="me-1"><a href="#">Home</a><i class="bi bi-chevron-right"  aria-hidden="true"></i></li>
+                <li class="me-1"><a href="#">Home</a><i class="bi bi-chevron-right"  aria-hidden="true"></i></li>
+                <li class="me-1"><a href="#">Home</a><i class="bi bi-chevron-right"  aria-hidden="true"></i></li>
+                <li class="me-1"><a href="#">Home</a><i class="bi bi-chevron-right"  aria-hidden="true"></i></li>
+                <li class="me-1 active" aria-current="page">Library</li>
+            </ol>
+        </nav>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-3 text-center search-orderby mt-3">
+            <span class="title">Odernar por</span>
+            <select class="selectpicker" data-width="fit">
+              <option class="order-option" value="avaliacao">Melhor Avaliação</option>
+              <option class="order-option" value="maior-preco">Maior Preço</option>
+              <option class="order-option" value="menor-preco">Menor Preço</option>
+            </select>            
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="left-content col-md-3">
+            <div>
+                <h3>Search String</h3>
+                <p><span>999</span>results</p>
+            </div>
+            <div class="w-75">
+                <span class=" text-center badge p-2 bg-warning text-light me-2 my-1">Tag 124 <span type="button" class=" btn-close btn-close-white h-100" aria-label="Close"></span></span>
+                <span class=" text-center badge p-2 bg-warning text-light me-2 my-1">Tag 9999 <span type="button" class=" btn-close btn-close-white h-100" aria-label="Close"></span></span>
+                <span class=" text-center badge p-2 bg-warning text-light me-2 my-1">Tag 6 <span type="button" class=" btn-close btn-close-white h-100" aria-label="Close"></span></span>
+                <span class=" text-center badge p-2 bg-warning text-light me-2 my-1">Tag 71 <span type="button" class=" btn-close btn-close-white h-100" aria-label="Close"></span></span>
+                <span class=" text-center badge p-2 bg-warning text-light me-2 my-1">Tag 123456 <span type="button" class=" btn-close btn-close-white h-100" aria-label="Close"></span></span>
+                <span class=" text-center badge p-2 bg-warning text-light me-2 my-1">Tag 1 <span type="button" class=" btn-close btn-close-white h-100" aria-label="Close"></span></span>
+                
+            </div>
+            <div class="filters w-75">
+                <ul class="list-group mt-4 caracteristica"> 
+                    <h6 class="font-weight-bold">Caracteristica</h6>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 1
+                    <span class="badge bg-dark rounded-pill ">14</span>
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 2
+                    <span class="badge bg-dark rounded-pill">2</span>
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 3
+                    <span class="badge bg-dark rounded-pill">1</span>
+                    </li>
+                </ul>
+                <ul class="list-group mt-4 caracteristica"> 
+                    <h6 class="font-weight-bold">Caracteristica2</h6>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 1
+                    <span class="badge bg-dark rounded-pill ">14</span>
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 2
+                    <span class="badge bg-dark rounded-pill">2</span>
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 3
+                    <span class="badge bg-dark rounded-pill">1</span>
+                    </li>
+                </ul>
+                <ul class="list-group mt-4 caracteristica"> 
+                    <h6 class="font-weight-bold">Caracteristica3</h6>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 1
+                    <span class="badge bg-dark rounded-pill ">14</span>
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 2
+                    <span class="badge bg-dark rounded-pill">2</span>
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    cat 3
+                    <span class="badge bg-dark rounded-pill">1</span>
+                    </li>
+                </ul>
+                <ul class="list-group mt-4 caracteristica"> 
+                    <h6 class="font-weight-bold">Caracteristica4</h6>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    <label class="form-check-label" for="User">cat 1</label>
+                    <input class="form-check-inline" type="checkbox" value="">
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    <label class="form-check-label" for="User">cat 2</label>
+                    <input class="form-check-inline" type="checkbox" value="">
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    <label class="form-check-label" for="User">cat 3</label>
+                    <input class="form-check-inline" type="checkbox" value="">
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    <label class="form-check-label" for="User">cat 3</label>
+                    <input class="form-check-inline" type="checkbox" value="">
+                    </li>
+                    <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
+                    <label class="form-check-label" for="User">cat 3</label>
+                    <input class="form-check-inline" type="checkbox" value="">
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+        <div class="right-content col-md-9 row h-100">
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 98,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 8,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 98,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 58,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 48,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 68,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 48,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 68,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 48,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 68,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 48,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="item" onmouseout="">
+                    <div class="card align-items-center prod-card w-auto">
+                      <div class="card-header bg-white">
+                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">R$ 68,12</h5>
+                        <p class="card-text">12x R$ 99,99 sem juros</p>
+                        <p class="product-desc">Produto exemplar - amostra simples</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="search-pagination">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item disabled">
+                    <a class="page-link bg-transparent" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item"><a class="page-link" href="#">6</a></li>
+                  <li class="page-item"><a class="page-link" href="#">7</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-center text-lg-start">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright | Todos os Direitos reservados    
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center p-3">
+          <ul>
+          <li><a href=""> Trabalhe conosco</a></li>
+          <li><a href="">Termos e condições</a></li>
+          <li><a href="">Como cuidamos da sua privacidade</a></li>
+          <li><a href="">Contato</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Select -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+  <!-- Our Scripts -->
+  <script src="../../commom/js/items3-carousel.js"></script>
+  <script src="js/busca.js"></script>
+
+
+</body>
+
+</html>

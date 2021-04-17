@@ -1,0 +1,46 @@
+*{margin: 0; padding: 0;}
+
+body{
+	font-family: "arial";font-size: 13x; color: #333;
+}
+header{
+	height: 0 auto;
+	background-color: #222;
+}
+.img{
+	width: 80px;
+}
+
+.navbar-inverse {
+    background-color: #222 !important;
+    border-color: #222222 !important;
+
+}
+.footer{
+	 background-color: #f95959;
+	 height: 80px;
+	 color: #fff;
+
+}
+.footer p{
+	padding-top: 10px;
+}
+
+.menu a{
+
+	color: #fff!important;
+	padding: 30px 45px;
+	text-decoration: none;
+	
+}
+.menu a:hover{
+	background-color:#f95959;
+
+}
+.menu{
+	    padding: 30px;
+}
+.adm{
+	background: #22928d;
+	color: red;
+}

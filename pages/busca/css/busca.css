@@ -1,0 +1,126 @@
+.item
+{
+    outline: none !important;
+    margin-bottom: 24px;
+}
+
+.item .card
+{
+    box-shadow: 0 2px 4px 2px rgba(204, 203, 203, 0.322);
+}
+
+.item .card:hover
+{
+    border: solid 1.5px rgba(128, 125, 125, 0.548);
+    box-shadow: -1px 2px 4px -1px rgba(26, 25, 25, 0.322);
+}
+
+.item .card-body
+{
+    width: 100%;
+    text-align: left;
+}
+
+.item .card-header
+{
+    padding: 16px 12px;
+}
+
+.item .card-body h5 
+{
+    font-size: 1.5rem;
+    margin-bottom: 0.5px;
+}
+
+.item .card-body p
+{
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.item .card-body .product-desc
+{
+    margin-top: 5px;
+    color: #666;
+}
+
+.item .card-body .cents
+{
+    font-size: 1.0rem;
+    position: relative;
+    top: -5px;
+    
+}
+
+ .page-path a,li{
+    font-size: 14px;
+    color: #666;
+}
+
+.page-path a:hover
+{
+    text-decoration: none;
+    color: #ffc107;
+
+}
+
+
+.search-orderby, .search-orderby button
+{
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+    color: #666;
+    padding-left: 2px;
+}
+
+.search-orderby .title
+{
+
+    font-weight: bold;
+}
+
+.search-orderby button:hover
+{
+    background-color: transparent;
+    outline: none;
+}
+
+.search-orderby .order-option
+{
+    color:  #212529;
+    font-size: 15px;
+    text-align: left;
+    border-left: 6px solid  transparent;
+    border-radius: 0 2px 2px 0px;
+    padding: 4px 12px;
+}
+
+.search-orderby .order-option:hover
+{
+    background-color: #666;
+    color:  rgb(52, 58, 64);
+    font-size: 15px;
+    text-align: left;
+    border-left: 6px solid  #ffc107;
+    border-radius: 0 2px 2px 0px;
+}
+
+.dropdown-item.active, .dropdown-item:active 
+{
+    background-color: rgb(52, 58, 64);
+    color: #ffc107;
+}
+
+.search-orderby .show
+{
+    position: relative;
+    
+    padding: 0;
+}
+
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle{
+    color: #666;
+    background-color: transparent;
+    border-color: transparent;
+}

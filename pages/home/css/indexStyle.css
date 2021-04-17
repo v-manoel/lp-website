@@ -1,0 +1,97 @@
+
+.items-carousel .item
+{
+    padding: 0 8px 0 8px;
+    outline: none !important;
+}
+
+.items-carousel .item .card
+{
+    
+    box-shadow: 0 2px 4px 2px rgba(204, 203, 203, 0.322);
+}
+
+.items-carousel .item .card:hover
+{
+    border: solid 1.5px rgba(128, 125, 125, 0.548);
+    box-shadow: -1px 2px 4px -1px rgba(26, 25, 25, 0.322);
+}
+
+.items-carousel .item .card-body
+{
+    width: 100%;
+    text-align: left;
+}
+
+.items-carousel .item .card-header
+{
+    padding: 16px 12px;
+}
+
+.items-carousel .item .card-body h5 
+{
+    font-size: 1.5rem;
+    margin-bottom: 0.5px;
+}
+
+.items-carousel .item .card-body p
+{
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.items-carousel .item .card-body .product-desc
+{
+    margin-top: 5px;
+    color: #666;
+    display: none;
+}
+
+.item .card-body .cents
+{
+    font-size: 1.0rem;
+    position: relative;
+    top: -5px;
+    
+}
+
+.products-carousel-section .section-title
+{
+    color: #666;
+}
+
+.callout
+{
+    border-left: 4.5px solid #ffc107;
+    padding: 15px 0 15px 0;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 1px rgba(204, 203, 203, 0.322);
+}
+
+.callout .field a:hover
+{
+    text-decoration: none;
+    color: #0a5cb4;
+}
+
+.callout .field h5
+{
+    font-size: 1.0rem;
+    margin-bottom: 2px;
+}
+
+.callout .field p
+{
+    color: #666;
+}
+
+.callout .field p,a
+{
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 992px){
+    .callout{display:none;}
+}
