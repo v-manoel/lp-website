@@ -1,0 +1,14 @@
+.menu-canto{
+	background: red;
+	height: auto;
+	width: 80px;
+	float: left;
+}
+.centro{
+	background: blue;
+	float: right;
+}
+.title-meus{
+	font-size: 24px;
+    margin-bottom: 30px;
+}
