@@ -1,0 +1,86 @@
+.page-container{
+    min-width: 90%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 30px;
+
+}
+
+.payment-method .container-fluid
+{
+    padding: 0;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(235, 232, 232);
+    box-shadow: 0 5px 2px -3px rgba(199, 198, 198, 0.8);
+    margin-bottom: 30px;
+}
+
+.payment-option
+{
+    padding: 28px;
+    margin: 0;
+}
+
+.payment-option .desc
+{
+    font-style: normal;
+    font-size: 16px;
+}
+
+.payment-option:hover
+{
+    background-color: rgba(216, 215, 215, 0.404);
+    cursor: pointer;
+    
+}
+.payment-option .form-check-input
+{
+    position: relative;
+    margin: 0;
+    margin-top: 4.8px;
+    margin-right: 12px;
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+
+#sidebar .sidebar-header .title
+{
+    font-weight: bold;
+}
+
+#sidebar .item
+{
+    padding: 12px;
+}
+
+#sidebar {
+    display: none;
+    z-index: 999;
+    background: rgb(255, 255, 255);
+
+    transition: all 0.3s;
+    box-shadow: none;
+}
+
+#sidebar.active {
+    display: block;
+    right: 0;
+}
+
+#dismiss {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#dismiss:hover {
+    color: #ffc107;
+}
