@@ -1,7 +1,6 @@
 .menu-canto{
 	background: red;
-	height: 100%;
-	width: 58px;
+	
 
 	margin-left: 0;
 }
@@ -12,4 +11,18 @@
 .title-meus{
 	font-size: 24px;
     margin-bottom: 30px;
+}
+.cts{
+	 width: 760px;
+
+}
+.cts{
+	background: #fff;
+	border-radius: 5px;
+}
+.c-hr{
+	    height: 0px!important;
+}
+.ONE{
+	padding-left: 15px;
 }
