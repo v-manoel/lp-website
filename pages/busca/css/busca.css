@@ -91,7 +91,7 @@
     color:  #212529;
     font-size: 15px;
     text-align: left;
-    border-left: 6px solid  transparent;
+    border-left: 6px solid transparent;
     border-radius: 0 2px 2px 0px;
     padding: 4px 12px;
 }
@@ -123,4 +123,76 @@
     color: #666;
     background-color: transparent;
     border-color: transparent;
+}
+
+
+/* Filter Slidebar */
+
+.left-content #sidebar {
+    width: 280px;
+    position: relative;
+    top: 0;
+    left: -400px;
+    z-index: 999;
+    background: #ebebeb;
+    color: #212529;
+    transition: all 0.3s;
+    overflow-y: scroll;
+    outline: none;
+    outline-width: 0;
+    border: 0;
+}
+
+.left-content #sidebar.active {
+    left: 0;
+
+}
+
+.left-content #dismiss {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    background: #ebebeb;
+
+    position: absolute;
+    right: 0;
+    top: 2px;
+
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.left-content #dismiss:hover {
+    color: #ffc107;
+}
+
+.left-content .dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.left-content #mCSB_1
+{
+    border: 0;
+    outline: none;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+.left-content #content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
 }
