@@ -15,14 +15,12 @@
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
 
-  <!-- Slick Carousel-->
- <!-- Slick Carousel-->
-  <link rel="stylesheet" type="text/css" href="./../../slick/slick.css">
-  <link rel="stylesheet" type="text/css" href="./../../slick/slick-theme.css"/>
+<!-- Slick Carousel-->
+  <link rel="stylesheet" type="text/css" href="../../../slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="../../../slick/slick-theme.css"/>
         
   <!-- Our styles -->
   <link rel="stylesheet" href="../../../commom/css/index.css">
-  <link rel="stylesheet" href="../../../commom/css/items5-carousel.css">
   <link rel="stylesheet" href="../../../commom/css/items5-carousel.css">
   <link rel="stylesheet" href="css/clientes.css">
   
@@ -37,7 +35,7 @@
     <div class="container " style="min-width: 92%;">
       <div id="header_top" class="row align-items-center">
         <div class="col-auto">
-          <a href="../clientes.html">
+          <a href="../../home/index.html">
             <img id="header_logo_left" alt="logo" src="../../../commom/img/logos/coinlogo2.svg" width="50px" />
 
             <img id="header_logo_right" alt="" src="../../../commom/img/logos/brand.png"
@@ -138,56 +136,59 @@
   <!--Start Selection -->
   <section id="clients" class="section-bg">
     <div class="container ">
-      <h4 class="oiu">Compras</h4>
+      <h3 class="t-add">Adicionar um endereço</h3>
+      <div class="center">
 
-      <div class="row ttta">
-        <div class="col-sm-2 ops">
-          <img src="../../../commom/img/examples/produtos.svg" style="height: 80px;width: 80px;">
-        </div>
-        <div class="col-sm-7">
-          <h5>Descrição:</h5>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has .</p>
-        </div>
-        <div class="col-sm-3">
-          <button type="button" class="btn btn-warning bti">Ver compra</button>
-          
-         <button type="button" class="btn btn-warning bti bt3">Comprovante</button> 
-        </div>
-      </div>
-      <div class="row ttta">
-        <div class="col-sm-2 ops">
-          <img src="../../../commom/img/examples/produtos.svg" style="height: 80px;width: 80px;">
-        </div>
-        <div class="col-sm-7">
-          <h5>Descrição:</h5>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has </p>
-        </div>
-        <div class="col-sm-3">
-          <button type="button" class="btn btn-warning bti">Ver compra</button>
-          
-         <button type="button" class="btn btn-warning bti bt3">Comprovante</button> 
+        <!-- Nome, cep,estado,cidade, bairro, rua, numero,(s/n), dados add, telefone-->
 
-        </div>
-        <br>
-      </div>
-      <div class="row ttta">
-        <div class="col-sm-2 ops">
-          <img src="../../../commom/img/examples/produtos.svg" style="height: 80px;width: 80px;">
-        </div>
-        <div class="col-sm-7">
-          <h5>Descrição:</h5>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It ha</p>
-        </div>
-        <div class="col-sm-3">
-         <button type="button" class="btn btn-warning bti">Ver compra</button>
-         
-         <button type="button" class="btn btn-warning bti bt3">Comprovante</button> 
-        </div>
+          <div class="form-floating mb-3 f-1">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Nome</label>
+          </div>
+          <div class="form-floating mb-3 f-2 ">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">CEP</label>
+          </div>
+          <div class="form-floating mb-3 f-3 float-right">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Estado</label>
+          </div>
+          <div class="form-floating mb-3 f-4">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Cidade</label>
+          </div>
+          <div class="form-floating mb-3 f-5">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Bairro</label>
+          </div>
+          <div class="form-floating mb-3 f-6 float-right">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Rua</label>
+          </div>
+          <div class="form-floating mb-3 f-7">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" aria-describedby="button-addon2">
+            <label for="floatingInput">Nº</label>
+            <input type="checkbox" id="button-addon2">
+            <span>Sem número</span>
+          </div>
+          <div class="form-floating mb-3 f-8">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Telefone</label>
+          </div>
+          <div class="form-floating mb-3" style="padding-bottom: 10px;">
+            <button type="button" class="btn btn-outline-warning float-none">Confirmar</button>
+            <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+
+          </div>
+          
+          
+
       </div>
         
     </div>
-</section>
-  <!-- End Selection-->
+</section>  <!-- End Selection-->
+
+
 
 
 
