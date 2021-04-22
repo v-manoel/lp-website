@@ -1,11 +1,6 @@
-.menu-canto{
-	
-	
 
-	margin-left: 0;
-}
 .oiu{
-	margin-top: 30px;
+	margin-bottom: 20px;
 }
 .centro{
 	background: blue;
@@ -94,9 +89,46 @@
 	text-align: center;
 
 }
+.bti{
+	margin-top: 9px;
+	width: auto;
+	font-size: 14px;
+
+}
 .cpo,p{
 	font-size: 13px;
 }
 .cpo,a{
 	color: black!important;
+}
+.inp{
+	background-color: #fec34b;
+	margin-bottom: 20px;
+	border-radius: 16px;
+}
+.ttta{
+	border: 1px solid;
+	margin-bottom: 10px;
+	border-radius: 7px;
+	background-color: #fff;
+	    border-color: #fec34b;
+}
+.inp,img{
+	height: auto;
+
+}
+.tit{
+	margin-bottom: 28px;
+}
+.sp{
+	width: 115px;
+	background-color: #fec34b;
+
+}
+.sp1{
+	width: auto;
+	background-color: #fec34b;
+}
+.lp{
+	background-color: none;
 }
