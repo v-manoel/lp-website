@@ -1,0 +1,33 @@
+.sidepanel-inner, .nav-item
+{
+    background-color: #212529 !important;
+}
+
+.nav-link,.stats-figure
+{
+    color: #ffc107 !important;
+}
+
+.stat-cell
+{
+    color: white;
+}
+
+.nav-link.active
+{
+    color: #212529 !important;
+    background: #ffc107 !important;
+    border-left: 4px solid #9c7708 !important;
+}
+
+.app-card
+{
+    background-color: #212529 !important;
+    color: white !important;
+}
+
+.app-card-title
+{
+    color: #fff !important;
+}
+

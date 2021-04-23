@@ -104,15 +104,21 @@ footer .text-lg-start{
     color: #ffc107!important;
 }
 
-footer .p-3,ul, li{
+footer .p-3 ul li{
 
     display: inline;
 
 }
-footer .p-3,ul, li, a{
+footer .p-3 ul li a{
 
     color:#ffc107!important;
 }
+
+footer .p-3{
+
+    color:#ffc107!important;
+}
+
 
 footer .carr{
     height: 300px;
