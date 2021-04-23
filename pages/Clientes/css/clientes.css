@@ -43,3 +43,60 @@
 .refe{
 	font-size: 13px;
 }
+
+ .section-header h3 {
+     font-size: 36px;
+     color: #283d50;
+     text-align: center;
+     font-weight: 500;
+     position: relative
+ }
+
+ .section-header p {
+   
+     margin: auto;
+     font-size: 15px;
+     padding-bottom: 60px;
+     color: #556877;
+     width: 50%
+ }
+
+ #clients {
+     padding: 60px 0
+ }
+
+ #clients .clients-wrap {
+    
+     margin-bottom: 30px
+ }
+
+.imgs{
+	height:auto;
+	width: auto;
+	text-align: center;
+}
+.imgs,img{
+	height: 70px;
+
+}
+ 
+ .cpo{
+ 	border-radius: 100px;
+ 	background: #b1c3d6d4;
+ 	height: 150px;
+ 	margin-bottom: 30px;
+ }
+ .cpo:hover{
+ 	background-color:#ffc107;
+ }
+
+.cpo,h2{
+	text-align: center;
+
+}
+.cpo,p{
+	font-size: 13px;
+}
+.cpo,a{
+	color: black!important;
+}
