@@ -1,4 +1,43 @@
 
+  #iterativeCard
+  {
+    width: 280px;
+    height: 160px;
+    background: linear-gradient(to top right, #212529 36%, #666666 90%);
+    border-radius: 4px;
+  }
+
+
+  #flagCard
+  {
+    width: 64px;
+    height: 44px;
+    position: relative;
+    top: 12px;
+    left: 12px;
+    background-color: rgb(75, 75, 75);
+    border-radius: 2px;
+  }
+
+  #iterativeCardBack
+  {
+    width: 280px;
+    height: 160px;
+    background: linear-gradient(to bottom right, #212529 36%, #666666 90%);
+    border-radius: 4px;
+  }
+
+  #stripCard
+  {
+    width: auto;
+    height: 44px;
+    position: relative;
+    top: 18px;
+
+    background-color: rgb(22, 21, 21);
+    border-radius: 2px;
+  }
+
 .oiu{
 	margin-bottom: 20px;
 }
