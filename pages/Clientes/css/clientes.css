@@ -82,9 +82,13 @@
  
  .cpo{
  	border-radius: 100px;
- 	background: #b1c3d6d4;
- 	height: 150px;
- 	margin-bottom: 30px;
+    background: #b1c3d6d4;
+    height: 158px;
+    margin-bottom: 30px;
+    margin: auto;
+    width: 268px;
+    margin-right: 0px;
+    margin-bottom: 16px
  }
  .cpo:hover{
  	background-color:#ffc107;
