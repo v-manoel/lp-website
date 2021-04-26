@@ -9,6 +9,75 @@
     box-shadow: 0 3px 2px -2px rgba(187, 187, 187, 0.8);
 }
 
+.item .prod-title
+{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.item .prod-desc
+{
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.item .prod-categoria
+{
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.item .options{
+    font-size: 0.9rem;
+
+}
+
+.item .qtd{
+    font-size: 1.2rem;
+
+}
+
+.item .qtd i{
+    cursor: pointer;
+}
+
+.item .card-body p
+{
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.item .decimals
+{
+    font-size: 70%;
+    position: relative;
+    top: 3px;
+
+}
+
+.item .price
+{
+    font-size: 1.3rem;
+}
+
+.price-information .price
+{
+ font-size: 1.2rem;
+}
+
+.price
+{
+ font-size: 1.5rem;
+}
+
+.decimals
+{
+    font-size: 70%;
+    position: relative;
+    top: 3px;
+
+}
+
 .item,.price-information{
     border-bottom: 1px solid rgba(221, 221, 221, 0.808);
     padding: 24px 0;

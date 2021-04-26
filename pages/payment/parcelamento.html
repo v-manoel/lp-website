@@ -63,12 +63,13 @@
                                 Cartão de Crédito Example
                             </div>
                             <div class="col-md-3 text-end">
-                                <a href="#">Alterar</a>
+                                <a href="preview.html">Alterar</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <h4 class="mb-4">Adicione um novo cartão</h4>
+                <form action="" method="post">
+                <h4 class="mb-4">Insira os dados do cartão</h4>
                 <div class="container-fluid">
                     <div class="row p-4">
 
@@ -76,7 +77,7 @@
                             <form class="row g-3 mt-auto">
 
                                 <div class="label-float">
-                                    <input type="text" class="w-auto" id="cardCod" placeholder=" ">
+                                    <input type="text" class="w-auto" id="cardCod" placeholder="123" required>
                                     <label for="cardCod" class="w-auto">Código de segurança</label>
                                 </div>
 
@@ -99,8 +100,8 @@
                     <h4 class="mb-3">Em quantas vezes ? </h4>
                     <div class="container-fluid">
                         <div class="form-check payment-option align-items-center">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0">
-                            <label class="form-check-label row align-items-center" for="flexRadioDefault0">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="1x">
+                            <label class="form-check-label row align-items-center" for="1x">
                                 <div class="col-md-6 parcela-parcial h5">
                                     <span class="font-weight-bold me-2">1x </span> R$ <span>99,99</span>
                                 </div>
@@ -110,20 +111,10 @@
                             </label>
                         </div>
                         <hr class="m-0 h-25 text-secondary ">
+
                         <div class="form-check payment-option align-items-center">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0">
-                            <label class="form-check-label row align-items-center" for="flexRadioDefault0">
-                                <div class="col-md-6 parcela-parcial h5">
-                                    <span class="font-weight-bold me-2">1x </span> R$ <span>99,99</span>
-                                </div>
-                                <div class="col-md-6 parcela-total text-end text-secondary h6">
-                                    <span> R$ <span>99,99</span></span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="form-check payment-option align-items-center">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0">
-                            <label class="form-check-label row align-items-center" for="flexRadioDefault0">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x">
+                            <label class="form-check-label row align-items-center" for="2x">
                                 <div class="col-md-6 parcela-parcial h5">
                                     <span class="font-weight-bold me-2">2x </span> R$ <span>99,99</span>
                                 </div>
@@ -132,9 +123,10 @@
                                 </div>
                             </label>
                         </div>
+                        <hr class="m-0 h-25 text-secondary ">
                         <div class="form-check payment-option align-items-center">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0">
-                            <label class="form-check-label row align-items-center" for="flexRadioDefault0">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="3x">
+                            <label class="form-check-label row align-items-center" for="3x">
                                 <div class="col-md-6 parcela-parcial h5">
                                     <span class="font-weight-bold me-2">3x </span> R$ <span>99,99</span>
                                 </div>
@@ -143,9 +135,10 @@
                                 </div>
                             </label>
                         </div>
+                        <hr class="m-0 h-25 text-secondary ">
                         <div class="form-check payment-option align-items-center">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0">
-                            <label class="form-check-label row align-items-center" for="flexRadioDefault0">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="4x">
+                            <label class="form-check-label row align-items-center" for="4x">
                                 <div class="col-md-6 parcela-parcial h5">
                                     <span class="font-weight-bold me-2">4x </span> R$ <span>99,99</span>
                                 </div>
@@ -154,9 +147,10 @@
                                 </div>
                             </label>
                         </div>
+                        <hr class="m-0 h-25 text-secondary ">
                         <div class="form-check payment-option align-items-center">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0">
-                            <label class="form-check-label row align-items-center" for="flexRadioDefault0">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="5x">
+                            <label class="form-check-label row align-items-center" for="5x">
                                 <div class="col-md-6 parcela-parcial h5">
                                     <span class="font-weight-bold me-2">5x </span> R$ <span>99,99</span>
                                 </div>
@@ -165,9 +159,10 @@
                                 </div>
                             </label>
                         </div>
+                        <hr class="m-0 h-25 text-secondary ">
                         <div class="form-check payment-option align-items-center">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0">
-                            <label class="form-check-label row align-items-center" for="flexRadioDefault0">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="6x">
+                            <label class="form-check-label row align-items-center" for="6x">
                                 <div class="col-md-6 parcela-parcial h5">
                                     <span class="font-weight-bold me-2">6x </span> R$ <span>99,99</span>
                                 </div>
@@ -179,7 +174,8 @@
                     </div>
                 </div>
 
-                <a href="review.html"><button class="btn btn-warning text-dark float-md-end">Continuar</button></a>
+                <button type="submit" class="btn btn-warning text-dark float-md-end">Continuar</button>
+                </form>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-4 text-center">

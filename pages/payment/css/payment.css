@@ -6,6 +6,19 @@
 
 }
 
+.text-secondary .price{
+  font-size: 1.6rem;
+}
+
+.decimals
+{
+    font-size: 70%;
+    position: relative;
+    top: 3px;
+
+}
+
+
 .payment-method .container-fluid
 {
     padding: 0;
@@ -200,3 +213,78 @@
     background-color: rgb(22, 21, 21);
     border-radius: 2px;
   }
+
+  .my-items .prod-title
+  {
+    font-size: 1rem;
+  }
+
+  .my-items .prod-other-info
+  {
+    font-size: 0.8rem ;
+  }
+
+  .user-enderecos .endereco-option
+{
+    padding: 12px;
+    border-bottom: 1px solid rgba(221, 221, 221, 0.808);
+}
+
+.user-enderecos .endereco-option:hover
+{
+    background-color: rgba(216, 215, 215, 0.404);
+    cursor: pointer;
+    
+}
+.user-enderecos .endereco-option .form-check-input
+{
+    position: relative;
+    margin: 0;
+    margin-top: 4.8px;
+    margin-right: 12px;
+}
+
+
+#enderecoModal .container-fluid
+{
+    padding: 0;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(235, 232, 232);
+    box-shadow: 0 4px 2px -2px rgba(146, 144, 144, 0.835);
+    margin-bottom: 30px;
+}
+
+
+
+.cep-entry #informcep
+{
+    padding-right: 0;
+    padding-left: 0;
+    margin-left: 12px;
+    margin-right: 12px;
+    border: 0;
+    outline: none;
+    border-radius: 1px;
+    border-bottom: 2px solid rgb(199, 198, 198);
+    padding-bottom: 1px;
+    background-color: transparent;
+}
+
+.cep-entry #informcep:hover
+{
+    border: 0;
+    border-bottom: 3px solid rgb(170, 170, 170);
+}
+
+.cep-entry form
+{
+    padding: 12px;
+    border-bottom: 1px solid rgba(221, 221, 221, 0.808);
+}
+
+.cep-entry form:hover
+{
+    background-color: rgba(216, 215, 215, 0.404);
+    cursor: pointer;
+}

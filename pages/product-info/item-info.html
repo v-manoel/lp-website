@@ -34,475 +34,953 @@
 <body>
 
   <!-- Navbar Begin -->
-  <div id="header" class="bg-dark border-bottom">
-    <div class="container " style="min-width: 92%;">
+  <div id="desk-header" class="py-1 my-bg-dark header">
+    <div class="container-fluid pb-2">
       <div id="header_top" class="row align-items-center">
-        <div class="col-auto">
-          <a href="../home/index.html">
-            <img id="header_logo_left" alt="logo" src="../../commom/img/logos/coinlogo2.svg" width="50px" />
 
-            <img id="header_logo_right" alt="" src="../../commom/img/logos/brand.png"
-              style="height:36px;width:86px; margin-left: 10px; margin-right: 30px; margin-top: 5px;" />
+        <div class="col-2 col-lg-3">
+          <a href="../home/index.html" class="text-decoration-none">
+            <img id="header_logo_left" alt="logo" src="../../commom/img/logos/coinlogo2.svg"/>
+            <img id="header_logo_right" alt="" src="../../commom/img/logos/brand.png"/>
           </a>
-        </div>
-        <div id="search-input" class="col">
-          <form action="/search" method="get" role="search" id="custom-search-input">
-            <label for="keywords" class="sr-only"></label>
+        </div><!-- //col -->
+
+        <div class="col-10 col-lg-6" id="search-input">
+          <form class="w-100" action="/search" method="POST" role="search" id="custom-search-input">
             <div class="input-group">
-              <input id="keywords" name="keywords" type="text" class="form-control" id="search-field"
-                placeholder="Buscar produtos, marcas e mais">
+              <input id="keywords" name="keywords" type="text" class="form-control" id="search-field" placeholder="Buscar produtos, marcas e mais">
               <span class="input-group-append">
-                <button type="submit" class="btn btn-info btn-lg"><i class="bi bi-search"
-                    aria-hidden="true"></i></button>
-              </span>
-            </div>
-          </form>
-        </div>
+                <button type="submit" class="btn btn-info btn-lg"><i class="bi bi-search" aria-hidden="true"></i></button>
+              </span><!-- input-group-append -->
+            </div><!--//input-group-->
+          </form><!--//form -->
+        </div><!-- //col -->
+        
+        <div class="col-3 col-lg-3 d-flex menu collapse" id="collapseExample">
+          <div class=" m-auto mx-1 header-icon" id="header_login">
+            <a href="../login/login.html" class="my-yellow">
+              <p class="m-auto font-weight-bold text-center">Entre ou <br> Cadastre-se</p>
+            </a>
+            
+          </div>
 
-        <div id="header_cart" class="col-auto">
-          <a href="../cart/cart.html" class="text-warning">
-            <i class="bi bi-basket2 text-warning" style="font-size: 1.6rem; color: white;"></i>
-            <span class="badge bg-warning rounded-circle text-dark"
-              style="position: relative; right: 16px; top: -16px; font-size: 14px;">4</span>
+          <div class="m-auto mx-1 header-icon " id="header_bell">
+            <a href="#" class="my-yellow">
+              <i class="bi bi-bell my-yellow me-2"></i>
+            </a>
+          </div>
+
+          <div class=" m-auto mx-1 header-icon" id="header_cart">
+            <a href="../cart/cart.html" class="my-yellow">
+              <i class="bi bi-basket2 my-yellow"></i>
+              <span class="badge bg-warning rounded-circle text-dark">4</span>
+            </a>
+          </div>
+        </div><!-- col -->
+      </div><!-- row -->
+    </div><!-- //container -->
+
+    
+    
+  </div> <!-- NavBar End -->
+
+  <div id="categorias">
+    <form class="list-group-horizontal w-100 text-center py-2 mb-1 h-auto my-bg-dark" action="/action_page.php" method="POST">
+      <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+      <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+      <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+      <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+      <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+      <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+      <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+    </form>
+  </div>
+
+
+  <!-- Navbar Begin -->
+  <div id="mobile-header" class="py-1 my-bg-dark header">
+    <div class="container-fluid">
+      <div id="header_top" class="row align-items-center my-auto">
+
+        <div class="col-2 col-sm-2">
+          <a href="../home/index.html">
+            <img id="header_logo_left" alt="logo" src="../../commom/img/logos/coinlogo2.svg"/>
           </a>
+        </div><!-- //col -->
+
+        <div class="col-8 col-sm-8" id="search-input">
+          <form class="w-100" action="/search" method="get" role="search" id="custom-search-input">
+            <div class="input-group">
+              <input id="keywords" name="keywords" type="text" class="form-control" id="search-field" placeholder="Buscar produtos, marcas e mais">
+              <span class="input-group-append">
+                <button type="submit" class="btn btn-info btn-lg"><i class="bi bi-search" aria-hidden="true"></i></button>
+              </span><!-- input-group-append -->
+            </div><!--//input-group-->
+          </form><!--//form -->
+        </div><!-- //col -->
+        
+        <div class="col-2 col-sm-2 d-flex menu p-0 my-auto">
+          <div class=" m-auto mx-1 header-icon" id="header_login">
+            <a class="my-yellow" data-bs-toggle="collapse" href="#mobileMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <i class="bi bi-list"></i>
+            </a>
+          </div>
+
+          <div class=" m-auto mx-1 header-icon" id="header_cart">
+            <a href="../cart/cart.html" class="my-yellow">
+              <i class="bi bi-basket2 my-yellow"></i>
+              <span class="badge bg-warning rounded-circle text-dark cart-qtd">4</span>
+            </a>
+          </div>
+        </div><!-- col -->
+        </div><!-- row -->
+  
+    </div><!-- //container -->
+  </div> <!-- NavBar End -->
+
+  <div class="mobile-menu pb-1 mb-3 collapse" id="mobileMenu">
+      <div class="container-fluid row m-auto login">
+        <div class="col-3 m-auto text-center">
+          <i class="bi bi-person-circle"></i>
+        </div>
+        <div class="col-9 m-auto">
+          <h6> <b> Bem vindo </b></h6>
+          <p class="mb-0">Entre na sua conta para ver suas compras</p>
         </div>
       </div>
 
-      <nav class=" row navbar-expand-lg navbar-dark" style="margin-top: 10px;">
-        <button class="navbar-toggler text-warning" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          Menu <i class="bi bi-chevron-down" style="font-size: 1.2rem; color: white;" aria-hidden="true"></i>
-        </button>
-
-        <div class="row align-items-center">
-          <div class="col-lg-2"> </div>
-
-          <div class="collapse navbar-collapse col-lg-5 justify-content-start" id="navbarSupportedContent">
-
-            <ul class="navbar-nav" style="font-size: 15px;">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdown" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  Categorias
-                </a>
-                <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item text-warning" href="#">Action</a></li>
-                  <li><a class="dropdown-item text-warning" href="#">Another action</a></li>
-                  <li><a class="dropdown-item text-warning" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <li>
-                <a class="nav-link text-warning" href="#"> Ofertas do dia</a>
-              </li>
-              <li>
-                <a class="nav-link text-warning" href="#"> Histórico</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-warning" href="#"> Supermercado</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-warning" href="#"> Contato</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3"></div>
-          <div class="collapse navbar-collapse col-lg-2 justify-content-end" id="navbarSupportedContent"
-            style="padding: 0;">
-            <ul class="navbar-nav" style="font-size: 15px;">
-              <li class="nav-item">
-                <a class="nav-link text-warning" href="../login/login.html">
-                  <i class="bi bi-box-arrow-in-right text-warning me-2" style="font-size: 1.4rem; color: white;"></i>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-warning" href="#">
-                  <i class="bi bi-bell text-warning me-2" style="font-size: 1.4rem; color: white;"></i>
-                </a>
-              </li>
-              <li class="nav-item" style="margin-top: 5px;">
-                <a class="nav-link text-warning" href="#">
-                  Compras
-                </a>
-              </li>
-            </ul>
-          </div>
-
+      <div class="container-fluid row m-auto">
+        <div class="col-6 text-center">
+          <a href="../login/login.html"> <button class="btn btn-warning text-dark w-100 m-auto">Entre</button> </a>
         </div>
-      </nav>
+        <div class="col-6 text-center">
+          <a href="../login/login.html"> <button class="btn btn-dark my-yellow w-100 m-auto">Cadastrar</button></a>
+        </div>
+      </div>
+      
+      <hr class="small my-bg-gray">
 
-    </div>
-  </div>
-  <!-- NavBar End -->
+      <div class="container-fluid dropdown-show text-center">
+       <a class="text-decoration-none text-dark m-auto" data-bs-toggle="collapse" href="#collapse-categorias" role="button" aria-expanded="false" aria-controls="collapseExample">
+         <h5><i class="bi bi-list-task me-3"></i>Categorias</h5></a>
+        
+       <div class="collapse" id="collapse-categorias">
+        <form class="list-group" action="/action_page.php">
+          <button type="submit" value="Categoria" class="list-group-item list-group-item-action h5">Categoria</button>
+          <button type="submit" value="Categoria" class="list-group-item list-group-item-action h5">Categoria</button>
+          <button type="submit" value="Categoria" class="list-group-item list-group-item-action h5">Categoria</button>
+          <button type="submit" value="Categoria" class="list-group-item list-group-item-action h5">Categoria</button>
+          <button type="submit" value="Categoria" class="list-group-item list-group-item-action h5">Categoria</button>
+          <button type="submit" value="Categoria" class="list-group-item list-group-item-action h5">Categoria</button>
+        </form>
+      </div>
+      </div>
+
+      <hr class="small my-bg-gray">
+
+      <div class="container-fluid text-center">
+        <h5><i class="bi bi-question-circle me-3"></i>Contate-nos</h5>
+      </div>
+  </div><!-- mobile menu -->
 
   <div class="container prod-info" id="prod-x">
     <div class="row">
-      <div class="left-content col-md-8">
-        <div class="prod-images row h-auto">
-          <div class="col-md-2 align-content-center">
-            <div class="vertical-items-carousel">
+      <div class="left-content col-lg-8 col-12">
+        <div class="prod-images row h-auto border-bottom pb-3">
+          <div class="col-lg-2 col-12 text-center p-2">
+            <div class="vertical-items-carousel img-preview-carousel">
 
-              <div class="item">
-                <button type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
-                    width="80px"></button>
+              <div class="item my-1 img-preview">
+                <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
+                    width="75%"></div>
               </div>
-              <div class="item">
-                <button type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
-                    width="80px"></button>
+
+              <div class="item my-1 img-preview">
+                <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
+                    width="75%"></div>
               </div>
-              <div class="item">
-                <button type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
-                    width="80px"></button>
+
+              <div class="item my-1 img-preview">
+                <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
+                    width="75%"></div>
               </div>
-              <div class="item">
-                <button type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
-                    width="80px"></button>
+              <div class="item my-1 img-preview">
+                <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
+                    width="75%"></div>
               </div>
-              <div class="item">
-                <button type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
-                    width="80px"></button>
+
+              <div class="item my-1 img-preview">
+                <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
+                    width="75%"></div>
               </div>
-              <div class="item">
-                <button type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
-                    width="80px"></button>
+              <div class="item my-1 img-preview">
+                <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
+                    width="75%"></div>
               </div>
-              <div class="item">
-                <button type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
-                    width="80px"></button>
-              </div>
-              <div class="item">
-                <button type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd"
-                    width="80px"></button>
-              </div>
+
+            </div><!-- carousel -->
+          </div><!-- col -->
+          <div class="col-lg-5 col-12 text-center m-auto p-3">
+            <img class="h-100 w-100 img-fluid" src="../../commom/img/examples/produtos.svg" alt="SomeProd">
+          </div><!-- col -->
+
+          <div class="col-lg-5 col-12">
+            <div class="my-2">
+              <p class="n-sales m-0">1985 vendidos</p>
+              <p class="prod-title m-0">Some product sold here</p>
+              <p class="m-0 rating">
+                <span class="bi bi-star-fill text-warning"></span>
+                <span class="bi bi-star-fill text-warning"></span>
+                <span class="bi bi-star-half text-warning"></span>
+                <span class="bi bi-star"></span>
+                <span class="bi bi-star"></span>
+              </p>
             </div>
-          </div>
-          <div class="col-md-10 text-center">
-            <img class="h-75 w-75 img-fluid" src="../../commom/img/examples/produtos.svg" alt="SomeProd">
-          </div>
-        </div>
+            <div class="my-2">
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+              </p>
+              
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+            </div>
+            <div class="my-2">
+              <p class="m-0">Informações sobre o produto</p>
+              <ul class="pl-3">
+                <li>Some information</li>
+                <li>Some information</li>
+                <li>Some information</li>
+                <li>Some information</li>
+                <li>Some information</li>
+                <li>Some information</li>
+                <li>Some information</li>
+              </ul>
+          </div><!-- list -->
 
-        <section class="container products-carousel-section" id="destaques-da-semana"
-          style="min-width: 90%; margin-top: 30px;">
+          </div><!-- col -->
+        </div><!-- row -->
 
-          <div class="h4 p-2 section-title"> Com base em suas últimas compras</div>
+        <section class="container products-carousel-section my-5 border-bottom pb-3" id="based-on-history">
 
+          <div class="h4 p-2 section-title">PRODUTOS SIMILARES</div>
+        
           <div class="items-carousel items-carousel-4">
-
-            <div class="item">
-              <div class="card align-items-center prod-card w-auto">
-                <div class="card-header bg-white">
-                  <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">R$ 99998,12</h5>
-                  <p class="card-text">12x R$ 99,99 sem juros</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="card align-items-center prod-card w-auto">
-                <div class="card-header bg-white">
-                  <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">R$ 99998,12</h5>
-                  <p class="card-text">12x R$ 99,99 sem juros</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="card align-items-center prod-card w-auto">
-                <div class="card-header bg-white">
-                  <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">R$ 99998,12</h5>
-                  <p class="card-text">12x R$ 99,99 sem juros</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="card align-items-center prod-card w-auto">
-                <div class="card-header bg-white">
-                  <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">R$ 99998,12</h5>
-                  <p class="card-text">12x R$ 99,99 sem juros</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="card align-items-center prod-card w-auto">
-                <div class="card-header bg-white">
-                  <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">R$ 99998,12</h5>
-                  <p class="card-text">12x R$ 99,99 sem juros</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="card align-items-center prod-card w-auto">
-                <div class="card-header bg-white">
-                  <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                </div>
-                <div class="card-body">
-                  <p class="card-title">R$ 99998,12</p>
-                  <p class="card-text">12x R$ 99,99 sem juros</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
+            
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+      
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+      
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+      
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+      
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+      
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+      
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+            
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+      
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+              <a href="../product-info/item-info.html">
+                <div class="card align-items-center prod-card w-auto">
+                  <div class="card-header bg-white">
+                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+                  </div><!-- card header -->
+                  <div class="card-body">
+                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                    <span class="text-success off-rate">20% OFF</span>
+                    </p>
+        
+                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                      sem juros
+                    </p>
+                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+                  </div><!-- card body -->
+                </div><!-- card -->
+              </a>
+            </div><!-- item -->
+          </div><!-- carousel -->
+          </section>
 
         <div class="prod-caract container">
-          <div class="card payment-options-card">
-            <h4 class="card-title">Product Title</h4>
-            <div class="card-body">
-              <div class="col-md-6">
-                Some text
-              </div>
-              <div class="col-md-6">
-                Some text
-              </div>
-            </div>
-          </div>
+          <h5>Descrição</h5>
+          <p>
+            Lorem ipsum eleifend taciti etiam lacus quisque dolor posuere eget vulputate, elit sodales elementum ultricies
+            habitant diam vulputate phasellus. platea tellus sem praesent vestibulum donec aliquam neque volutpat lacus,
+            ornare netus ligula vestibulum class nostra fames nisl, per velit interdum habitant eu per vestibulum rhoncus.
+            magna cras adipiscing lobortis volutpat vehicula aliquet tortor, nam ante habitasse nulla habitasse magna,
+            dictum rutrum quisque etiam fermentum vitae. aliquet sem conubia nam morbi consectetur sollicitudin orci,
+            habitasse vitae magna hac quis amet aptent curabitur, sem ultrices morbi sollicitudin pulvinar est. eget purus
+            senectus imperdiet quisque semper netus amet, nullam commodo potenti rutrum eget proin ornare, per vestibulum
+            lacinia integer in quam.
+          </p>
         </div>
 
-        <div class="prod-caract container">
-          <h4>Descrição</h4>
-          Lorem ipsum eleifend taciti etiam lacus quisque dolor posuere eget vulputate, elit sodales elementum ultricies
-          habitant diam vulputate phasellus. platea tellus sem praesent vestibulum donec aliquam neque volutpat lacus,
-          ornare netus ligula vestibulum class nostra fames nisl, per velit interdum habitant eu per vestibulum rhoncus.
-          magna cras adipiscing lobortis volutpat vehicula aliquet tortor, nam ante habitasse nulla habitasse magna,
-          dictum rutrum quisque etiam fermentum vitae. aliquet sem conubia nam morbi consectetur sollicitudin orci,
-          habitasse vitae magna hac quis amet aptent curabitur, sem ultrices morbi sollicitudin pulvinar est. eget purus
-          senectus imperdiet quisque semper netus amet, nullam commodo potenti rutrum eget proin ornare, per vestibulum
-          lacinia integer in quam.
-        </div>
-
-        <div class="prod-caract container">
-          <h4>Avaliação do Produto</h4>
-
-        </div>
-
-
-      </div>
-      <div class="right-content col-md-4">
+      </div><!-- col -->
+      <div class="right-content col-lg-4 col-12">
         <div class="card payment-card">
-          <h4 class="card-title">Product Title</h4>
-          <div class="card-body">
-            <div class="price">Preco</div>
-            <div class="desc"> Informações sobre entrega</div>
-            <div class="desc"> Informações sobre cor e tamanho</div>
-            <div class="desc">Informaçẽos sobre o vendedor</div>
-          </div>
-          <a href="#" class="btn btn-primary">Buy it</a>
-        </div>
-        <div class="card payment-options-card">
-          <h4 class="card-title">Product Title</h4>
-          <div class="card-body">
-            <div class="price">Preco</div>
-            <div class="desc"> Informações sobre entrega</div>
-            <div class="desc"> Informações sobre cor e tamanho</div>
-            <div class="desc">Informaçẽos sobre o vendedor</div>
-          </div>
-        </div>
-        <div class="card seller-card">
-          <h4 class="card-title">Product Title</h4>
-          <div class="card-body">
-            <div class="price">Preco</div>
-            <div class="desc"> Informações sobre entrega</div>
-            <div class="desc"> Informações sobre cor e tamanho</div>
-            <div class="desc">Informaçẽos sobre o vendedor</div>
-          </div>
-        </div>
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="col-lg-1 col-1 text-center">
+                <i class="bi bi-truck h5"></i>
+              </div><!-- col -->
+              <div class="col-lg-10 col-10">
+                <p class="text-success">Produto com frete grátis</p>
+              </div><!-- col -->
+            </div><!-- row -->
+            <p>Fornecido por <span class="text-warning" id="fornecedor">Someone</span></p>
+            <form class="" action="#" method="POST">
 
-      </div>
-    </div>
-  </div>
+              <label for="item-qtd">Quantidade:</label>
+              <select class="selectpicker border-0 bg-transparent my-4" id="item-qtd" data-width="fit">
+                <option class="order-option" value="1" selected>1 unidade</option>
+                <option class="order-option" value="2">2 unidades</option>
+                <option class="order-option" value="3">3 unidades</option>
+                <option class="order-option" value="4">4 unidades</option>
+                <option class="order-option" value="5">5 unidades</option>
+                <option class="order-option" value="6">6 unidades</option>
+                <option class="order-option" value="6">mais de 6 unidades</option>
+              </select>  
 
-  <section class="container products-carousel-section" id="destaques-da-semana"
-    style="min-width: 90%; margin-top: 30px;">
+              <button class="btn btn-dark text-warning my-2 w-100 mt-5" type="submit">Comprar agora</button>
+              <button class="btn btn-warning text-dark my-2 w-100" type="submit">Adicionar ao Carrinho</button>
+            </form>
+            <div class="row my-3">
+            <i class="bi bi-shield-check text-warning h5 col-lg-2 col-2 pr-0 m-auto"></i>
+            <p class="col-lg-10 col-10 text-left p-0 m-auto">Compra Garantida, receba o produto que está esperando ou devolvemos o dinheiro.</p>
+            </div><!-- row -->
+          </div><!-- card body -->
+        </div><!-- card -->
 
-    <div class="h4 p-2 section-title"> Com base em suas últimas compras</div>
+        <div class="card payment-card my-4">
+          <div class="card-body p-0">
+            <p class="mb-4">Meios de pagamento</p>
+            <div class="btn btn-success w-100"><i class="bi bi-credit-card-2-front me-2"></i> Pague em até <b>12</b>x sem juros!</div>
 
+            <div class="mt-4">
+              <p class="my-1">Cartões de crédito</p>
+              <i class="bi bi-credit-card-2-front h2 me-3"></i>
+              <i class="bi bi-credit-card-2-front h2 me-3"></i>
+              <i class="bi bi-credit-card-2-front h2 me-3"></i>
+              <i class="bi bi-credit-card-2-front h2 me-3"></i>
+              <i class="bi bi-credit-card-2-front h2 me-3"></i>
+              <i class="bi bi-credit-card-2-front h2 me-3"></i>
+            </div>
+
+            <div class="mt-4">
+              <p class="my-1">Transferencia PIX</p>
+              <i class="bi bi-x-diamond-fill h2 me-3"></i>
+            </div>
+          </div><!-- card body -->
+        </div><!-- card -->
+
+      </div><!-- col -->
+    </div><!-- row -->
+
+  </div><!-- container -->
+
+  <section class="container products-carousel-section my-5" id="based-on-history">
+
+    <div class="h4 p-2 section-title">BASEADO EM SUAS ÚLTIMAS COMPRAS</div>
+  
     <div class="items-carousel items-carousel-5">
+      
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
 
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <p class="card-title">R$ 99998,12</p>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
 
-    </div>
-  </section>
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
 
-  <section class="container products-carousel-section" id="destaques-da-semana"
-    style="min-width: 90%; margin-top: 30px;">
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
 
-    <div class="h4 p-2 section-title"> Com base em suas últimas compras</div>
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
 
-    <div class="items-carousel items-carousel-5">
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
 
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">R$ 99998,12</h5>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card align-items-center prod-card w-auto">
-          <div class="card-header bg-white">
-            <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-          </div>
-          <div class="card-body">
-            <p class="card-title">R$ 99998,12</p>
-            <p class="card-text">12x R$ 99,99 sem juros</p>
-          </div>
-        </div>
-      </div>
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
+      
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
 
-    </div>
-  </section>
+      <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+        <a href="../product-info/item-info.html">
+          <div class="card align-items-center prod-card w-auto">
+            <div class="card-header bg-white">
+              <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+            </div><!-- card header -->
+            <div class="card-body">
+              <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+              <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+              <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+              <span class="text-success off-rate">20% OFF</span>
+              </p>
+  
+              <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                sem juros
+              </p>
+              <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+            </div><!-- card body -->
+          </div><!-- card -->
+        </a>
+      </div><!-- item -->
+    </div><!-- carousel -->
+    </section>
+
+    <section class="container products-carousel-section my-5" id="based-on-history">
+
+      <div class="h4 p-2 section-title">BASEADO EM SUAS ÚLTIMAS COMPRAS</div>
+    
+      <div class="items-carousel items-carousel-5">
+        
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+  
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+  
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+  
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+  
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+  
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+  
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+        
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+  
+        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+          <a href="../product-info/item-info.html">
+            <div class="card align-items-center prod-card w-auto">
+              <div class="card-header bg-white">
+                <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
+              </div><!-- card header -->
+              <div class="card-body">
+                <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
+                <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
+                <span class="text-success off-rate">20% OFF</span>
+                </p>
+    
+                <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                  sem juros
+                </p>
+                <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
+              </div><!-- card body -->
+            </div><!-- card -->
+          </a>
+        </div><!-- item -->
+      </div><!-- carousel -->
+      </section>
 
   <div class="container banner">
     
   </div>
 
 
-  <footer class="bg-dark text-center text-lg-start w-100">
+  <footer class="bg-dark text-center text-lg-start w-100 mt-4">
     <div class="container-fluid">
       <div class="row">
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.2);">
       © 2020 Copyright | Todos os Direitos reservados    
         </div>
-      </div>
+      </div><!-- row -->
       <div class="row">
-        <div class="text-center p-3">
-          <ul>
-          <li><a href=""> Trabalhe conosco</a></li>
-          <li><a href="">Termos e condições</a></li>
-          <li><a href="">Como cuidamos da sua privacidade</a></li>
+        <div class="text-center p-2">
+          <ul class="m-0">
+          <li><a href="">Trabalhe conosco</a> | </li>
+          <li><a href="">Termos e condições</a> | </li>
+          <li><a href="">Como cuidamos da sua privacidade</a> | </li>
           <li><a href="">Contato</a></li>
         </ul>
         </div>
-      </div>
-    </div>
+      </div><!-- row -->
+    </div><!-- conainer-fluid -->
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
@@ -522,10 +1000,15 @@
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script type="text/javascript" src="../../../slick/slick.min.js"></script>
 
+  <!-- Bootstrap Select -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+
   <!-- Our Scripts -->
   <script src="../../commom/js/vertical-items-carousel.js"></script>
   <script src="../../commom/js/items4-carousel.js"></script>
   <script src="../../commom/js/items5-carousel.js"></script>
+  <script src="../../commom/js/index.js" ></script>
 
 </body>
 

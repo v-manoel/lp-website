@@ -9,9 +9,10 @@ vslider.slick({
     vertical: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 990,
         settings: {
-          slidesToShow: 3,
+          vertical: false,
+          slidesToShow: 5,
           slidesToScroll: 1,
 
         }
@@ -19,7 +20,8 @@ vslider.slick({
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          vertical: false,
+          slidesToShow: 3,
           slidesToScroll: 1,
           vertical: false
         }
@@ -27,7 +29,8 @@ vslider.slick({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          vertical: false,
+          slidesToShow: 2,
           slidesToScroll: 1,
           vertical: false
         }
