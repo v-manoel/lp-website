@@ -3,23 +3,22 @@
 include '../model/negocio/ClassProduct.php';
 include '../../src/classes/Render.php';
 
-class ControllerHome extends Render{
+class ControllerProdInfo extends Render{
 
     public function __construct(){
         $this->setTitle("La Pechincha Brasil");
-        $this->setDesc("Página inicial do sistema");
-        $this->setKeywords("inicio, home, pagina inicial");
-        $this->setDir("home");
+        $this->setDesc("Descrição e caracteristicas do produto selecionado");
+        $this->setKeywords("produto, caracteristicas, descrição");
+        $this->setDir("product-info");
         $this->renderLayout();
     }
 
     public function exibir(){
-        echo "oi";
+        
     }
 
     public function addMain()
     {
-        $teste2 = "Testando denovo";
         if(file_exists(DIRREQ."app/view/{$this->getDir()}/Main.php")){
             require(DIRREQ."app/view/{$this->getDir()}/Main.php");
         }

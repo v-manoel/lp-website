@@ -119,6 +119,18 @@
     </div><!-- //container -->
   </div> <!-- NavBar End -->
 
+  <div id="categorias">
+    <form class="list-group-horizontal w-100 text-center py-2 mb-1 h-auto my-bg-dark" action="/action_page.php" method="POST">
+        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+    </form>
+</div>
+
   <div class="mobile-menu pb-1 mb-3 collapse" id="mobileMenu">
       <div class="container-fluid row m-auto login">
         <div class="col-3 m-auto text-center">

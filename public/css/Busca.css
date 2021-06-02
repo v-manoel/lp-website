@@ -1,0 +1,257 @@
+.item
+{
+    outline: none !important;
+    margin-bottom: 24px;
+    padding: 0 8px 0 8px;
+    outline: none !important;
+}
+
+.item .card
+{
+    cursor: pointer;
+    box-shadow: 0 2px 4px 2px rgba(204, 203, 203, 0.322);
+    border: solid 1px rgba(216, 214, 214, 0.835);
+}
+
+.item .card:hover
+{
+    border: solid 1.5px rgba(180, 178, 178, 0.835);
+    box-shadow: 0px 3px 2px rgba(121, 120, 120, 0.322);
+}
+
+.item .card-body
+{
+    width: 100%;
+    text-align: left;
+    padding: 12px;
+}
+
+.item .card-header
+{
+    padding: 1px 1px;
+    /* padding: 16px 12px; */
+}
+
+.item .card-body h5 
+{
+    font-size: 1.5rem;
+    margin-bottom: 0.5px;
+}
+
+.item .card-body p
+{
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.item .card-body .product-desc
+{
+    margin-top: 5px;
+    color: #666;
+}
+
+.item .card-body .cents
+{
+    font-size: 1.0rem;
+    position: relative;
+    top: -5px;
+    
+}
+
+.item a
+{
+    text-decoration: none;
+    color: #212529;
+}
+
+.item img
+{
+    transform: scale(0.95);
+}
+
+
+
+
+
+
+.item .card-body p, .item .card-body span
+{
+    font-size: 0.76rem;
+}
+
+.item .card-body .tag, .items-carousel-4 .item .card-body .parcela
+{
+    font-size: 0.65rem;
+}
+
+.item .card-body .parcela
+{
+    font-size: 0.8rem;
+}
+
+.item .card-body .decimals
+{
+    font-size: 70%;
+    position: relative;
+    top: 3px;
+
+}
+
+.item .card-body .price
+{
+    font-size: 1.3rem;
+}
+
+
+.item .card-body .product-desc
+{
+    font-size: 0.8rem;
+   
+}
+
+
+/* page path */
+
+.page-path a,li{
+    font-size: 14px;
+    color: #666;
+}
+
+.page-path a:hover
+{
+    text-decoration: none;
+    color: #ffc107;
+
+}
+
+
+.search-orderby, .search-orderby button
+{
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+    color: #666;
+    padding-left: 2px;
+}
+
+.search-orderby .title
+{
+
+    font-weight: bold;
+}
+
+.search-orderby button:hover
+{
+    background-color: transparent;
+    outline: none;
+}
+
+.search-orderby .order-option
+{
+    color:  #212529;
+    font-size: 15px;
+    text-align: left;
+    border-left: 6px solid transparent;
+    border-radius: 0 2px 2px 0px;
+    padding: 4px 12px;
+}
+
+.search-orderby .order-option:hover
+{
+    background-color: #666;
+    color:  rgb(52, 58, 64);
+    font-size: 15px;
+    text-align: left;
+    border-left: 6px solid  #ffc107;
+    border-radius: 0 2px 2px 0px;
+}
+
+.dropdown-item.active, .dropdown-item:active 
+{
+    background-color: rgb(52, 58, 64);
+    color: #ffc107;
+}
+
+.search-orderby .show
+{
+    position: relative;
+    
+    padding: 0;
+}
+
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle{
+    color: #666;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* Filter Slidebar */
+
+.left-content #sidebar {
+    width: 280px;
+    position: relative;
+    top: 0;
+    left: -400px;
+    z-index: 999;
+    background: #ebebeb;
+    color: #212529;
+    transition: all 0.3s;
+    overflow-y: scroll;
+    outline: none;
+    outline-width: 0;
+    border: 0;
+}
+
+.left-content #sidebar.active {
+    left: 0;
+
+}
+
+.left-content #dismiss {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    background: #ebebeb;
+
+    position: absolute;
+    right: 0;
+    top: 2px;
+
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.left-content #dismiss:hover {
+    color: #ffc107;
+}
+
+.left-content .dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.left-content #mCSB_1
+{
+    border: 0;
+    outline: none;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+.left-content #content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+}

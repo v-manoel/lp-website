@@ -31,7 +31,8 @@ class Routes{
         $this->route = array(
             ""=>"ControllerHome",
             "home"=>"ControllerHome",
-            "test"=>"Controller404"
+            "product"=>"ControllerProdInfo",
+            "busca"=>"ControllerBusca"
         );
 
         if(array_key_exists($index, $this->route)){//Se a url esta no array
