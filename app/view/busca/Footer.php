@@ -6,3 +6,4 @@
 
  <!-- Our Scripts -->
  <script src="<?= DIRJS.'busca.js'; ?>"></script>
+ <script src="<?= DIRJS.'layout.js'; ?>"></script>

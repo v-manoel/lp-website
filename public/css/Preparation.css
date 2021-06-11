@@ -1,0 +1,147 @@
+.tablet.dark-bg
+{
+    background-color: rgba(0, 0, 0, 0.993);
+}
+
+.grid-menu
+{
+    margin: 15% 1%;
+}
+
+.tablet .menu-icon
+{
+    width: 75%;
+    border: 1px solid #ffc107;
+    padding: 10px 0px;
+    background-color: rgba(255, 255, 255, 0.034);
+    font-size: 50px;
+    opacity: 0.7;
+    border-radius: 6px;
+}
+
+.tablet .header_logo_right
+{
+    height:30px;
+    width:80px;
+    margin-left: 10px;
+    margin-right: 30px;
+    
+}
+
+/* Lista de pedidos */
+
+.tablet .orders-list
+{
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(235, 232, 232);
+    box-shadow: 0 5px 1px -2px rgba(97, 96, 96, 0.8);
+    max-height: 540px;
+    overflow-y: auto;
+}
+
+.tablet .order-items
+{
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(235, 232, 232);
+    box-shadow: 0 5px 1px -2px rgba(97, 96, 96, 0.8);
+    max-height: 540px;
+    overflow-y: auto;
+}
+
+.tablet .list-header
+{
+    transform: scale(1.0);
+    transition: all ease 0.8seg;
+    background-color: transparent;
+    border: none;
+    color:#ffc107;
+}
+
+.tablet .list-header:hover
+{
+    transform: scale(1.1);
+    color:#ffc107;
+    cursor: pointer;
+    border-top: 6px solid #ffc107;
+}
+
+
+@media(max-width: 767px)
+{
+    .tablet .orders-list
+    {
+    max-height: 420px !important;
+    }
+
+    .tablet .order-items
+    {
+        max-height: 400px;
+    }
+}
+
+
+.tablet .orders-list,.order-items
+{
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+
+.tablet .orders-list .item .prod-status
+{
+    border-radius: 4px;
+}
+
+.tablet .order-items
+{
+    font-size: 16px;
+}
+
+/* Entrega Style */
+.delivery-progress-bar .step-begin
+{
+    position: absolute;
+    left: 84px;
+}
+
+
+.delivery-progress-bar .step-out
+{
+    position: absolute;
+    left: 258px;
+}
+
+.delivery-progress-bar .step-load
+{
+    position: absolute;
+    right: 224px;
+}
+
+
+.delivery-progress-bar .step-end
+{
+    position: absolute;
+    right:  54px;
+}
+
+.delivery-progress-bar .step-dot
+{
+    position: absolute;
+    background-color:#212529;
+    height: 30px;
+    width: 30px;
+    font-size: 18px;
+    border-radius: 50%;
+    line-height: 30px;
+}
+
+.order-addres-data
+{
+    margin-top: 100px;
+}
+
+.tablet .left-button{
+    position: absolute; 
+    right: 80px;
+}

@@ -1,7 +1,6 @@
 <?php
 
 require './Order.php';
-require './CustomerAccount.php';
 
 class Stats
 {
@@ -26,7 +25,6 @@ class Stats
 		$this->orders = $order->all();
 	}
 	
-
 	//Employee stats
 	public function totalAttendanceTimeByEmployees()
 	{

@@ -1,0 +1,290 @@
+.page-container{
+    min-width: 90%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 30px;
+
+}
+
+.text-secondary .price{
+  font-size: 1.6rem;
+}
+
+.decimals
+{
+    font-size: 70%;
+    position: relative;
+    top: 3px;
+
+}
+
+
+.payment-method .container-fluid
+{
+    padding: 0;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(235, 232, 232);
+    box-shadow: 0 5px 2px -3px rgba(199, 198, 198, 0.8);
+    margin-bottom: 30px;
+}
+
+.payment-option
+{
+    padding: 28px;
+    margin: 0;
+}
+
+.payment-option .desc
+{
+    font-style: normal;
+    font-size: 16px;
+}
+
+.payment-option:hover
+{
+    background-color: rgba(241, 238, 238, 0.534);
+    cursor: pointer;
+    
+}
+.payment-option .form-check-input
+{
+    position: relative;
+    margin: 0;
+    margin-top: 4.8px;
+    margin-right: 12px;
+}
+
+/* cardform page */
+.card-form #atual-payment-method
+{
+    background-color: rgba(255, 255, 255, 0.486);
+}
+
+.card-form #sidebar
+{
+    background-color: rgba(255, 255, 255, 0.486);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+
+#sidebar .sidebar-header .title
+{
+    font-weight: bold;
+}
+
+#sidebar .item
+{
+    padding: 12px;
+}
+
+#sidebar {
+    display: none;
+    z-index: 999;
+    background: rgb(255, 255, 255);
+
+    transition: all 0.3s;
+    box-shadow: none;
+}
+
+#sidebar.active {
+    display: block;
+    right: 0;
+}
+
+#dismiss {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#dismiss:hover {
+    color: #ffc107;
+}
+
+/* Floating Labels */
+.label-float{
+  position: relative;
+  padding-top: 18px;
+  }
+
+
+
+
+  .label-float input{
+
+    border: 0;
+    border-bottom: 2px solid rgb(219, 217, 217);
+    outline: none;
+    font-size: 18px;
+    width: 100% !important;
+
+    transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -webkit-appearance:none;
+    border-radius: 0;
+  }
+  
+  .label-float input:focus{
+    border-bottom: 2px solid #ffc107;
+  }
+  
+  .label-float input::placeholder{
+    color:transparent;
+    white-space: nowrap;  
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+  
+  .label-float label{
+    white-space: nowrap;  
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    width: 100% !important;
+    color: #666;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 14px;
+    transition: all .1s ease-out;
+    -webkit-transition: all .1s ease-out;
+    -moz-transition: all .1s ease-out;
+  }
+  
+  .label-float input:required:invalid + label{
+    color: #dc3545;
+  }
+  .label-float input:focus:required:invalid{
+    border-bottom: 2px solid #dc3545;
+  }
+  .label-float input:required:invalid + label:before{
+    content: '* ';
+  }
+  .label-float input:focus + label,
+  .label-float input:not(:placeholder-shown) + label{
+    font-size: 14px;
+    margin-top: 0;
+    color: #ffc107;
+  }
+
+  .card-form #iterativeCard
+  {
+    width: 280px;
+    height: 160px;
+    background: linear-gradient(to top right, #212529 36%, #666666 90%);
+    border-radius: 4px;
+  }
+
+  .card-form #flagCard
+  {
+    width: 64px;
+    height: 44px;
+    position: relative;
+    top: 12px;
+    left: 12px;
+    background-color: rgb(75, 75, 75);
+    border-radius: 2px;
+  }
+
+  .card-form #iterativeCardBack
+  {
+    width: 280px;
+    height: 160px;
+    background: linear-gradient(to bottom right, #212529 36%, #666666 90%);
+    border-radius: 4px;
+  }
+
+  .card-form #stripCard
+  {
+    width: auto;
+    height: 44px;
+    position: relative;
+    top: 18px;
+
+    background-color: rgb(22, 21, 21);
+    border-radius: 2px;
+  }
+
+  .my-items .prod-title
+  {
+    font-size: 1rem;
+  }
+
+  .my-items .prod-other-info
+  {
+    font-size: 0.8rem ;
+  }
+
+  .user-enderecos .endereco-option
+{
+    padding: 12px;
+    border-bottom: 1px solid rgba(221, 221, 221, 0.808);
+}
+
+.user-enderecos .endereco-option:hover
+{
+    background-color: rgba(216, 215, 215, 0.404);
+    cursor: pointer;
+    
+}
+.user-enderecos .endereco-option .form-check-input
+{
+    position: relative;
+    margin: 0;
+    margin-top: 4.8px;
+    margin-right: 12px;
+}
+
+
+#enderecoModal .container-fluid
+{
+    padding: 0;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(235, 232, 232);
+    box-shadow: 0 4px 2px -2px rgba(146, 144, 144, 0.835);
+    margin-bottom: 30px;
+}
+
+
+
+.cep-entry #informcep
+{
+    padding-right: 0;
+    padding-left: 0;
+    margin-left: 12px;
+    margin-right: 12px;
+    border: 0;
+    outline: none;
+    border-radius: 1px;
+    border-bottom: 2px solid rgb(199, 198, 198);
+    padding-bottom: 1px;
+    background-color: transparent;
+}
+
+.cep-entry #informcep:hover
+{
+    border: 0;
+    border-bottom: 3px solid rgb(170, 170, 170);
+}
+
+.cep-entry form
+{
+    padding: 12px;
+    border-bottom: 1px solid rgba(221, 221, 221, 0.808);
+}
+
+.cep-entry form:hover
+{
+    background-color: rgba(216, 215, 215, 0.404);
+    cursor: pointer;
+}

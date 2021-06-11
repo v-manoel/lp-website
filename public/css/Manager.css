@@ -1,0 +1,28 @@
+/* .content .login
+{
+    padding: 20px 0;
+    width: 60%;
+    margin-top: 10%;
+    background-color: rgba(231, 230, 230, 0.609);
+    border-radius: 8px;
+    box-shadow: -4px 6px 3px -2px rgba(158, 158, 158, 0.822);
+} */
+
+ .content .login
+{
+    padding: 20px 0;
+    width: 60%;
+    margin-top: 10%;
+    background-color: #212529df;
+    border-radius: 8px;
+    box-shadow: -4px 6px 3px -2px rgba(158, 158, 158, 0.822);
+} 
+
+
+.content .login .form-control:focus
+{
+    
+    border: 1px solid rgb(206, 212, 218);
+    outline: none;
+    box-shadow: none;
+}

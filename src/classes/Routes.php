@@ -32,7 +32,11 @@ class Routes{
             ""=>"ControllerHome",
             "home"=>"ControllerHome",
             "product"=>"ControllerProdInfo",
-            "busca"=>"ControllerBusca"
+            "busca"=>"ControllerBusca",
+            "cart"=>"ControllerCart",
+            "payment"=>"ControllerPayment",
+            "department"=>"ControllerDepartment",
+            "login"=>"ControllerLogin"
         );
 
         if(array_key_exists($index, $this->route)){//Se a url esta no array

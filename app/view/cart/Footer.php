@@ -5,5 +5,5 @@
 
  <!-- Our Scripts -->
  <script src="<?= DIRJS.'items5-carousel.js'; ?>"></script>
- <script src="<?= DIRJS.'home.js'; ?>"></script>
+ <script src="<?= DIRJS.'cart.js'; ?>"></script>
  <script src="<?= DIRJS.'layout.js'; ?>"></script>

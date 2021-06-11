@@ -1,0 +1,76 @@
+
+.tablet {
+    position: relative;
+    width: 768px;
+    height: 1024px;
+    margin: auto;
+    border: 16px #212529 solid;
+    border-top-width: 60px;
+    border-bottom-width: 60px;
+    border-radius: 36px;
+    background-color: white;
+    font-family: 'Ubuntu' ;
+  }
+  
+  /* The horizontal line on the top of the device */
+  .tablet:before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 5px;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #333;
+    border-radius: 10px;
+  }
+  
+  /* The circle on the bottom of the device */
+  .tablet:after {
+    content: '';
+    display: block;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: 50%;
+    bottom: -65px;
+    transform: translate(-50%, -50%);
+    background: #333;
+    border-radius: 50%;
+  }
+  
+.tablet .header
+{
+    box-shadow: 0px 2px 2px -2px rgba(27, 27, 27, 0.822);
+}
+
+.tablet .footer
+{
+    width: 100%;
+    border-top: 1px solid rgb(90, 90, 90);
+    background-color: rgba(0, 0, 0, 0.993);
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+}
+
+.tablet .footer:hover
+{
+    opacity: 100;
+}
+
+
+.tablet .footer #apps-btn
+{
+  width: 25%;
+  position: absolute;
+  right: 0;
+}
+
+.tablet .footer #return-btn
+{
+  width: 25%;
+  position: absolute;
+  left: 0;
+}
