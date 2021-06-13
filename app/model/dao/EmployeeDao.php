@@ -10,7 +10,7 @@ class EmployeeDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("INSERT INTO customer(name,cpf,email,pswd) values(:name, :cpf, :email, :pswd)");
+            $stmt = $con->prepare("INSERT INTO users(name,cpf,email,pswd) values(:name, :cpf, :email, :pswd)");
             $stmt->bindParam("name",$customer->getName());
             $stmt->bindParam("cpf",$customer->getCpf());
             $stmt->bindParam("email",$customer->getEmail());

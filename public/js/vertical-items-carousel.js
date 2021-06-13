@@ -57,5 +57,3 @@ vslider.slick({
   function UncollapseItem(collapser, collapsed) {
     collapser.getElementsByClassName(collapsed)[0].style.display = "block"
   }
-  
-  

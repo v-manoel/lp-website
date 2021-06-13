@@ -1,7 +1,7 @@
 <?php
 
-include '../model/negocio/ClassProduct.php';
-include '../../src/classes/Render.php';
+require_once __DIR__."/../model/negocio/Product.php";
+require_once __DIR__."/../model/negocio/Category.php";
 
 class ControllerHome extends Render{
 
@@ -14,12 +14,18 @@ class ControllerHome extends Render{
     }
 
     public function exibir(){
-        echo "oi";
+       $category = new Category();
+       $category->setName('Frios');
+       $category = $category->findByName();
+       $prod = new Product();
+       var_dump($prod->allByCategory($category));
     }
 
     public function addMain()
     {
-        $teste2 = "Testando denovo";
+        $prod_base = new Product();
+        $cat = new Category();
+
         if(file_exists(DIRREQ."app/view/{$this->getDir()}/Main.php")){
             require(DIRREQ."app/view/{$this->getDir()}/Main.php");
         }

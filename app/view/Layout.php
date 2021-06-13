@@ -121,15 +121,11 @@
 
   <div id="categorias">
     <form class="list-group-horizontal w-100 text-center py-2 mb-1 h-auto my-bg-dark" action="/action_page.php" method="POST">
-        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
-        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
-        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
-        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
-        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
-        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
-        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6">Categoria</button>
+      <?php for($index = 0; $index < count($categories) && $index < 7; $index++){ ?>
+        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6"><?= $categories[$index]->getName() ?></button>
+      <?php } ?>
     </form>
-</div>
+  </div>
 
   <div class="mobile-menu pb-1 mb-3 collapse" id="mobileMenu">
       <div class="container-fluid row m-auto login">
@@ -192,7 +188,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
+    
+    <script src="<?= DIRJS.'layout.js'; ?>"></script>
     <?php echo $this->addFooter(); ?>
     
 </body>

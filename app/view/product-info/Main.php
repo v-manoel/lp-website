@@ -3,40 +3,28 @@
         <div class="left-content col-lg-8 col-12">
             <div class="prod-images row h-auto border-bottom pb-3">
                 <div class="col-lg-2 col-12 text-center p-2">
-                    <div class="vertical-items-carousel img-preview-carousel">
-
-                        <div class="item my-1 img-preview">
-                            <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd" width="75%"></div>
-                        </div>
-
-                        <div class="item my-1 img-preview">
-                            <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd" width="75%"></div>
-                        </div>
-
-                        <div class="item my-1 img-preview">
-                            <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd" width="75%"></div>
-                        </div>
-                        <div class="item my-1 img-preview">
-                            <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd" width="75%"></div>
-                        </div>
-
-                        <div class="item my-1 img-preview">
-                            <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd" width="75%"></div>
-                        </div>
-                        <div class="item my-1 img-preview">
-                            <div type="button"><img src="../../commom/img/examples/produtos.svg" alt="SomeProd" width="75%"></div>
-                        </div>
-
-                    </div><!-- carousel -->
+                    <?php if (count($product->getImgs()) > 0) { ?>
+                        <div class="vertical-items-carousel img-preview-carousel">
+                            <?php for ($index = 0; $index < count($product->getImgs()); $index++) { ?>
+                                <div class="item my-1 img-preview">
+                                    <div type="button"><img src="<?= DIRIMG . $prod->getImgs()[$index]; ?>" onclick="SwitchImgSrc(this,'main-img')" alt="SomeProd" width="75%"></div>
+                                </div>
+                            <?php } ?>
+                        </div><!-- carousel -->
+                    <?php } ?>
                 </div><!-- col -->
                 <div class="col-lg-5 col-12 text-center m-auto p-3">
-                    <img class="h-100 w-100 img-fluid" src="../../commom/img/examples/produtos.svg" alt="SomeProd">
+                    <?php if (count($product->getImgs()) > 0) { ?>
+                        <img class="h-100 w-100 img-fluid" id="main_img" src="<?= DIRIMG . $product->getImgs()[0]; ?>" alt="SomeProd">
+                    <?php } else { ?>
+                        <img class="card-img" id="main-img" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="...">
+                    <?php } ?>
                 </div><!-- col -->
 
                 <div class="col-lg-5 col-12">
                     <div class="my-2">
                         <p class="n-sales m-0">1985 vendidos</p>
-                        <p class="prod-title m-0">Some product sold here</p>
+                        <p class="prod-title m-0"><?= $product->getTitle(); ?></p>
                         <p class="m-0 rating">
                             <span class="bi bi-star-fill text-warning"></span>
                             <span class="bi bi-star-fill text-warning"></span>
@@ -46,15 +34,17 @@
                         </p>
                     </div>
                     <div class="my-2">
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
+                        <p class="text-secondary text-decoration-line-through m-0 off-price"> <?= 'R$' . floor($product->getPrice()) ?><span class="decimals align-top"><?= ($product->getPrice() * 100) % 100; ?></span></p>
+                        <p class="card-title price m-0"><?= 'R$ ' . floor($product->offerPrice()) ?><span class="decimals align-top"><?= ($product->offerPrice() * 100) % 100; ?></span>
+                            <span class="text-success off-rate"><?= $product->offerAsPerc(); ?> % OFF</span>
                         </p>
 
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
+                        <p class="parcela text-success m-0"><?= '12x de R$ ' . floor($product->offerPrice()) ?><span class="decimals align-top"><?= ($product->offerPrice() * 100) % 100; ?></span>
                             sem juros
                         </p>
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
+                        <?php for ($i = 0; $i < count($product->getCategories()); $i++) { ?>
+                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $product->getCategories()[$i]->getName(); ?></p>
+                        <?php } ?>
                     </div>
                     <div class="my-2">
                         <p class="m-0">Informações sobre o produto</p>
@@ -73,222 +63,53 @@
             </div><!-- row -->
 
             <section class="container products-carousel-section my-5 border-bottom pb-3" id="based-on-history">
-
-                <div class="h4 p-2 section-title">PRODUTOS SIMILARES</div>
+                <?php
+                $prod = new Product();
+                $prod->setSource($product->getSource());
+                $products = $prod->all();
+                ?>
+                <div class="h4 p-2 section-title"><?= 'Mais de '.$product->getSource() ?></div>
 
                 <div class="items-carousel items-carousel-4">
+                    <?php foreach ($products as $prod) { ?>
+                        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+                            <form action="<?php echo DIRPAGE . 'product'; ?>" method="post">
+                                <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br>
+                                <button type="submit" class="border-0 bg-transparent p-0">
+                                    <div class="card align-items-center prod-card w-auto">
+                                        <div class="card-header bg-white">
+                                            <?php if (count($prod->getImgs()) > 0) { ?>
+                                                <img class="card-img" src="<?= DIRIMG . $prod->getImgs()[0]; ?>" alt="...">
+                                            <?php } else { ?>
+                                                <img class="card-img" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="...">
+                                            <?php } ?>
+                                        </div><!-- card header -->
 
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
+                                        <div class="card-body">
+                                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getCategories()[0]->getName(); ?></p>
+                                            <!-- <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p> -->
+                                            <p class="text-secondary text-decoration-line-through m-0 off-price"><?= "R$ " . floor($prod->getPrice()); ?><span class="decimals align-top"><?= ($prod->getPrice() * 100) % 100; ?></span></p>
+                                            <p class="card-title price m-0"><?= "R$ " . floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() * 100) % 100; ?></span>
+                                                <span class="text-success off-rate"><?= $prod->offerAsPerc() . "% OFF"; ?></span>
+                                            </p>
+                                            <p class="parcela text-success m-0"><?= "12x de R$ " . floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() * 100) % 100; ?></span>
+                                                sem juros
+                                            </p>
+                                            <p class="product-desc m-auto pt-1 text-center"><?= $prod->getTitle(); ?></p>
+                                        </div><!-- card body -->
 
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
-
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
-
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
-
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
-
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
-
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
-
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
-
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
-
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
-
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
-
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
-
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
-
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
-
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
-
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
-
-                    <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-                        <a href="../product-info/item-info.html">
-                            <div class="card align-items-center prod-card w-auto">
-                                <div class="card-header bg-white">
-                                    <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                                </div><!-- card header -->
-                                <div class="card-body">
-                                    <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                                    <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                                    <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                                        <span class="text-success off-rate">20% OFF</span>
-                                    </p>
-
-                                    <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                                        sem juros
-                                    </p>
-                                    <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                                </div><!-- card body -->
-                            </div><!-- card -->
-                        </a>
-                    </div><!-- item -->
+                                    </div><!-- card -->
+                                </button>
+                            </form>
+                        </div><!-- item -->
+                    <?php } ?>
                 </div><!-- carousel -->
             </section>
 
             <div class="prod-caract container">
                 <h5>Descrição</h5>
                 <p>
-                    Lorem ipsum eleifend taciti etiam lacus quisque dolor posuere eget vulputate, elit sodales elementum ultricies
-                    habitant diam vulputate phasellus. platea tellus sem praesent vestibulum donec aliquam neque volutpat lacus,
-                    ornare netus ligula vestibulum class nostra fames nisl, per velit interdum habitant eu per vestibulum rhoncus.
-                    magna cras adipiscing lobortis volutpat vehicula aliquet tortor, nam ante habitasse nulla habitasse magna,
-                    dictum rutrum quisque etiam fermentum vitae. aliquet sem conubia nam morbi consectetur sollicitudin orci,
-                    habitasse vitae magna hac quis amet aptent curabitur, sem ultrices morbi sollicitudin pulvinar est. eget purus
-                    senectus imperdiet quisque semper netus amet, nullam commodo potenti rutrum eget proin ornare, per vestibulum
-                    lacinia integer in quam.
+                    <?= $product->getDescription(); ?>
                 </p>
             </div>
 
@@ -304,7 +125,7 @@
                             <p class="text-success">Produto com frete grátis</p>
                         </div><!-- col -->
                     </div><!-- row -->
-                    <p>Fornecido por <span class="text-warning" id="fornecedor">Someone</span></p>
+                    <p>Fornecido por <span class="text-warning" id="fornecedor"><?= $product->getSource(); ?></span></p>
                     <form class="" action="#" method="POST">
 
                         <label for="item-qtd">Quantidade:</label>
@@ -355,414 +176,89 @@
 
 </div><!-- container -->
 
-<section class="container products-carousel-section my-5" id="based-on-history">
+<section class="container products-carousel-section my-5">
+    <?php    
+        $bycategory = $product->allByCategory($product->getCategories()[0]);
+    ?> 
+    <div class="p-2 h2 section-title"> <?= 'Mais de '. $product->getCategories()[0]->getName() ?></div>
 
-    <div class="h4 p-2 section-title">BASEADO EM SUAS ÚLTIMAS COMPRAS</div>
-
-    <div class="items-carousel items-carousel-5">
-
+    <div class="items-carousel items-carousel-5 m-auto">
+    <?php foreach ($bycategory as $prod){?>
         <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
+            <form action="<?php echo DIRPAGE.'product'; ?>" method="post">
+                <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br> 
+                <button type="submit" class="border-0 bg-transparent p-0">
+                    <div class="card align-items-center prod-card w-auto">
+                        <div class="card-header bg-white">
+                            <?php if(count($prod->getImgs()) > 0){ ?>
+                                <img class="card-img" src="<?= DIRIMG . $prod->getImgs()[0]; ?>" alt="...">
+                            <?php }else{?>
+                                <img class="card-img" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="...">
+                            <?php } ?>
+                        </div><!-- card header -->
+                        
+                        <div class="card-body">
+                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getCategories()[0]->getName(); ?></p><br>
+                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p>
+                            <p class="text-secondary text-decoration-line-through m-0 off-price"><?= "R$ ".floor($prod->getPrice()); ?><span class="decimals align-top"><?= ($prod->getPrice() *100)%100; ?></span></p>
+                            <p class="card-title price m-0"><?= "R$ ".floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() *100)%100; ?></span>
+                                <span class="text-success off-rate"><?= $prod->offerAsPerc()."% OFF"; ?></span>
+                            </p>
+                            <p class="parcela text-success m-0"><?= "12x de R$ ".floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() *100)%100; ?></span>
+                                sem juros
+                            </p>
+                            <p class="product-desc m-auto pt-1 text-center"><?= $prod->getTitle(); ?></p>
+                        </div><!-- card body -->
+                        
+                    </div><!-- card -->
+                </button>
+            </form>
         </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
+    <?php } ?>
     </div><!-- carousel -->
 </section>
 
-<section class="container products-carousel-section my-5" id="based-on-history">
+<section class="container products-carousel-section my-5">
+    <?php
+        $prod_base = new Product();
+        $prod_base->setOffer(0.6);
+        $bycategory = $prod_base->all();
+    ?> 
+    <div class="p-2 h2 section-title"> <?= 'Mais de '. $prod_base->offerAsPerc() .'% de desconto' ?></div>
 
-    <div class="h4 p-2 section-title">BASEADO EM SUAS ÚLTIMAS COMPRAS</div>
-
-    <div class="items-carousel items-carousel-5">
-
+    <div class="items-carousel items-carousel-5 m-auto">
+    <?php foreach ($bycategory as $prod){?>
         <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
+            <form action="<?php echo DIRPAGE.'product'; ?>" method="post">
+                <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br> 
+                <button type="submit" class="border-0 bg-transparent p-0">
+                    <div class="card align-items-center prod-card w-auto">
+                        <div class="card-header bg-white">
+                            <?php if(count($prod->getImgs()) > 0){ ?>
+                                <img class="card-img" src="<?= DIRIMG . $prod->getImgs()[0]; ?>" alt="...">
+                            <?php }else{?>
+                                <img class="card-img" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="...">
+                            <?php } ?>
+                        </div><!-- card header -->
+                        
+                        <div class="card-body">
+                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getCategories()[0]->getName(); ?></p><br>
+                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p>
+                            <p class="text-secondary text-decoration-line-through m-0 off-price"><?= "R$ ".floor($prod->getPrice()); ?><span class="decimals align-top"><?= ($prod->getPrice() *100)%100; ?></span></p>
+                            <p class="card-title price m-0"><?= "R$ ".floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() *100)%100; ?></span>
+                                <span class="text-success off-rate"><?= $prod->offerAsPerc()."% OFF"; ?></span>
+                            </p>
+                            <p class="parcela text-success m-0"><?= "12x de R$ ".floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() *100)%100; ?></span>
+                                sem juros
+                            </p>
+                            <p class="product-desc m-auto pt-1 text-center"><?= $prod->getTitle(); ?></p>
+                        </div><!-- card body -->
+                        
+                    </div><!-- card -->
+                </button>
+            </form>
         </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
-
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <a href="../product-info/item-info.html">
-                <div class="card align-items-center prod-card w-auto">
-                    <div class="card-header bg-white">
-                        <img class="card-img" src="../../commom/img/examples/produtos.svg" alt="...">
-                    </div><!-- card header -->
-                    <div class="card-body">
-                        <p class="badge bg-warning text-dark tag p-1 m-0">SOME TAG</p>
-                        <p class="text-secondary text-decoration-line-through m-0 off-price">R$ 10.193</p>
-                        <p class="card-title price m-0">R$ 9.998<span class="decimals align-top">12</span>
-                            <span class="text-success off-rate">20% OFF</span>
-                        </p>
-
-                        <p class="parcela text-success m-0">12x de R$ 98<span class="decimals align-top">12</span>
-                            sem juros
-                        </p>
-                        <p class="product-desc m-auto pt-1">Produto exemplar - amostra simples</p>
-                    </div><!-- card body -->
-                </div><!-- card -->
-            </a>
-        </div><!-- item -->
+    <?php } ?>
     </div><!-- carousel -->
 </section>
+

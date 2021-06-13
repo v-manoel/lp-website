@@ -23,7 +23,7 @@ define('DIRADMIN',DIRPAGE."public/admin/");
 
 #Acesso ao banco de dados
 define('HOST',"localhost");
-define('DB',"sistema");
+define('DB',"bd_pechincha");
 define('USER',"root");
 define('PASS',"v@Imysql");
 define('PORT',"3306");

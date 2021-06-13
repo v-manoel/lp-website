@@ -10,7 +10,7 @@ class CustomerDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("INSERT INTO customer(name,cpf,email,pswd) values(:name, :cpf, :email, :pswd)");
+            $stmt = $con->prepare("INSERT INTO users(name,cpf,email,pswd) values(:name, :cpf, :email, :pswd)");
             $stmt->bindParam("name",$customer->getName());
             $stmt->bindParam("cpf",$customer->getCpf());
             $stmt->bindParam("email",$customer->getEmail());
@@ -32,7 +32,7 @@ class CustomerDao{
 
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM customer WHERE _name like :
+            $stmt = $con->prepare("SELECT * FROM users WHERE _name like :
             name and cpf like :_cpf and pswd like :_pswd and email like :_email");
             $stmt->bindParam(":_name",$_name);
             $stmt->bindParam(":_cpf",$_cpf);
@@ -65,7 +65,7 @@ class CustomerDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("DELETE FROM customer WHERE cpf=:cpf");
+            $stmt = $con->prepare("DELETE FROM users WHERE cpf=:cpf");
             $stmt->bindParam("cpf",$cpf);
 
 
@@ -81,7 +81,7 @@ class CustomerDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("UPDATE customer SET name:=name, cpf:=cpf, email:=email, pswd:=pswd)");
+            $stmt = $con->prepare("UPDATE users SET name:=name, cpf:=cpf, email:=email, pswd:=pswd)");
             $stmt->bindParam("name",$customer->getName());
             $stmt->bindParam("cpf",$customer->getCpf());
             $stmt->bindParam("email",$customer->getEmail());

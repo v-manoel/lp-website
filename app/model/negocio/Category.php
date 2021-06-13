@@ -1,17 +1,28 @@
 <?php 
 
+require_once __DIR__."/../dao/CategoryDao.php";
+
 Class Category{
 	private $id;
 	private $name;
 	
-	
-	public function finByID($id){
-		
+	public function findByID(){
+		$dao = new CategoryDao();
+		$category = $dao->selectById($this);
+
+		return $category;
 	}
 
-	public function all(Category $generic_category = new Category()){
+	public function findByName(){
 		$dao = new CategoryDao();
-		$categories = $dao->select($generic_category);
+		$category = $dao->selectByName($this);
+
+		return $category;
+	}
+
+	public function all(){
+		$dao = new CategoryDao();
+		$categories = $dao->select($this);
 
 		return $categories;
 	}

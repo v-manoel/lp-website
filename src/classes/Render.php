@@ -23,6 +23,10 @@ abstract class Render{
     //metodo responsável por renderizar os layouts
 
     public function renderLayout(){
+        require_once __DIR__."/../../app/model/negocio/Category.php";
+        $cat = new Category();
+        $categories = $cat->all();
+        shuffle($categories);
         require_once(DIRREQ."app/view/Layout.php");
     }
 

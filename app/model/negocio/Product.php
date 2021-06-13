@@ -1,36 +1,58 @@
 <?php 
 
-require './Category.php';
+require_once __DIR__."/Category.php";
+require_once __DIR__."/../dao/ProductDao.php";
 
 Class Product{
 	private $id;
-	private $title;
-	private $description;
-	private $imgs;
-	private $price;
-	private $offer;
-	private Category $category;
-	private $source;
+	private $title = "";
+	private $description = "";
+	private $imgs = array();
+	private $price = 0.0;
+	private $offer = 0.0;
+	private $categories = array();
+	private $source = "";
 
 	//stats attributes
 	private $total_orders = 0;
 	private $total_sales = 0.0;
 
-	public function finByID($id){
+	public function findByID(){
+		$dao = new ProductDao();
+		$products = $dao->selectById($this);
 
+		return $this;
 	}
 
-	public function all(Product $generic_product = new Product()){
+	public function all(){
 		$dao = new ProductDao();
-		$products = $dao->select($generic_product);
-
+		$products = $dao->select($this);
 		return $products;
 	}
 
-
-	
 	public function offerPrice(){
-		return $this->price + ($this->price * $this->offer);
+		return round(($this->price - ($this->price * $this->offer)),2);
+		
+	}
+
+	public function offerAsPerc(){
+		return $this->offer * 100;
+	}
+
+	public function addImg($img)
+	{
+		array_push($this->imgs, $img);
+	}
+
+	public function addCategory(Category $category)
+	{
+		array_push($this->categories, $category);
+	}
+
+	public function allByCategory(Category $category)
+	{
+		$dao = new ProductDao();
+		return $dao->allByCategory($category);
 	}
 
 	/**
@@ -54,21 +76,21 @@ Class Product{
 	}
 
 	/**
-	 * Get the value of category
+	 * Get the value of categories
 	 */ 
-	public function getCategory()
+	public function getCategories()
 	{
-		return $this->category;
+		return $this->categories;
 	}
 
 	/**
-	 * Set the value of category
+	 * Set the value of categories
 	 *
 	 * @return  self
 	 */ 
-	public function setCategory($category)
+	public function setCategories($categories)
 	{
-		$this->category = $category;
+		$this->category = $categories;
 
 		return $this;
 	}

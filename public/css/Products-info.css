@@ -77,6 +77,13 @@
     font-size: 0.8rem;
 }
 
+.decimals{
+    font-size: 70%;
+    font-weight: bold;
+    position: relative;
+    top: 3px;
+}
+
 .item .card-body .decimals
 {
     font-size: 70%;
