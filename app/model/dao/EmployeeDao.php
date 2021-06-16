@@ -11,10 +11,15 @@ class EmployeeDao{
             $con = Connection::getConnection();
             
             $stmt = $con->prepare("INSERT INTO users(name,cpf,email,pswd) values(:name, :cpf, :email, :pswd)");
-            $stmt->bindParam("name",$customer->getName());
-            $stmt->bindParam("cpf",$customer->getCpf());
-            $stmt->bindParam("email",$customer->getEmail());
-            $stmt->bindParam("pswd",$customer->getPswd());
+            $stmt->bindParam(":name",$_name);
+            $stmt->bindParam(":cpf",$_cpf);
+            $stmt->bindParam(":email",$_email);
+            $stmt->bindParam(":pswd",$_pswd);
+
+            $_name = $customer->getName();
+            $_cpf = $customer->getCpf();
+            $_email = $customer->getEmail();
+            $_pswd = $customer->getPswd();
 
             $stmt->execute();            
 
@@ -25,11 +30,7 @@ class EmployeeDao{
     }
 
     public function select($generic_customer){
-        $_name = '%'. $generic_customer->getName() .'%';
-        $_cpf = '%'. $generic_customer->getCpf() .'%';
-        $_pswd = '%'. $generic_customer->getPswd() .'%';
-        $_email = '%'. $generic_customer->getEmail() .'%';
-
+        
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM customer WHERE _name like :
@@ -39,6 +40,11 @@ class EmployeeDao{
             $stmt->bindParam(":_pswd",$_pswd);
             $stmt->bindParam(":_email",$_email);
             
+            $_name = '%'. $generic_customer->getName() .'%';
+            $_cpf = '%'. $generic_customer->getCpf() .'%';
+            $_pswd = '%'. $generic_customer->getPswd() .'%';
+            $_email = '%'. $generic_customer->getEmail() .'%';
+
             $stmt->execute();
 
             $customers = array();
@@ -82,10 +88,15 @@ class EmployeeDao{
             $con = Connection::getConnection();
             
             $stmt = $con->prepare("UPDATE customer SET name:=name, cpf:=cpf, email:=email, pswd:=pswd)");
-            $stmt->bindParam("name",$customer->getName());
-            $stmt->bindParam("cpf",$customer->getCpf());
-            $stmt->bindParam("email",$customer->getEmail());
-            $stmt->bindParam("pswd",$customer->getPswd());
+            $stmt->bindParam(":name",$_name);
+            $stmt->bindParam(":cpf",$_cpf);
+            $stmt->bindParam(":email",$_email);
+            $stmt->bindParam(":pswd",$_pswd);
+
+            $_name = $customer->getName();
+            $_cpf = $customer->getCpf();
+            $_email = $customer->getEmail();
+            $_pswd = $customer->getPswd();
 
             $stmt->execute();            
 

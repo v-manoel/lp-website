@@ -7,7 +7,7 @@
       <!--FORMULÁRIO DE LOGIN-->
       <div id="login">
         <form method="POST" action="<?= DIRPAGE.'login/logar/';?>">
-          <a href="home/"><img src="<?= DIRIMG . 'icons/voltar.svg'; ?>" style="height: 30px; width: 30px;"></a>
+          <a href="<?= DIRPAGE.'home/';?>"><img src="<?= DIRIMG . 'icons/voltar.svg'; ?>" style="height: 30px; width: 30px;"></a>
           <h1>Login</h1>
 
           <p> 
@@ -40,7 +40,7 @@
       <!--FORMULÁRIO DE CADASTRO-->
       <div id="cadastro">
         <form method="post" action="<?= DIRPAGE.'login/register/';?>">
-          <a href="home/"><img src="<?= DIRIMG . 'icons/voltar.svg'; ?>" style="height: 30px; width: 30px;"></a>
+          <a href="<?= DIRPAGE.'home/';?>"><img src="<?= DIRIMG . 'icons/voltar.svg'; ?>" style="height: 30px; width: 30px;"></a>
           <h1>Cadastro</h1> 
            
           <p> 

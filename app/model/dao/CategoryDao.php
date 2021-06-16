@@ -12,7 +12,9 @@ class CategoryDao{
             $con = Connection::getConnection();
             
             $stmt = $con->prepare("INSERT INTO bd_pechincha.categories(name) values(:name)");
-            $stmt->bindParam(":title",$category->getName());
+            $stmt->bindParam(":title", $_name);
+
+            $_name = $category->getName();
 
             $stmt->execute();
 
@@ -27,8 +29,10 @@ class CategoryDao{
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM categories WHERE id = :id");
-            $stmt->bindParam(":id",$category->getId());
+            $stmt->bindParam(":id",$_id);
             
+            $_id = $category->getId();
+
             $stmt->execute();
 
             if($stmt->rowCount() == 1){
@@ -50,8 +54,10 @@ class CategoryDao{
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM categories WHERE name = :name");
-            $stmt->bindParam(":name",$category->getName());
+            $stmt->bindParam(":name",$_name);
             
+            $_name = $category->getName();
+
             $stmt->execute();
 
             if($stmt->rowCount() == 1){
@@ -70,12 +76,13 @@ class CategoryDao{
     }
 
     public function select(Category $generic_category){
-        $_name = '%'. $generic_category->getName() .'%';
-
+        
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM categories WHERE name LIKE :name ");
             $stmt->bindParam(":name",$_name);
+            
+            $_name = '%'. $generic_category->getName() .'%';
             
             $stmt->execute();
 
@@ -108,8 +115,9 @@ class CategoryDao{
             $prod_stmt->execute();
                 
             $stmt = $con->prepare("DELETE FROM categories WHERE id=:id");
-            $stmt->bindParam(":id",$category->getId()->getId());
+            $stmt->bindParam(":id",$_id);
 
+            $_id = $category->getId();
 
             $stmt->execute();    
         }catch(PDOException $err){
@@ -124,9 +132,11 @@ class CategoryDao{
             $con = Connection::getConnection();
             
             $stmt = $con->prepare("UPDATE categories SET name=:name WHERE id=:id)");
-            $stmt->bindParam(":id",$category->getId());
-            $stmt->bindParam(":name",$category->getName());
+            $stmt->bindParam(":id",$_name);
+            $stmt->bindParam(":name",$_id);
 
+            $_name = $category->getId();
+            $_id = $category->getId();
 
             $stmt->execute();            
 

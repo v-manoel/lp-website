@@ -1,9 +1,5 @@
 
 <section class="container products-carousel-section my-5"">
-    <?php    
-        $prod_base->setOffer(0.6);
-        $inoffer = $prod_base->all();
-    ?> 
     <div class="p-2 h2 section-title"> Super Ofertas </div>
 
     <div class="items-carousel items-carousel-5 m-auto">
@@ -45,15 +41,10 @@
 
 
 <section class="container products-carousel-section my-5"">
-    <?php    
-        $cat->setName("Frios");
-        $cat = $cat->findByName();
-        $bycategory = $prod_base->allByCategory($cat);
-    ?> 
     <div class="p-2 h2 section-title"> Frios em Destaque</div>
 
     <div class="items-carousel items-carousel-5 m-auto">
-    <?php foreach ($bycategory as $prod){?>
+    <?php foreach ($bycategory[0] as $prod){?>
         <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
             <form action="<?php echo DIRPAGE.'product'; ?>" method="post">
                 <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br> 
@@ -89,15 +80,10 @@
 </section>
 
 <section class="container products-carousel-section my-5"">
-    <?php    
-        $cat->setName("Games");
-        $cat = $cat->findByName();
-        $bycategory = $prod_base->allByCategory($cat);
-    ?> 
     <div class="p-2 h2 section-title"> Games em Destaque</div>
 
     <div class="items-carousel items-carousel-5 m-auto">
-    <?php foreach ($bycategory as $prod){?>
+    <?php foreach ($bycategory[1] as $prod){?>
         <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
             <form action="<?php echo DIRPAGE.'product'; ?>" method="post">
                 <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br> 

@@ -52,7 +52,9 @@ Class Product{
 	public function allByCategory(Category $category)
 	{
 		$dao = new ProductDao();
-		return $dao->allByCategory($category);
+		$products = $dao->allByCategory($category);
+		
+		return $products;
 	}
 
 	

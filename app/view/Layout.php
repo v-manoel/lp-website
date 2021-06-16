@@ -55,11 +55,16 @@
                 <div class="col-3 col-lg-3 d-flex menu collapse" id="collapseExample">
                 
                 <?php if(isset($_SESSION['user_login'])){ ?>
-                  <div class="m-auto mx-1 header-icon " id="header_login">
+                  <div class="m-auto mx-1 header-icon text-center" id="header_login">
                     <a href="<?= DIRPAGE.'account/';?>" class="my-yellow">
                       <i class="bi bi-person-circle me-2"></i>
                     </a>
                   </div>
+                  <div class="m-auto header-icon ml-0 " id="header_bell">
+                    <a href="<?= DIRPAGE.'account/';?>" class="my-yellow text-center">
+                    <p class="text-white text-center my-auto h4">Bem Vindo <?= '<br>'. unserialize($_SESSION['user_login'])->getName(); ?> :)</p>
+                    </a>
+                </div>
                   <div class="m-auto mx-1 header-icon " id="header_bell">
                     <a href="<?= DIRPAGE.'home/logout';?>" class="my-yellow">
                     <i class="bi bi-door-open-fill my-yellow me-2"></i>

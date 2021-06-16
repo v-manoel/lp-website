@@ -2,7 +2,6 @@
 
 require_once __DIR__."/../model/negocio/Customer.php";
 
-session_start();
 class ControllerLogin extends Render{
 
     public function __construct(){
