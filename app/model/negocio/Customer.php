@@ -1,34 +1,23 @@
 
 <?php
 
-require '../dao/CustomerDao.php';
+require_once __DIR__."/../dao/CustomerDao.php";
+require_once __DIR__."/User.php";
 
 Class Customer extends User{
 	//stats attributes
 	private $total_sales = 0.0;
 	private $total_orders = 0;
 
-	public function finByID($cpf){
+	public function findByID(){
 		$dao = new CustomerDao();
-		$customer = new Customer();
-		$customer->setCpf($cpf);
-		$customers = $dao->select($customer);
-
-		if(count($customers) == 1){
-			$this->setCpf($customers[0]->getCpf());
-			$this->setName($customers[0]->getName());
-			$this->setEmail($customers[0]->getEmail());
-			$this->setPswd($customers[0]->getPswd());
-			return true;
-		}else{
-			return false;
-		}
+		$res = $dao->selectById($this);
+		return $res;
 	}
 
-	public function all(Customer $generic_customer = new Customer()){
+	public function all(){
 		$dao = new CustomerDao();
-		$customers = $dao->select($generic_customer);
-
+		$customers = $dao->select($this);
 		return $customers;
 	}
 
@@ -39,6 +28,7 @@ Class Customer extends User{
 
 	public function insert(){
 		$dao = new CustomerDao();
+		echo $this->getCpf() . '<br>' . $this->getName();
 		return $dao->insert($this);
 	}
 
@@ -50,18 +40,10 @@ Class Customer extends User{
 
 	//Verifica se os usuário esta cadastrado no banco de dados
 	public function checkCredentials(){
-		$dao = new CustomerDao();
-		$customers = $dao->select($this);
-
-		if(count($customers) == 1){
-			$this->setCpf($customers[0]->getCpf());
-			$this->setName($customers[0]->getName());
-			$this->setEmail($customers[0]->getEmail());
-			$this->setPswd($customers[0]->getPswd());
+		if($this->findByID()){
 			return true;
-		}else{
-			return false;
 		}
+		return false;
 	}
 
 

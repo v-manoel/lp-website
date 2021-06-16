@@ -13,3 +13,10 @@ function SwitchImgSrc(source_img, target_img) {
   source_img.src = target.src;
   target.src = aux_src;
 }
+
+function CollapseItem(collapser, collapsed) {
+  collapser.getElementsByClassName(collapsed)[0].style.display = "none";
+}
+function UncollapseItem(collapser, collapsed) {
+  collapser.getElementsByClassName(collapsed)[0].style.display = "block"
+}

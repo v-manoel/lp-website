@@ -27,6 +27,9 @@ Class Category{
 		return $categories;
 	}
 	
+	public function equals(Category $cat){
+		return $this->getName() == $cat->getName();
+	}
 
 	/**
 	 * Get the value of id

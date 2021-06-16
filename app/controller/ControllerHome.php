@@ -3,6 +3,8 @@
 require_once __DIR__."/../model/negocio/Product.php";
 require_once __DIR__."/../model/negocio/Category.php";
 
+session_start();
+
 class ControllerHome extends Render{
 
     public function __construct(){
@@ -13,12 +15,14 @@ class ControllerHome extends Render{
         $this->renderLayout();
     }
 
-    public function exibir(){
-       $category = new Category();
-       $category->setName('Frios');
-       $category = $category->findByName();
-       $prod = new Product();
-       var_dump($prod->allByCategory($category));
+    public function logout(){
+        if(isset($_SESSION['user_login']))
+        {
+        session_destroy();
+        echo '<script>'.'window.location.reload()'.'</script>';
+        $this->setDir("home");
+        $this->renderLayout();
+        }
     }
 
     public function addMain()

@@ -255,3 +255,12 @@
     right: 0;
     
 }
+
+.price_slide span{
+    font-size: 14px;
+}
+
+.caracteristica .pill-label{
+    background-color: #2b2b2b;
+    font-size: 0.8rem;
+}

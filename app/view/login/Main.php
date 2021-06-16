@@ -6,28 +6,28 @@
     <div class="content">      
       <!--FORMULÁRIO DE LOGIN-->
       <div id="login">
-        <form method="POST" action="login.php">
-          <a href="../home/index.html"><img src="img/voltar.svg" style="height: 30px; width: 30px;"></a>
+        <form method="POST" action="<?= DIRPAGE.'login/logar/';?>">
+          <a href="home/"><img src="<?= DIRIMG . 'icons/voltar.svg'; ?>" style="height: 30px; width: 30px;"></a>
           <h1>Login</h1>
 
           <p> 
-            <label for="nome_login">Seu nome</label>
-            <input id="nome_login" name="nome" required="required" type="text" placeholder="ex. João Carlos"/>
+            <label for="nome_login">Seu email</label>
+            <input id="nome_login" name="email" required="required" type="email" placeholder="user@lapechincha.com"/>
           </p>
            
           <p> 
             <label for="email_login">Sua senha</label>
-            <input id="email_login" name="senha" required="required" type="password" placeholder="Digite sua senha" /> 
+            <input id="email_login" name="pswd" required="required" type="password" placeholder="Digite sua senha" /> 
           </p>
 
            
           <p> 
-            <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
+            <input type="checkbox" name="manterlogado" id="manterlogado" value="permanent_login" /> 
             <label for="manterlogado">Manter-me logado</label>
           </p>
            
           <p> 
-            <input type="submit" value="Logar" name="logar" /> 
+            <input type="submit" value="Logar" name="logar"/> 
           </p>
            
           <p class="link">
@@ -39,23 +39,27 @@
  
       <!--FORMULÁRIO DE CADASTRO-->
       <div id="cadastro">
-        <form method="post" action="cadastro.php">
-          <a href="../home/index.html"><img src="img/voltar.svg" style="height: 30px; width: 30px;"></a>
+        <form method="post" action="<?= DIRPAGE.'login/register/';?>">
+          <a href="home/"><img src="<?= DIRIMG . 'icons/voltar.svg'; ?>" style="height: 30px; width: 30px;"></a>
           <h1>Cadastro</h1> 
            
           <p> 
-            <label for="nome_cad">Seu nome</label>
-            <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="nome" />
+            <label for="name_cad">Seu nome</label>
+            <input id="name_cad" name="name_cad" required="required" type="text" placeholder="nome" />
+          </p>
+          <p> 
+            <label for="nome_cad">Seu CPF</label>
+            <input id="cpf_cad" name="cpf_cad" required="required" type="text" placeholder="cpf" />
           </p>
            
           <p> 
             <label for="email_cad">Seu e-mail</label>
-            <input id="email_cad" name="email_cad" required="required" type="email" placeholder="contato@htmlecsspro.com"/> 
+            <input id="email_cad" name="email_cad" required="required" type="email" placeholder="user@lapechincha.com"/> 
           </p>
            
           <p> 
-            <label for="senha_cad">Sua senha</label>
-            <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="ex. 1234"/>
+            <label for="pswd_cad">Sua senha</label>
+            <input id="pswd_cad" name="pswd_cad" required="required" type="password" placeholder="ex. 1234"/>
           </p>
            
           <p> 

@@ -19,7 +19,7 @@ Class Product{
 
 	public function findByID(){
 		$dao = new ProductDao();
-		$products = $dao->selectById($this);
+		$dao->selectById($this);
 
 		return $this;
 	}
@@ -53,6 +53,47 @@ Class Product{
 	{
 		$dao = new ProductDao();
 		return $dao->allByCategory($category);
+	}
+
+	
+	public function allBySimilarity()
+	{
+		
+		$products = array();
+
+		if($this->getSource() != ""){
+			$product = new Product();
+			$product->setSource($this->getSource());
+			//Similar source
+			$products = $product->all();
+		}
+		if($this->getTitle() != ""){
+			$product = new Product();
+			$product->setTitle($this->getTitle());
+			//Similar Title
+			$products = array_merge($products,$product->all());
+		}
+
+		if($this->getOffer() > 0){
+			$product = new Product();
+			$product->setOffer($this->getOffer());
+			//Equals or biggest offer
+			$products = array_merge($products,$product->all());
+		}
+
+		if($this->getPrice() > 0){
+			$product = new Product();
+			$product->setPrice($this->getPrice());
+			//Equals or more expensive
+			$products = array_merge($products,$product->all());
+		}
+
+
+		foreach ($this->categories as $category) {
+			$products = array_merge($products, $this->allByCategory($category));
+		}
+		
+		return $products;
 	}
 
 	/**
@@ -254,4 +295,67 @@ Class Product{
 
 		return $this;
 	}
+
+	//static Functions
+
+	public static function cmpPrice($product1, $product2){
+		return $product1->offerPrice() >= $product2->offerPrice();
+	}
+	
+	public static function cmpOffer($product1, $product2){
+		return $product1->getOffer() <= $product2->getOffer();
+	}
+
+/* 	public static function cmpId($product1, $product2){
+		return $product1->getId() <= $product2->getId();
+	}
+
+	public static function removeDuplicate($products){
+		usort($products,'Product::cmpId');
+		
+		$id = $products[0]->getId();
+		$new_list = array();
+		array_push($new_list,$products[0]);
+		foreach ($products as $prod) {
+			if($prod->getId() != $id){
+				$id = $prod->getId();
+				array_push($new_list, $prod);
+			}
+		}
+	} */
+
+	public static function reducebyCategory($products, Category $category){
+		$new_list = array();
+		foreach ($products as $prod) {
+			foreach ($prod->getCategories() as $cat) {
+				if($cat->equals($category))
+					array_push($new_list,$prod);
+			}	
+		}
+
+		return $new_list;
+	}
+
+	public static function reducebySource($products, $source){
+		$new_list = array();
+		foreach ($products as $prod)
+			if($prod->getSource() == $source)
+				array_push($new_list,$prod);
+
+
+		return $new_list;
+	}
+
+	public static function reducebyPriceLim($products, $price){
+		$new_list = array();
+		foreach ($products as $prod) 
+			if($prod->offerPrice() <= $price)
+				array_push($new_list,$prod);
+				
+		
+
+		return $new_list;
+	}
+
 }
+

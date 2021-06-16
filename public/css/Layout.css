@@ -245,3 +245,9 @@ footer .search-pagination .page-link:hover{
     border: none;
     color: #f8f9fa;
 }
+
+.items-carousel .item .card-body .product-desc
+{
+    font-size: 0.92rem;
+    display: none;
+}

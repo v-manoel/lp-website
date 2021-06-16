@@ -42,9 +42,9 @@
                 </div><!-- //col -->
 
                 <div class="col-10 col-lg-6" id="search-input">
-                <form class="w-100" action="/search" method="POST" role="search" id="custom-search-input">
+                 <form class="w-100" action="<?php echo DIRPAGE.'busca/result'; ?>" method="GET" role="search" id="custom-search-input">
                     <div class="input-group">
-                    <input id="keywords" name="keywords" type="text" class="form-control" id="search-field" placeholder="Buscar produtos, marcas e mais">
+                    <input id="keywords" name="search_string" type="text" class="form-control" id="search-field" required="required" placeholder="Buscar produtos, marcas e mais">
                     <span class="input-group-append">
                         <button type="submit" class="btn btn-info btn-lg"><i class="bi bi-search" aria-hidden="true"></i></button>
                     </span><!-- input-group-append -->
@@ -53,18 +53,33 @@
                 </div><!-- //col -->
                 
                 <div class="col-3 col-lg-3 d-flex menu collapse" id="collapseExample">
-                <div class=" m-auto mx-1 header-icon" id="header_login">
-                    <a href="../login/login.html" class="my-yellow">
-                    <p class="m-auto font-weight-bold text-center">Entre ou <br> Cadastre-se</p>
+                
+                <?php if(isset($_SESSION['user_login'])){ ?>
+                  <div class="m-auto mx-1 header-icon " id="header_login">
+                    <a href="<?= DIRPAGE.'account/';?>" class="my-yellow">
+                      <i class="bi bi-person-circle me-2"></i>
                     </a>
-                    
+                  </div>
+                  <div class="m-auto mx-1 header-icon " id="header_bell">
+                    <a href="<?= DIRPAGE.'home/logout';?>" class="my-yellow">
+                    <i class="bi bi-door-open-fill my-yellow me-2"></i>
+                    </a>
                 </div>
-
-                <div class="m-auto mx-1 header-icon " id="header_bell">
+                <?php }else{ ?>
+                  <div class=" m-auto mx-1 header-icon" id="header_login">
+                    <a href="<?= DIRPAGE.'login/';?>" class="my-yellow">
+                      <p class="m-auto font-weight-bold text-center">Entre ou <br> Cadastre-se</p>
+                    </a>
+                  </div>
+                  <div class="m-auto mx-1 header-icon" hidden id="header_bell">
                     <a href="#" class="my-yellow">
-                    <i class="bi bi-bell my-yellow me-2"></i>
+                    <i class="bi bi-door-open-fill my-yellow me-2"></i>
                     </a>
                 </div>
+                <?php } ?>
+                    
+                
+
 
                 <div class=" m-auto mx-1 header-icon" id="header_cart">
                     <a href="../cart/cart.html" class="my-yellow">
@@ -90,9 +105,9 @@
         </div><!-- //col -->
 
         <div class="col-8 col-sm-8" id="search-input">
-          <form class="w-100" action="/search" method="get" role="search" id="custom-search-input">
+          <form class="w-100" action="<?php echo DIRPAGE.'busca/result'; ?>" method="GET" role="search" id="custom-search-input">
             <div class="input-group">
-              <input id="keywords" name="keywords" type="text" class="form-control" id="search-field" placeholder="Buscar produtos, marcas e mais">
+              <input id="keywords" name="search_string" type="text" class="form-control" id="search-field" required="required" placeholder="Buscar produtos, marcas e mais">
               <span class="input-group-append">
                 <button type="submit" class="btn btn-info btn-lg"><i class="bi bi-search" aria-hidden="true"></i></button>
               </span><!-- input-group-append -->
@@ -120,9 +135,9 @@
   </div> <!-- NavBar End -->
 
   <div id="categorias">
-    <form class="list-group-horizontal w-100 text-center py-2 mb-1 h-auto my-bg-dark" action="/action_page.php" method="POST">
+    <form class="list-group-horizontal w-100 text-center py-2 mb-1 h-auto my-bg-dark" action="<?php echo DIRPAGE.'busca/result'; ?>" method="GET">
       <?php for($index = 0; $index < count($categories) && $index < 7; $index++){ ?>
-        <button type="submit" value="Categoria" class="bg-transparent my-yellow border-0 m-0 h6"><?= $categories[$index]->getName() ?></button>
+        <button type="submit" name="category" value="<?= $categories[$index]->getName() ?>" class="bg-transparent my-yellow border-0 m-0 h6"><?= $categories[$index]->getName() ?></button>
       <?php } ?>
     </form>
   </div>

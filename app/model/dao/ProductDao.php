@@ -93,7 +93,6 @@ class ProductDao{
         $_offer = $generic_product->getOffer();
         $_source = '%'. $generic_product->getSource() .'%';
 
-        
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM products WHERE title LIKE :title 

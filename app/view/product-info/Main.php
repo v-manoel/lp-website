@@ -24,7 +24,7 @@
                 <div class="col-lg-5 col-12">
                     <div class="my-2">
                         <p class="n-sales m-0">1985 vendidos</p>
-                        <p class="prod-title m-0"><?= $product->getTitle(); ?></p>
+                        <p class="prod-title h4 m-0"><?= $product->getTitle(); ?></p>
                         <p class="m-0 rating">
                             <span class="bi bi-star-fill text-warning"></span>
                             <span class="bi bi-star-fill text-warning"></span>
