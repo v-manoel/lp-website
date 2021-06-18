@@ -1,8 +1,8 @@
 <?php
 
-require '../negocio/OrderStatus.php';
-require '../negocio/Order.php';
-require './Connection.php';
+require_once __DIR__."/Connection.php";
+require_once __DIR__."/../negocio/OrderStatus.php";
+require_once __DIR__."/../negocio/Order.php";
 
 class OrderStatusDao{
 

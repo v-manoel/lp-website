@@ -19,11 +19,11 @@ Class CreditCard{
 
 	}
 
-	public function all(CreditCard $generic_card = new CreditCard()){
-		$dao = new CreditCardDao();
-		$cards = $dao->select($generic_card);
+	public function all(){
+/* 		$dao = new CreditCardDao();
+		$cards = $dao->select($this);
 
-		return $cards;
+		return $cards; */
 	}
 
 	public function validadteCvv($cvv){

@@ -1,9 +1,10 @@
 <?php
 
-require './Customer.php';
-require './Address.php';
-require './CreditCard.php';
-require './Order.php';
+require_once __DIR__."/Customer.php";
+require_once __DIR__."/Address.php";
+require_once __DIR__."/CreditCard.php";
+require_once __DIR__."/Order.php";
+require_once __DIR__."/../dao/AccountDAO.php";
 
 Class CustomerAccount{
 	private $customer;

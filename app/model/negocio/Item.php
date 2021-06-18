@@ -1,6 +1,6 @@
 <?php 
 
-require './Product.php';
+require_once __DIR__."/Product.php";
 
 Class Item{
 	private $id;
@@ -19,11 +19,11 @@ Class Item{
 	public function update(){
 	
 	}
-	public function all(Item $generic_item = new Item()){
-		$dao = new ItemDao();
-		$item = $dao->select($generic_item);
+	public function all(){
+/* 		$dao = new ItemDao();
+		$item = $dao->select($this);
 
-		return $item;
+		return $item; */
 	}
 
 	public function insert(){

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__."/../model/negocio/Product.php";
+require_once __DIR__."/../model/negocio/Customer.php";
 require_once __DIR__."/../model/negocio/Category.php";
 
 class ControllerProdInfo extends Render{

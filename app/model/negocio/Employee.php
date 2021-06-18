@@ -1,6 +1,6 @@
 <?php
 
-require '../dao/EmployeeDao.php';
+require_once __DIR__."/../dao/EmployeeDao.php";
 
 Class Employee extends User{
 	private $department;
@@ -32,9 +32,9 @@ Class Employee extends User{
 	public function finByID($integer){
 	}
 
-	public function all(Employee $generic_employee = new Employee()){
+	public function all(){
 		$dao = new EmployeeDao();
-		$employees = $dao->select($generic_employee);
+		$employees = $dao->select($this);
 
 		return $employees;
 	}

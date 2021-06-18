@@ -9,11 +9,11 @@ Class State{
 
 	}
 	
-	public function all(State $generic_state = new State()){
-		$dao = new StateDao();
-		$states = $dao->select($generic_state);
+	public function all(){
+/* 		$dao = new StateDao();
+		$states = $dao->select($this);
 
-		return $states;
+		return $states; */
 	}
 
 	/**

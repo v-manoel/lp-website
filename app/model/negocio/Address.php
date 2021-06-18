@@ -1,7 +1,7 @@
 <?php 
 
-require './City.php';
-require './State.php';
+require_once __DIR__."/City.php";
+require_once __DIR__."/State.php";
 
 Class Address{
 	private $id;
@@ -21,11 +21,11 @@ Class Address{
 
 	}
 
-	public function all(Address $generic_address = new Address()){
-		$dao = new AddressDao();
-		$addresses = $dao->select($generic_address);
+	public function all(){
+/* 		$dao = new AddressDao();
+		$addresses = $dao->select($this);
 
-		return $addresses;
+		return $addresses; */
 	}
 
 	public function finByID($id){

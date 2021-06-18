@@ -5,6 +5,9 @@ abstract Class User{
 	protected $cpf = "";
 	protected $pswd = "";
 	protected $email = "";
+	protected $phone = "";
+	protected $birthday = "";
+	protected $genre = "";
 
 	public function finByID($integer){
 
@@ -31,6 +34,9 @@ abstract Class User{
 		
 	}
 
+	public  function NamePieces($delimiter = " ",$qnty_names = 2){
+		return explode($delimiter, $this->name, $qnty_names);
+	}
 
 
 	/**
@@ -109,6 +115,69 @@ abstract Class User{
 	public function setEmail($email)
 	{
 		$this->email = $email;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of phone
+	 */ 
+	public function getPhone()
+	{
+		return $this->phone;
+	}
+
+	/**
+	 * Set the value of phone
+	 *
+	 * @return  self
+	 */ 
+	public function setPhone($phone)
+	{
+		$this->phone = $phone;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of birthday
+	 */ 
+	public function getBirthday()
+	{
+		return $this->birthday;
+	}
+
+	/**
+	 * Set the value of birthday
+	 *
+	 * @return  self
+	 */ 
+	public function setBirthday($birthday)
+	{
+		$this->birthday = $birthday;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of gender
+	 */ 
+	public function getGenre()
+	{
+		return $this->genre;
+	}
+
+	/**
+	 * Set the value of gender
+	 *
+	 * @return  self
+	 */ 
+	public function setGenre($genre)
+	{
+		if(strtoupper($genre) == 'F')
+			$this->genre = "Feminino";
+		else if(strtoupper($genre) == 'M')
+			$this->genre = "Masculino";
 
 		return $this;
 	}

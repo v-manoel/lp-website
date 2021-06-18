@@ -1,8 +1,8 @@
 <?php 
 
-require './Order.php';
-require './Employee.php';
-require '../dao/OrderStatusDao.php';
+require_once __DIR__."/Employee.php";
+require_once __DIR__."/Order.php";
+require_once __DIR__."/../dao/OrderStatusDao.php";
 
 Class OrderStatus{
 	private $id;
@@ -17,12 +17,12 @@ Class OrderStatus{
 	public function update(){
 
 	}
-	public function all(OrderStatus $generic_order_status = new OrderStatus()){
+	public function all(){
 		/*Se order estiver setado este método pode ser utilizado para retornar
 		 todos os status da order segundo a implementação do select no dao*/
 		
 		$dao = new OrderStatusDao();
-		$orders_status = $dao->select($generic_order_status);
+		$orders_status = $dao->select($this);
 
 		return $orders_status;
 	}

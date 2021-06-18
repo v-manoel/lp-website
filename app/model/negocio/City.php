@@ -9,11 +9,11 @@ Class City{
 
 	}
 	
-	public function all(City $generic_city = new City()){
-		$dao = new CityDAO();
-		$cities = $dao->select($generic_city);
+	public function all(){
+/* 		$dao = new CityDAO();
+		$cities = $dao->select($this);
 
-		return $cities;
+		return $cities; */
 	}
 
 	/**

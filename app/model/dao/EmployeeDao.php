@@ -1,7 +1,7 @@
 <?php
 
-require '../negocio/Customer.php';
-require './Connection.php';
+require_once __DIR__."/Connection.php";
+require_once __DIR__."/../negocio/Customer.php";
 
 class EmployeeDao{
 

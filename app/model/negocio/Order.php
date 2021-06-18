@@ -1,10 +1,10 @@
 <?php
 
-require './CreditCard.php';
-require './Address.php';
-require './Customer.php';
-require './OrderStatus.php';
-require './Item.php';
+require_once __DIR__."/CreditCard.php";
+require_once __DIR__."/Address.php";
+require_once __DIR__."/Customer.php";
+require_once __DIR__."/OrderStatus.php";
+require_once __DIR__."/Item.php";
 
 Class Order{
 	private $id;
@@ -12,7 +12,7 @@ Class Order{
 	private $date;
 	private $price;
 	private Address $destination;
-	private CreditCard $payment = null;
+	private CreditCard $payment;
 	private Customer $owner;
 	private $rate;
 	private OrderStatus $status;
@@ -29,11 +29,11 @@ Class Order{
 
 	}
 
-	public function all(Order $generic_order = new Order()){
-		$dao = new OrderDao();
-		$orders = $dao->select($generic_order);
+	public function all(){
+/* 		$dao = new OrderDao();
+		$orders = $dao->select($this);
 
-		return $orders;
+		return $orders; */
 	}
 
 	public function insert(){

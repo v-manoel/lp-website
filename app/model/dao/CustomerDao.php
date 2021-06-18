@@ -10,16 +10,23 @@ class CustomerDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("INSERT INTO users(name,cpf,email,pswd) values(:name, :cpf, :email, :pswd)");
+            $stmt = $con->prepare("INSERT INTO users(name,cpf,email,pswd,phone,genre,birthday) values(:name, :cpf, :email, :pswd, :phone, :genre, :birthday)");
             $stmt->bindParam(":name",$_name);
             $stmt->bindParam(":cpf",$_cpf);
             $stmt->bindParam(":email",$_email);
             $stmt->bindParam(":pswd",$_pswd);
+            $stmt->bindParam(":phone",$_phone);
+            $stmt->bindParam(":genre",$_genre);
+            $stmt->bindParam(":birthday",$_birthday);
 
             $_name = $customer->getName();
             $_cpf = $customer->getCpf();
             $_email = $customer->getEmail();
             $_pswd = $customer->getPswd();
+            $_phone = $customer->getPhone();
+            $_genre =$customer->getGenre() == "Masculino" ? 'M' : 'F';
+            $_birthday = $customer->getBirthday();
+
 
             $stmt->execute();            
 
@@ -46,6 +53,10 @@ class CustomerDao{
                 if($row['department'] == null){
                     $customer->setCpf($row['cpf']);
                     $customer->setName($row['name']);
+                    $customer->setPhone($row['phone']);
+                    $customer->setGenre($row['genre']);
+                    $customer->setBirthday($row['birthday']);
+
                     return $customer;
                 }
             }
@@ -61,12 +72,19 @@ class CustomerDao{
         
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM users WHERE _name like :
-            name and cpf like :_cpf and email like :_email");
-            $stmt->bindParam(":_name",$_name);
-            $stmt->bindParam(":_cpf",$_cpf);
-            $stmt->bindParam(":_email",$_email);
+            $stmt = $con->prepare("SELECT * FROM users WHERE name like :name 
+            and cpf like :cpf and email like :email and phone like :phone
+            and genre like :genre and birthday like :birthday");
+            $stmt->bindParam(":name",$_name);
+            $stmt->bindParam(":cpf",$_cpf);
+            $stmt->bindParam(":email",$_email);
+            $stmt->bindParam(":phone",$_phone);
+            $stmt->bindParam(":genre",$_genre);
+            $stmt->bindParam(":birthday",$_birthday);
             
+            $_phone = '%'.$generic_customer->getPhone().'%';
+            $_genre =$generic_customer->getGenre() == "Masculino" ? 'M' : 'F';
+            $_birthday = '%'.$generic_customer->getBirthday().'%';
             $_name = '%'. $generic_customer->getName() .'%';
             $_cpf = '%'. $generic_customer->getCpf() .'%';
             $_email = '%'. $generic_customer->getEmail() .'%';
@@ -75,11 +93,14 @@ class CustomerDao{
 
             $customers = array();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                if($row['department'] == "NULL"){
+                if($row['department'] == null){
                     $customer = new Customer();
                     $customer->setCpf($row['cpf']);
                     $customer->setEmail($row['email']);
                     $customer->setName($row['name']);
+                    $customer->setPhone($row['phone']);
+                    $customer->setGenre($row['genre']);
+                    $customer->setBirthday($row['birthday']);
                 
                     array_push($customers,$customer);
                 }
@@ -93,13 +114,14 @@ class CustomerDao{
         
     }
 
-    public function delete($cpf)
+    public function delete($customer)
     {
         try{
             $con = Connection::getConnection();
             
             $stmt = $con->prepare("DELETE FROM users WHERE cpf=:cpf");
-            $stmt->bindParam("cpf",$cpf);
+            $stmt->bindParam(":cpf",$_cpf);
+            $_cpf = $customer->getCpf();
 
             $stmt->execute();    
         }catch(PDOException $err){
@@ -113,16 +135,23 @@ class CustomerDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("UPDATE users SET name=:name, cpf=:cpf, email=:email, pswd=:pswd WHERE cpf=:cpf)");
+            $stmt = $con->prepare("UPDATE users SET name=:name, cpf=:cpf, email=:email, pswd=:pswd, phone=:phone, genre=:genre, birthday=:birthday WHERE cpf=:cpf)");
             $stmt->bindParam(":name",$_name);
             $stmt->bindParam(":cpf",$_cpf);
             $stmt->bindParam(":email",$_email);
             $stmt->bindParam(":pswd",$_pswd);
+            $stmt->bindParam(":phone",$_phone);
+            $stmt->bindParam(":genre",$_genre);
+            $stmt->bindParam(":birthday",$_birthday);
 
             $_name = $customer->getName();
             $_cpf = $customer->getCpf();
             $_email = $customer->getEmail();
             $_pswd = $customer->getPswd();
+            $_phone = $customer->getPhone();
+            $_genre =$customer->getGenre() == "Masculino" ? 'M' : 'F';
+            $_birthday = $customer->getBirthday();
+            
 
             $stmt->execute();            
 
