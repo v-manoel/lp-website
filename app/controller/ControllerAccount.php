@@ -49,32 +49,70 @@ class ControllerAccount extends Render{
     public function dataUpdate(){
         $fname = $this->customer->getCustomer()->NamePieces()[0];
         $lname = $this->customer->getCustomer()->NamePieces()[1];
-        if(isset($_GET['fname'])){
-            $fname = $_GET['fname'];
+        if(isset($_POST['fname'])){
+            $fname = $_POST['fname'];
         }
-        if(isset($_GET['lname'])){
-            $lname = $_GET['lname'];
+        if(isset($_POST['lname'])){
+            $lname = $_POST['lname'];
         }
-        if(isset($_GET['email'])){
-            $this->customer->getCustomer()->setEmail($_GET['email']);
+        if(isset($_POST['email'])){
+            $this->customer->getCustomer()->setEmail($_POST['email']);
         }
-        if(isset($_GET['genre'])){
-            $this->customer->getCustomer()->setGenre($_GET['genre']);
+        if(isset($_POST['genre'])){
+            $this->customer->getCustomer()->setGenre($_POST['genre']);
         }
-        if(isset($_GET['birthday'])){
-            $this->customer->getCustomer()->setBirthday($_GET['birthday']);
+        if(isset($_POST['birthday'])){
+            $this->customer->getCustomer()->setBirthday($_POST['birthday']);
         }
-        if(isset($_GET['phone'])){
-            $this->customer->getCustomer()->setPhone($_GET['phone']);
+        if(isset($_POST['phone'])){
+            $this->customer->getCustomer()->setPhone($_POST['phone']);
         }
 
         $this->customer->getCustomer()->setName($fname.' '.$lname);
-        
-        //updates database register reference
-        $this->customer->getCustomer()->update();
 
-        //updates user' session reference
-        $_SESSION['user_login'] = serialize($this->customer->getCustomer());
+        //try to update database register reference
+        if($this->customer->getCustomer()->update()){
+
+            //updates user' session reference
+            $_SESSION['user_login'] = serialize($this->customer->getCustomer());
+       
+            $dest_page = DIRPAGE.'account/page/myRegister';
+            $this->messagePage("Dados Atualizados com Sucesso !",$dest_page );
+            
+        }else{
+            $dest_page = DIRPAGE.'account/page/myRegister';
+            $this->messagePage("Erro no Processo de Atualização !",$dest_page );
+        }
+        
+    }
+
+    public function loginUpdate(){
+        
+        if($this->customer->getCustomer()->getPswd() == $_POST['lpswd']){
+
+            if(isset($_POST['email'])){
+                $this->customer->getCustomer()->setEmail($_POST['email']);
+            }
+            if(isset($_POST['npswd'])){
+                $this->customer->getCustomer()->setPswd($_POST['npswd']);
+            }
+            
+            if($this->customer->getCustomer()->update()){
+            //updates user' session reference
+            $_SESSION['user_login'] = serialize($this->customer->getCustomer());
+            $dest_page = DIRPAGE.'account/page/myData';
+            $this->messagePage("Dados Atualizados com Sucesso !",$dest_page );
+            
+            }else{
+                $dest_page = DIRPAGE.'account/page/myRegister';
+                $this->messagePage("Erro Interno no Banco de Dados!",$dest_page );
+            }
+        }       
+        else{
+            $dest_page = DIRPAGE.'account/page/myRegister';
+            $this->messagePage("Senha Antiga não encontrada !",$dest_page );
+        }
+        
         
     }
 

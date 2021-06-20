@@ -31,12 +31,15 @@ class ControllerLogin extends Render{
                     setcookie("user_login",serialize($customer),time() + 5);
                 }
 
-                header('Location:'.DIRPAGE.'home', true,302);
+                $dest_page = DIRPAGE.'home';
+                $this->messagePage("Usuario Logado com Sucesso !",$dest_page,false );
+            
             }else{
-                echo "<script>alert('Senha ou Email incorretos !')</script>";
+                $dest_page = DIRPAGE.'login#paralogin';
+                $this->messagePage("Senha ou Email incorretos !",$dest_page,false );
             }
         }else{
-            header('Location:'.DIRPAGE.'home', true,302);
+            
         }
 
     }
@@ -49,14 +52,12 @@ class ControllerLogin extends Render{
         $customer->setCpf($_POST['cpf_cad']);
 
         if($customer->insert()){
-            echo "<script>alert('Usuário Cadastrado com sucesso !')</script>";
-            sleep(2);
             $_SESSION['user_login'] = serialize($customer);
-            header('Location:'.DIRPAGE.'home', true,302);
+            $dest_page = DIRPAGE.'home';
+            $this->messagePage("Usuario Cadastrado com Sucesso !",$dest_page,false ); 
         }else{
-            echo "<script>alert('Dados Invalidos !')</script>";
-            sleep(2);
-            header('Location:'.DIRPAGE.'login', true,302);
+            $dest_page = DIRPAGE.'login';
+            $this->messagePage("Dados Invalidos !",$dest_page,false ); 
         }
     }
 

@@ -28,7 +28,6 @@ Class Customer extends User{
 
 	public function insert(){
 		$dao = new CustomerDao();
-		echo $this->getCpf() . '<br>' . $this->getName();
 		return $dao->insert($this);
 	}
 

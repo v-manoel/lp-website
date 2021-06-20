@@ -251,3 +251,96 @@ footer .search-pagination .page-link:hover{
     font-size: 0.92rem;
     display: none;
 }
+
+#toast {
+    visibility: hidden;
+    max-width: 48px;
+    height: 48px;
+    /*margin-left: -125px;*/
+    margin: auto;
+    background-color: #e2b538;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    
+    position: fixed;
+    left: 0;right:0;
+    top: 4px;
+    font-size: 17px;
+    white-space: nowrap;
+    z-index: 9999;
+}
+#toast #img{
+
+	width: 48px;
+	height: 48px;
+    
+    float: left;
+
+    margin-top: auto;
+    
+    background-color: rgba(13,13,13,255);
+}
+#toast #desc{
+
+    margin: auto;
+    color: #141314;
+    font-weight:550px;
+
+    overflow: hidden;
+	white-space: nowrap;
+}
+
+#toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes expand {
+    from {min-width: 50px} 
+    to {min-width: 350px}
+}
+
+@keyframes expand {
+    from {min-width: 50px}
+    to {min-width: 350px}
+}
+@-webkit-keyframes stay {
+    from {min-width: 350px} 
+    to {min-width: 350px}
+}
+
+@keyframes stay {
+    from {min-width: 350px}
+    to {min-width: 350px}
+}
+@-webkit-keyframes shrink {
+    from {min-width: 350px;} 
+    to {min-width: 50px;}
+}
+
+@keyframes shrink {
+    from {min-width: 350px;} 
+    to {min-width: 50px;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 60px; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 60px; opacity: 0;}
+}

@@ -59,6 +59,35 @@ abstract class Render{
             require(DIRREQ."app/view/{$this->getDir()}/Footer.php");
         }
     }
+
+    //Exibe uma página para exibir informacoes de redirecionamento para o usuario
+    public function messagePage($message="",$dest_page="",$must_render = true){
+        if($must_render){
+            $this->renderLayout();
+        }
+        echo '
+        <div class="h-100 row align-items-center" >
+        <div class="position-absolute top-0 col text-center" tabindex="999">
+
+            <div class="card mx-auto" style="max-width: 564px; margin-top: 15%">
+            <div class="card-header text-right my-bg-dark">
+                <h5 class="card-title m-auto text-center text-warning">Someone Message</h5>
+                <a class=" position-absolute top-0 mt-1" style="right: 6px;" href = "'.$dest_page.'">
+                <i class="bi bi-x h2 font-weight-bolder text-white"></i>
+                </a>
+            </div>
+            <div class="card-body mt-4">
+                <h6>'.$message.'</h6>
+            </div>
+            <div class="text-end p-2">
+                <a type="button" class="btn btn-warning p-1" href =" '.$dest_page.'">OK</a>
+            </div>
+            </div>
+        </div>
+
+        </div>';
+
+        }
 }
 
 ?>

@@ -6,7 +6,7 @@ abstract Class User{
 	protected $pswd = "";
 	protected $email = "";
 	protected $phone = "";
-	protected $birthday = "";
+	protected $birthday = null;
 	protected $genre = "";
 
 	public function finByID($integer){
@@ -54,7 +54,7 @@ abstract Class User{
 	 */ 
 	public function setName($name)
 	{
-		$this->name = $name;
+		$this->name = ucwords($name);
 
 		return $this;
 	}

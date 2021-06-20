@@ -4,6 +4,18 @@ section #clients{
 }
 
 
+.account-menu a:hover{
+  background: #e2b538;
+}
+
+.hide-pass {
+  position: absolute;
+  bottom: -4px; 
+  left: 90%;
+  cursor: pointer;
+}
+
+
 .menu-canto{
 	
 	

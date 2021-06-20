@@ -1,4 +1,4 @@
-<form class="col-6 mt-5 row"  action="<?php echo DIRPAGE . 'account/dataUpdate'; ?>" method="GET">
+<form class="col-6 mt-5 row"  action="<?php echo DIRPAGE . 'account/dataUpdate'; ?>" method="POST">
     <div class="col-md-2 mb-3">
       <img id="header_logo_left" width="86px" alt="logo" src="<?= DIRIMG . 'logos/coinlogo2.svg'; ?>"/>
     </div>
@@ -8,11 +8,11 @@
     </div>
     <div class="col-md-6 mt-2">
       <label for="fname" class="form-label text-secondary my-0">Primeiro Nome</label>
-      <input type="text" class="form-control" id="fname" name="fname" value="<?= $this->customer->getCustomer()->NamePieces()[0]; ?>" required>
+      <input type="text" class="form-control" id="fname" name="fname" value="<?= $this->customer->getCustomer()->NamePieces()[0]; ?>">
     </div>
     <div class="col-md-6 mt-2">
       <label for="lname" class="form-label text-secondary my-0">Último Nome</label>
-      <input type="text" class="form-control" id="lname" name="lname" value="<?= $this->customer->getCustomer()->NamePieces()[1]; ?>" required>
+      <input type="text" class="form-control" id="lname" name="lname" value="<?= $this->customer->getCustomer()->NamePieces()[1]; ?>">
     </div>
     <div class="col-md-8 mt-2">
       <label for="email" class="form-label my-0 text-secondary ">Email Cadastrado</label>
@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-4 mt-2">
       <label for="genre" class="form-label text-secondary my-0">Genêro</label>
-      <select class="form-select py-0 pb-1" id="genre" name="genre" required>
+      <select class="form-select py-0 pb-1" id="genre" name="genre">
       <option value="" selected disabled hidden><?= $this->customer->getCustomer()->getGenre(); ?></option>
         <option value="F">Feminino</option>
         <option value="M">Masculino</option>
@@ -28,11 +28,11 @@
     </div>
     <div class="col-md-6 mt-2">
       <label for="phone" class="form-label text-secondary my-0">Celular</label>
-      <input type="text" class="form-control" id="phone" name="phone" value="<?= $this->customer->getCustomer()->getPhone(); ?>" required>
+      <input type="text" class="form-control" id="phone" name="phone" value="<?= $this->customer->getCustomer()->getPhone(); ?>">
     </div>
     <div class="col-md-6 mt-2">
       <label for="birthday" class="form-label text-secondary my-0">Data de Nascimento</label>
-      <input type="date" class="form-control" id="birthday" name="birthday" value="<?= $this->customer->getCustomer()->getBirthday(); ?>" required>
+      <input type="date" class="form-control" id="birthday" name="birthday" value="<?= $this->customer->getCustomer()->getBirthday(); ?>">
     </div>
 
     <div class="col-12 mt-4">

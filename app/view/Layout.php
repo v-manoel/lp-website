@@ -64,7 +64,7 @@
               <div class="m-auto header-icon ml-0" id="header_bell">
                 <div class="btn-group">
                   <a role="button" type="button" class="btn dropdown"  data-toggle="dropdown">
-                    <p class="text-white text-center my-auto h4">Bem Vindo <?= '<br>' . unserialize($_SESSION['user_login'])->getName(); ?> :)</p>
+                    <p class="text-white text-center my-auto h4">Bem Vindo <?= '<br>' . unserialize($_SESSION['user_login'])->NamePieces()[0]; ?> :)</p>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-right">
                     <li><a class="dropdown-item" href="<?= DIRPAGE.'account/page/myData';?>">

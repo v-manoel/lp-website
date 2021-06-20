@@ -135,7 +135,7 @@ class CustomerDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("UPDATE users SET name=:name, cpf=:cpf, email=:email, pswd=:pswd, phone=:phone, genre=:genre, birthday=:birthday WHERE cpf=:cpf)");
+            $stmt = $con->prepare("UPDATE users SET name=:name, email=:email, pswd=:pswd, phone=:phone, genre=:genre, birthday=:birthday WHERE cpf=:cpf");
             $stmt->bindParam(":name",$_name);
             $stmt->bindParam(":cpf",$_cpf);
             $stmt->bindParam(":email",$_email);
