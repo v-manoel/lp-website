@@ -4,59 +4,76 @@ require_once __DIR__."/Customer.php";
 require_once __DIR__."/Address.php";
 require_once __DIR__."/CreditCard.php";
 require_once __DIR__."/Order.php";
-require_once __DIR__."/../dao/AccountDAO.php";
+require_once __DIR__."/../dao/AccountDao.php";
 
 Class CustomerAccount{
 	private $customer;
-	private $my_cards;
-	private $my_orders;
-	private $my_address;
+	private $cards;
+	private $orders;
+	private $addresses;
 
 	public function __construct(Customer $customer)
 	{
 		$this->customer = $customer;
-		//$this->my_address = CustomerAddressDAO loads all customer address
-		//$this->my_cards = CustomerCardsDAO loads all customer address
-		//$this->my_orders = CustomerOrderDAO loads all customer address
+		$this->addresses = Address::allByCustomer($this->getCustomer());
+		$this->cards = CreditCard::allByCustomer($this->getCustomer());
+		//$this->orders = CustomerOrderDAO loads all customer address
 
 	}
 
-	public function addAddress(Address $Adress){
-		array_push($this->my_address, $Adress);
-		//CustomerAddressDAO inserts this new address
+	public function addAddress(Address $address){
+		array_push($this->addresses, $address);
+		return $address->insert();
 	}
 
-	public function addCredcard(CreditCard $Credcard){
-		array_push($this->my_cards, $Credcard);
-		//CustomerCardDAO inserts this new card
+	public function addCredcard(CreditCard $credcard){
+		if($credcard->insert()){
+			array_push($this->cards, $credcard);
+			$dao = new AccountDao(); 			
+			return $dao->insertUserCard($credcard, $this->customer);
+		}
+		return false;
 	}
 
-	public function deleteAddress(Address $Address){
-		//CustomerAddressDAO deletes this address
-		//$my_address = //CustomerAddressDAO selects all address again
+	public function deleteAddress(Address $address){
+		foreach ($this->addresses as $index => $add) {
+			if($add->getId() == $address->getId()){
+				$add->delete();
+				array_splice($this->addresses,$index,1);
+			}
+		}
 	}
 
-	public function deleteCredcard(CreditCard $Credcard){
-		//CustomerCardDAO deletes this address
-		//$my_Cards = //CustomerCardDAO selects all cards again
+	public function deleteCredcard(CreditCard $credcard){
+		foreach ($this->cards as $index => $card) {
+			if($card->getNumber() == $credcard->getNumber()){
+				if($card->delete()){
+					array_splice($this->cards,$index,1);
+					$dao = new AccountDao(); 			
+					return $dao->deleteUserCard($credcard, $this->customer);
+				}
+			}
+		}
+		return false;
 	}
 
-	public function changeAddress(Address $Address){
-		foreach ($this->my_address as $address){
-			if($address->getId() == $Address->getId()){
-				$address = $Address;
-				//CustomerAddressDAO updates this address
+	public function changeAddress(Address $address){
+		
+		foreach ($this->addresses as $add){
+			if($add->getId() == $address->getId()){
+				$add = $address;
+				$add->update();
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public function changeCredcard(CreditCard $Credcard){
-		foreach ($this->my_cards as $cards){
-			if($cards->getNumber() == $Credcard->getNumber()){
-				$address = $Credcard;
-				//CustomerAddressDAO updates this address
+	public function changeCredcard(CreditCard $credcard){
+		foreach ($this->cards as $card){
+			if($card->getNumber() == $credcard->getNumber()){
+				$card = $credcard;
+				$card->update();
 				return true;
 			}
 		}
@@ -64,10 +81,10 @@ Class CustomerAccount{
 	}
 
 
-	public function copyOrder($id_order){
-		foreach ($this->my_orders as $order) {
-			if($order->getId() == $id_order)
-				return $order; //$_SESSION['Cart'] = $order
+	public function copyOrder($order){
+		foreach ($this->orders as $ord) {
+			if($ord->getId() == $order->getId())
+				return $ord; //$_SESSION['Cart'] = $order
 		}
 	}
 
@@ -94,61 +111,61 @@ Class CustomerAccount{
 	}
 
 	/**
-	 * Get the value of my_cards
+	 * Get the value of cards
 	 */ 
-	public function getMy_cards()
+	public function getCards()
 	{
-		return $this->my_cards;
+		return $this->cards;
 	}
 
 	/**
-	 * Set the value of my_cards
+	 * Set the value of cards
 	 *
 	 * @return  self
 	 */ 
-	public function setMy_cards($my_cards)
+	public function setCards($cards)
 	{
-		$this->my_cards = $my_cards;
+		$this->cards = $cards;
 
 		return $this;
 	}
 
 	/**
-	 * Get the value of my_orders
+	 * Get the value of orders
 	 */ 
-	public function getMy_orders()
+	public function getOrders()
 	{
-		return $this->my_orders;
+		return $this->orders;
 	}
 
 	/**
-	 * Set the value of my_orders
+	 * Set the value of orders
 	 *
 	 * @return  self
 	 */ 
-	public function setMy_orders($my_orders)
+	public function setOrders($orders)
 	{
-		$this->my_orders = $my_orders;
+		$this->orders = $orders;
 
 		return $this;
 	}
 
 	/**
-	 * Get the value of my_address
+	 * Get the value of addresses
 	 */ 
-	public function getMy_address()
+	public function getAddresses()
 	{
-		return $this->my_address;
+		return $this->addresses;
 	}
 
 	/**
-	 * Set the value of my_address
+	 * Set the value of addresses
 	 *
 	 * @return  self
 	 */ 
-	public function setMy_address($my_address)
+	public function setMy_address($addresses)
 	{
-		$this->my_address = $my_address;
+		$this->addresses = $addresses;
 
 		return $this;
 	}

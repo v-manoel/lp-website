@@ -12,7 +12,7 @@ class CategoryDao{
             $con = Connection::getConnection();
             
             $stmt = $con->prepare("INSERT INTO bd_pechincha.categories(name) values(:name)");
-            $stmt->bindParam(":title", $_name);
+            $stmt->bindParam(":name", $_name);
 
             $_name = $category->getName();
 
@@ -104,7 +104,7 @@ class CategoryDao{
         
     }
 
-    public function delete($category)
+    public function delete(Category $category)
     {
         try{
             $con = Connection::getConnection();
@@ -126,16 +126,16 @@ class CategoryDao{
         return true;
     }
 
-    public function update($category)
+    public function update(Category $category)
     {
         try{
             $con = Connection::getConnection();
             
             $stmt = $con->prepare("UPDATE categories SET name=:name WHERE id=:id)");
-            $stmt->bindParam(":id",$_name);
-            $stmt->bindParam(":name",$_id);
+            $stmt->bindParam(":id",$_id);
+            $stmt->bindParam(":name",$_name);
 
-            $_name = $category->getId();
+            $_name = $category->getName();
             $_id = $category->getId();
 
             $stmt->execute();            

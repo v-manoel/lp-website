@@ -36,7 +36,7 @@ class CustomerDao{
         return true;
     }
 
-    public function selectById(Customer $customer){
+    public function selectById(Customer $customer, bool $only_active = true){
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM users WHERE email = :email and pswd = :pswd");
@@ -50,7 +50,7 @@ class CustomerDao{
 
             if($stmt->rowCount() == 1){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                if($row['department'] == null){
+                if($row['department'] == null && $row['is_active'] == $only_active){
                     $customer->setCpf($row['cpf']);
                     $customer->setName($row['name']);
                     $customer->setPhone($row['phone']);
@@ -68,7 +68,7 @@ class CustomerDao{
         return null;
     }
 
-    public function select(Customer $generic_customer){
+    public function select(Customer $generic_customer, bool $only_active = true){
         
         try{
             $con = Connection::getConnection();
@@ -93,7 +93,7 @@ class CustomerDao{
 
             $customers = array();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                if($row['department'] == null){
+                if($row['department'] == null && $row['is_active'] == $only_active){
                     $customer = new Customer();
                     $customer->setCpf($row['cpf']);
                     $customer->setEmail($row['email']);
@@ -118,12 +118,12 @@ class CustomerDao{
     {
         try{
             $con = Connection::getConnection();
-            
-            $stmt = $con->prepare("DELETE FROM users WHERE cpf=:cpf");
+            $stmt = $con->prepare("UPDATE users SET is_active = 0 WHERE cpf=:cpf");
             $stmt->bindParam(":cpf",$_cpf);
+            
             $_cpf = $customer->getCpf();
-
             $stmt->execute();    
+
         }catch(PDOException $err){
             return false;
         }

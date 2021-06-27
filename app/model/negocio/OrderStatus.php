@@ -11,7 +11,7 @@ Class OrderStatus{
 	private Employee $modifier;
 	private Order $order;
 	
-	public function finByID($id){
+	public function findByID($id){
 
 	}
 	public function update(){

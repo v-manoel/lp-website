@@ -9,19 +9,19 @@ require_once __DIR__."/Item.php";
 Class Order{
 	private $id;
 	private $items = array();
-	private $date;
-	private $price;
+	private $date = "";
+	private $price = 0.0;
 	private Address $destination;
 	private CreditCard $payment;
 	private Customer $owner;
-	private $rate;
+	private $rate = 0.0;
 	private OrderStatus $status;
 
 	public function delete(){
 
 	}
 	
-	public function finByID($id){
+	public function findByID($id){
 
 	}
 

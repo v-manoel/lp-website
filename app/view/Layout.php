@@ -212,7 +212,7 @@
   </div>
 
   <div class="Footer">
-    <footer class="bg-dark text-center text-lg-start w-100 mt-4">
+    <footer class="bg-dark text-center text-lg-start w-100 mt-4 sticky-bottom">
       <div class="container-fluid">
         <div class="row">
           <div class="text-center p-1" style="background-color: #141314;">

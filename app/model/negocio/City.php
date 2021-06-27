@@ -1,20 +1,36 @@
 <?php
 
+require_once __DIR__."/../dao/CityDao.php";
+require_once __DIR__."/State.php";
+
 Class City{
 
 	private $id;
-	private $name;
+	private $name = "";
+	private $state = null;
 
-	public function finByID($id){
+		
+	public function findByID(){
+		$dao = new CityDAO();
+		$city = $dao->selectById($this);
 
+		return $city;
 	}
 	
+	public function findByName(){
+		$dao = new CityDAO();
+		$city = $dao->selectByName($this);
+
+		return $city;
+	}
+
 	public function all(){
-/* 		$dao = new CityDAO();
+		$dao = new CityDAO();
 		$cities = $dao->select($this);
 
-		return $cities; */
+		return $cities;
 	}
+	
 
 	/**
 	 * Get the value of name
@@ -54,5 +70,31 @@ Class City{
 		$this->id = $id;
 
 		return $this;
+	}
+
+
+	/**
+	 * Get the value of state
+	 */ 
+	public function getState()
+	{
+		return $this->state;
+	}
+
+	/**
+	 * Set the value of state
+	 *
+	 * @return  self
+	 */ 
+	public function setState($state)
+	{
+		$this->state = $state;
+
+		return $this;
+	}
+
+	static public function allByState(State $state){
+		$dao = new CityDao();
+		return $dao->selectByState($state);
 	}
 }

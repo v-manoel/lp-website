@@ -39,6 +39,20 @@ class ProductDao{
                     return false;
                 }
             }
+            //insert all linked categories relations
+            foreach ($product->getCategories() as $cat){
+                try{
+                    $stmt = $con->prepare("INSERT INTO products_has_category(id_category,id_product) values(:id_category, :id_product");
+                    $stmt->bindParam(":id_category",$_cat_id);
+                    $stmt->bindParam(":id_product",$product_id);
+                    
+                    $_cat_id = $cat->getId();
+                    
+                    $stmt->execute();
+                }catch(PDOException $err){
+                    return false;
+                }
+            }
 
         } catch(PDOException $err){
             return false;
@@ -47,7 +61,7 @@ class ProductDao{
     }
 
     
-    public function selectById(Product $product){
+    public function selectById(Product $product, bool $only_active = true){
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM products WHERE id = :id");
@@ -59,33 +73,35 @@ class ProductDao{
 
             if($stmt->rowCount() == 1){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                $product->setTitle($row['title']);
-                $product->setDescription($row['description']);
-                $product->setPrice($row['price']);
-                $product->setOffer($row['offer']);
-                $product->setSource($row['source']);
                 
-                //Set product images
-                $img_stmt = $con->prepare("SELECT * FROM images WHERE id_product = :product_id");
-                $img_stmt->bindParam(":product_id", $_id);
-                $img_stmt->execute();
-                while($img_row = $img_stmt->fetch(PDO::FETCH_ASSOC)){
-                    $product->addImg($img_row['src']);
-                }
+                if($row['is_active'] == $only_active){
+                    $product->setTitle($row['title']);
+                    $product->setDescription($row['description']);
+                    $product->setPrice($row['price']);
+                    $product->setOffer($row['offer']);
+                    $product->setSource($row['source']);
+                    
+                    //Set product images
+                    $img_stmt = $con->prepare("SELECT * FROM images WHERE id_product = :product_id");
+                    $img_stmt->bindParam(":product_id", $_id);
+                    $img_stmt->execute();
+                    while($img_row = $img_stmt->fetch(PDO::FETCH_ASSOC)){
+                        $product->addImg($img_row['src']);
+                    }
 
-                //Set product categories
-                $cat_stmt = $con->prepare("SELECT * FROM products_has_category WHERE id_product = :product_id");
-                $cat_stmt->bindParam(":product_id", $_id);
-                $cat_stmt->execute();
-                while($cat_row = $cat_stmt->fetch(PDO::FETCH_ASSOC)){
-                    $category = new Category();
-                    $category->setId($cat_row['id_category']);
-                    $category = $category->findByID();
-                    $product->addCategory($category);
-                }
+                    //Set product categories
+                    $cat_stmt = $con->prepare("SELECT * FROM products_has_category WHERE id_product = :product_id");
+                    $cat_stmt->bindParam(":product_id", $_id);
+                    $cat_stmt->execute();
+                    while($cat_row = $cat_stmt->fetch(PDO::FETCH_ASSOC)){
+                        $category = new Category();
+                        $category->setId($cat_row['id_category']);
+                        $category = $category->findByID();
+                        $product->addCategory($category);
+                    }
 
-                return $product;
+                    return $product;
+                }
             }
             
         } catch(PDOException $err){
@@ -95,7 +111,7 @@ class ProductDao{
         return null;
     }
 
-    public function select(Product $generic_product){
+    public function select(Product $generic_product, bool $only_active = true){
         
         try{
             $con = Connection::getConnection();
@@ -117,35 +133,37 @@ class ProductDao{
             $stmt->execute();
             $products = array();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $product = new Product();
-                $product->setId($row['id']);
-                $product->setTitle($row['title']);
-                $product->setDescription($row['description']);
-                $product->setPrice($row['price']);
-                $product->setOffer($row['offer']);
-                $product->setSource($row['source']);
+                if($row['is_active'] == $only_active){
+                    $product = new Product();
+                    $product->setId($row['id']);
+                    $product->setTitle($row['title']);
+                    $product->setDescription($row['description']);
+                    $product->setPrice($row['price']);
+                    $product->setOffer($row['offer']);
+                    $product->setSource($row['source']);
 
-                $_id = $product->getId();
-                
-                $img_stmt = $con->prepare("SELECT * FROM bd_pechincha.images WHERE id_product = :product_id");
-                $img_stmt->bindParam(":product_id", $_id);
-                $img_stmt->execute();
-                while($img_row = $img_stmt->fetch(PDO::FETCH_ASSOC)){
-                    $product->addImg($img_row['src']);
+                    $_id = $product->getId();
+                    
+                    $img_stmt = $con->prepare("SELECT * FROM bd_pechincha.images WHERE id_product = :product_id");
+                    $img_stmt->bindParam(":product_id", $_id);
+                    $img_stmt->execute();
+                    while($img_row = $img_stmt->fetch(PDO::FETCH_ASSOC)){
+                        $product->addImg($img_row['src']);
+                    }
+
+                    //Set product categories
+                    $cat_stmt = $con->prepare("SELECT * FROM bd_pechincha.products_has_category WHERE id_product = :product_id");
+                    $cat_stmt->bindParam(":product_id", $_id);
+                    $cat_stmt->execute();
+                    while($cat_row = $cat_stmt->fetch(PDO::FETCH_ASSOC)){
+                        $category = new Category();
+                        $category->setId($cat_row['id_category']);
+                        $category = $category->findByID();
+                        $product->addCategory($category);
+                    }
+
+                    array_push($products,$product);
                 }
-
-                //Set product categories
-                $cat_stmt = $con->prepare("SELECT * FROM bd_pechincha.products_has_category WHERE id_product = :product_id");
-                $cat_stmt->bindParam(":product_id", $_id);
-                $cat_stmt->execute();
-                while($cat_row = $cat_stmt->fetch(PDO::FETCH_ASSOC)){
-                    $category = new Category();
-                    $category->setId($cat_row['id_category']);
-                    $category = $category->findByID();
-                    $product->addCategory($category);
-                }
-
-                array_push($products,$product);
             }
 
 
@@ -173,7 +191,10 @@ class ProductDao{
                 $product = new Product();
                 $product->setId($row['id_product']);
                 $product = $product->findByID();
-                array_push($products,$product);
+                
+                if($product){
+                    array_push($products,$product);
+                }
                 
             }
 
@@ -185,24 +206,14 @@ class ProductDao{
 
     public function delete($product)
     {
+        //Should just check a flag ?
         try{
             $con = Connection::getConnection();
 
-            $_id = $product->getId();
-            
-            //Delete all linked images
-            $img_stmt = $con->prepare("DELETE FROM images WHERE id_product = :id_product");
-            $img_stmt->bindParam(":id_product", $_id);
-            $img_stmt->execute();
-
-            //Delete all categories relations
-            $cat_stmt = $con->prepare("DELETE FROM products_has_category WHERE id_product = :id_product");
-            $cat_stmt->bindParam(":id_product", $_id);
-            $cat_stmt->execute();
-                
-            $stmt = $con->prepare("DELETE FROM products WHERE id=:id");
+            $stmt = $con->prepare("UPDATE products SET is_active = 0 WHERE id=:id");
             $stmt->bindParam(":id",$_id);
-
+            
+            $_id = $product->getId();
 
             $stmt->execute();    
         }catch(PDOException $err){

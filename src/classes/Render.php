@@ -3,10 +3,11 @@
 
 abstract class Render{
 
-    private $dir;
-    private $title;
-    private $desc;
-    private $keywords;
+    protected $dir;
+    protected $title;
+    protected $desc;
+    protected $keywords;
+    protected $content;
 
     public function getDir(){return $this->dir;}
     public function setDir($dir){$this->dir = $dir;}
@@ -69,9 +70,9 @@ abstract class Render{
         <div class="h-100 row align-items-center" >
         <div class="position-absolute top-0 col text-center" tabindex="999">
 
-            <div class="card mx-auto" style="max-width: 564px; margin-top: 15%">
+            <div class="card mx-auto shadow-lg" style="max-width: 564px; margin-top: 15%">
             <div class="card-header text-right my-bg-dark">
-                <h5 class="card-title m-auto text-center text-warning">Someone Message</h5>
+                <h5 class="card-title m-auto text-center text-warning">Messagem Informativa</h5>
                 <a class=" position-absolute top-0 mt-1" style="right: 6px;" href = "'.$dest_page.'">
                 <i class="bi bi-x h2 font-weight-bolder text-white"></i>
                 </a>

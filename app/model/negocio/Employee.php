@@ -29,7 +29,7 @@ Class Employee extends User{
 		}
 	}
 	
-	public function finByID($integer){
+	public function findByID(){
 	}
 
 	public function all(){

@@ -1,40 +1,51 @@
 <?php 
 
+require_once __DIR__."/../dao/AddressDao.php";
 require_once __DIR__."/City.php";
+require_once __DIR__."/Customer.php";
 require_once __DIR__."/State.php";
 
 Class Address{
 	private $id;
-	private State $uf;
-	private City $city;
-	private $district;
-	private $street;
-	private $number;
-	private $description;
+	private $state = null;
+	private $city = null;
+	private $district = "";
+	private $street = "";
+	private $number = "";
+	private $description = "";
+	private $name = "";
+	private $destinatary = "";
+	private $cep = "";
+	private $owner = null;
 
 	
 	public function insert(){
-	
+		$dao = new AddressDao();
+		return $dao->insert($this);
 	}
 
 	public function update(){
-
+		$dao = new AddressDao();
+		return $dao->update($this);
 	}
 
 	public function all(){
-/* 		$dao = new AddressDao();
+ 		$dao = new AddressDao();
 		$addresses = $dao->select($this);
 
-		return $addresses; */
+		return $addresses; 
 	}
 
-	public function finByID($id){
-
+	public function findByID(){
+		$dao = new AddressDao();
+		$res = $dao->selectById($this);
+		return $res;
 	}
 	
 
 	public function delete(){
-
+		$dao = new AddressDao();
+		return $dao->delete($this);
 	}
 	
 
@@ -155,25 +166,113 @@ Class Address{
 	{
 		$this->city = $city;
 
+		//also fill state attribute
+		$this->state = $this->city->getState();
+
 		return $this;
 	}
 
 	/**
-	 * Get the value of uf
+	 * Get the value of state
 	 */ 
-	public function getUf()
+	public function getState()
 	{
-		return $this->uf;
+		return $this->state;
 	}
 
 	/**
-	 * Set the value of uf
+	 * Set the value of state
 	 *
 	 * @return  self
 	 */ 
-	public function setUf($uf)
+	public function setState($state)
 	{
-		$this->uf = $uf;
+		$this->state = $state;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of name
+	 */ 
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * Set the value of name
+	 *
+	 * @return  self
+	 */ 
+	public function setName($name)
+	{
+		$this->name = $name;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of destinatary
+	 */ 
+	public function getDestinatary()
+	{
+		return $this->destinatary;
+	}
+
+	/**
+	 * Set the value of destinatary
+	 *
+	 * @return  self
+	 */ 
+	public function setDestinatary($destinatary)
+	{
+		$this->destinatary = $destinatary;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of cep
+	 */ 
+	public function getCep()
+	{
+		return $this->cep;
+	}
+
+	/**
+	 * Set the value of cep
+	 *
+	 * @return  self
+	 */ 
+	public function setCep($cep)
+	{
+		$this->cep = $cep;
+
+		return $this;
+	}
+
+	public static function allByCustomer(Customer $customer){
+		$dao = new AddressDao();
+		return $dao->selectByCustomer($customer);
+	}
+
+	/**
+	 * Get the value of owner
+	 */ 
+	public function getOwner()
+	{
+		return $this->owner;
+	}
+
+	/**
+	 * Set the value of owner
+	 *
+	 * @return  self
+	 */ 
+	public function setOwner($owner)
+	{
+		$this->owner = $owner;
 
 		return $this;
 	}

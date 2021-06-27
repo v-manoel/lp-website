@@ -13,7 +13,7 @@ Class Item{
 	public function delete_Item(){
 
 	}
-	public function finByID_item($id){
+	public function findByID_item($id){
 
 	}
 	public function update(){

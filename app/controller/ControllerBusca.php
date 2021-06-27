@@ -2,6 +2,7 @@
 
 require_once __DIR__."/../model/negocio/Product.php";
 require_once __DIR__."/../model/negocio/Category.php";
+require_once __DIR__."/../model/negocio/Customer.php";
 
 class ControllerBusca extends Render{
 

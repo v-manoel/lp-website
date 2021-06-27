@@ -9,7 +9,7 @@ abstract Class User{
 	protected $birthday = null;
 	protected $genre = "";
 
-	public function finByID($integer){
+	public function findByID(){
 
 	}
 	public function all(){

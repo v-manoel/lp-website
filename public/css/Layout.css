@@ -4,6 +4,19 @@ body
     font-family: 'Ubuntu' ;
 }
 
+@media (max-height: 700px)
+{
+.Main{
+    min-height: 500px;
+}
+}
+
+@media (min-height: 700px)
+{
+.Main{
+    min-height: 700px;
+}
+}
 /* colors */
 
 .my-bg-dark
@@ -18,6 +31,11 @@ body
 .my-bg-gray{
     background-color: rgba(170, 167, 167, 0.623);
 }
+
+.my-bg-light-gray{
+    background-color: #e9ecef;
+}
+
 .my-gray{
     color: rgba(170, 167, 167, 0.623);
 }
@@ -343,4 +361,9 @@ footer .search-pagination .page-link:hover{
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 60px; opacity: 0;}
+}
+
+.input-label{
+    border: #ced4da solid 1px !important;
+    color: #495057 !important;
 }

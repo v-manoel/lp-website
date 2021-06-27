@@ -1,20 +1,32 @@
 <?php 
 
+require_once __DIR__."/../dao/StateDao.php";
 
 Class State{
 	private $id;
-	private $uf;
+	private $uf = "";
 
-	public function finByID($id){
+	public function findByID(){
+		$dao = new StateDAO();
+		$state = $dao->selectById($this);
 
+		return $state;
 	}
-	
+
+	public function findByUf(){
+		$dao = new StateDAO();
+		$state = $dao->selectByUf($this);
+
+		return $state;
+	}
+
 	public function all(){
-/* 		$dao = new StateDao();
+		$dao = new StateDAO();
 		$states = $dao->select($this);
 
-		return $states; */
+		return $states;
 	}
+
 
 	/**
 	 * Get the value of id

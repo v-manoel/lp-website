@@ -55,7 +55,7 @@
               <?php foreach ($categories as $name => $qnt) { ?>
                 <label for="<?= 'cat' . $name ?>">
                   <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
-                    <input type="radio" class="radio_filter" name="filter_category"  onclick="changeLabelColor('<?= $name ?>')" value=<?= $name ?> id=<?= 'cat' . $name ?>>
+                    <input type="radio" class="radio_filter" name="filter_category"  onclick="changeLabelColor('<?= $name ?>')" value="<?= $name ?>" id=<?= 'cat' . $name ?>>
                     <?= $name ?>
                     <span class="badge bg-dark rounded-pill " id="<?= 'label' . $name ?>"><?= $qnt ?></span>
                   </li>
@@ -67,7 +67,7 @@
               <?php foreach ($sources as $name => $qnt) { ?>
                 <label for="<?= 'src' . $name ?>">
                   <li class="list-group-item text-secondary bg-transparent border-0 p-0 pb-2 d-flex justify-content-between align-items-center">
-                    <input type="radio" name="filter_source" value=<?= $name ?> id=<?= 'src' . $name ?>>
+                    <input type="radio" name="filter_source" value="<?= $name ?>" id=<?= 'src' . $name ?>>
                     <?= $name ?>
                     <span class="badge bg-dark rounded-pill "><?= $qnt ?></span>
                   </li>

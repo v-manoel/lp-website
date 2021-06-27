@@ -1,34 +1,45 @@
 <?php 
 
+ require_once __DIR__."/../dao/CreditCardDao.php"; 
+
 Class CreditCard{
 	private $number;
-	private $holder;
-	private $cvv;
-	private $expiration;
+	private $holder = "";
+	private $cvv = null;
+	private $expiration = "";
 	
 
-	public function delete(){
-		
+	public function insert(){
+		$dao = new CreditCardDao();
+		return $dao->insert($this);
 	}
-	
-	public function finByID($number){
 
+	public function findByID(){
+	 	$dao = new CreditCardDao();
+		$res = $dao->selectById($this);
+		return $res; 
 	}
 
 	public function update(){
-
+	 	$dao = new CreditCardDao();
+		return $dao->update($this); 
 	}
 
 	public function all(){
-/* 		$dao = new CreditCardDao();
-		$cards = $dao->select($this);
+ 		$dao = new CreditCardDao();
+		$addresses = $dao->select($this);
 
-		return $cards; */
-	}
+		return $addresses;  
+   }
+
+   public function delete(){
+		$dao = new CreditCardDao();
+		return $dao->delete($this); 
+   }
 
 	public function validadteCvv($cvv){
 		
-		if($this->finByID($this->number) && $this->getCvv() == $cvv){
+		if($this->findByID() && $this->getCvv() == $cvv){
 			return true;
 		}
 		return false;
@@ -114,4 +125,9 @@ Class CreditCard{
 
 		return $this;
 	}
+
+ 	public static function allByCustomer(Customer $customer){
+		$dao = new CreditCardDao();
+		return $dao->selectByCustomer($customer);
+	} 
 }
