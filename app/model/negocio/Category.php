@@ -3,7 +3,7 @@
 require_once __DIR__."/../dao/CategoryDao.php";
 
 Class Category{
-	private $id;
+	private $id = null;
 	private $name;
 	
 	public function findByID(){

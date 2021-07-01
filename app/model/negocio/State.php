@@ -3,7 +3,7 @@
 require_once __DIR__."/../dao/StateDao.php";
 
 Class State{
-	private $id;
+	private $id = null;
 	private $uf = "";
 
 	public function findByID(){

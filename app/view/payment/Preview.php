@@ -2,32 +2,54 @@
     <div class="row">
         <div class="col-md-7 payment-method">
             <h4 class="mb-4">Como você prefere pagar ?</h4>
+            <?php if($this->content['order']->getPayment()){?>
+            <div class="mb-3">
+                <h6 class="mb-3">Cartão Selecionado</h6>
+                <div class="form-check payment-option align-items-center border-1 border-bottom text-white bg-dark rounded shadow-lg">
+                    <input class="form-check-input" type="radio" name="card-number" id="atual-card" value="atual-card">
+                    <label class="form-check-label row align-items-center" for="atual-card">
+                        <div class="col-md-1">
+                            <i class="bi bi-credit-card-fill h4"></i>
+                        </div>
+                        <div class="col-md-11 desc">
+                            <?= $this->content['order']->getPayment()->getNumber(); ?>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <?php } ?>
             <div>
                 <h6 class="mb-3">Com cartão de crédito </h6>
                 <div class="container-fluid">
+                <form id="card-form" action="<?= DIRPAGE.'payment/PaymentMethod'?>" method="POST">
+                    <?php if($this->content['order']->getOwner()){?>
+                        <?php foreach (CreditCard::allByCustomer($this->content['order']->getOwner()) as $card) { ?>
+                        <div class="form-check payment-option align-items-center border-1 border-bottom">
+                            <input class="form-check-input" type="radio" name="card-number" id="<?= $card->getNumber(); ?>" value="<?= $card->getNumber(); ?>">
+                            <label class="form-check-label row align-items-center" for="<?= $card->getNumber(); ?>">
+                                <div class="col-md-1">
+                                    <i class="bi bi-credit-card-fill h4"></i>
+                                </div>
+                                <div class="col-md-11 desc">
+                                    <?= $card->getNumber(); ?>
+                                </div>
+                            </label>
+                        </div>
+                        <?php } ?>
+                    <?php } ?>
+                    
                     <div class="form-check payment-option align-items-center">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0">
-                        <label class="form-check-label row align-items-center" for="flexRadioDefault0">
+                        <input class="form-check-input" type="radio" name="card-number" id="other-card" value="0">
+                        <label class="form-check-label row align-items-center" for="other-card">
                             <div class="col-md-1">
                                 <i class="bi bi-credit-card-fill h4"></i>
                             </div>
                             <div class="col-md-11 desc">
-                                Cartão de Crédito Cadastrado
+                                Novo Cartão de Crédito
                             </div>
                         </label>
                     </div>
-                    <hr class="m-0 h-25 text-secondary ">
-                    <div class="form-check payment-option align-items-center">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label row align-items-center" for="flexRadioDefault1">
-                            <div class="col-md-1">
-                                <i class="bi bi-credit-card-fill h4"></i>
-                            </div>
-                            <div class="col-md-11 desc">
-                                Outro Cartão de Crédito
-                            </div>
-                        </label>
-                    </div>
+                </form>
                 </div>
             </div>
             <div>
@@ -37,7 +59,7 @@
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                         <label class="form-check-label row align-items-center" for="flexRadioDefault2">
                             <div class="col-md-1">
-                                <img src="../../commom/img/icons/pix.svg" alt="pix" width="60px">
+                            <i class="bi bi-x-diamond-fill h4 "></i>
                             </div>
                             <div class="col-md-11 desc">
                                 Pagar com Pix
@@ -46,24 +68,24 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-warning text-dark float-md-end">Continuar</button>
+            <button type="submit" form="card-form" class="btn btn-warning text-dark float-md-end">Continuar</button>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-4 text-center">
             <div class="wrapper mt-2">
                 <div id="sidebar" class="mb-4">
                     <div class="container">
-                        <div class="sidebar-header p-2">
+                        <div class="sidebar-header py-3 px-2 border-1 border-bottom">
                             <span class="title text-dark h5">Resumo da compra</span>
                             <i id="dismiss" class="bi bi-x h2"></i>
                         </div>
-                        <hr class="m-0 h-25 text-secondary mt-3 mb-2">
+                        
                         <div class="row item parcial-price">
                             <div class="col-md-6 col-sm-6 text-start">
-                                Produtos(<span class="quantidade">3</span>)
+                                Produtos(<span class="quantidade h6"><?= $this->content['order']->getProdQnty(); ?></span>)
                             </div>
                             <div class="col-md-6 col-sm-6 text-end">
-                                <p class="price m-auto">R$ 9.998<span class="decimals align-top">12</span>
+                            <p class="price m-auto"><?= 'R$ ' . floor($this->content['order']->calcTotal()) ?><span class="decimals align-top"><?= ($this->content['order']->calcTotal() * 100) % 100; ?></span></p>
                             </div>
                         </div>
 
@@ -71,17 +93,17 @@
                             <div class="col-md-6 col-sm-6 text-start">
                                 Envio
                             </div>
-                            <div class="col-md-6 col-sm-6 text-end">
+                            <div class="col-md-6 col-sm-6 text-end text-success">
                                 Grátis
                             </div>
                         </div>
                         <hr class="m-0 h-25 text-secondary mt-3 mb-2">
-                        <div class="row item total-price">
-                            <div class="col-md-6 col-sm-6 text-start h6">
+                        <div class="row item total-price text-primary">
+                            <div class="col-md-6 col-sm-6 text-start font-weight-bold">
                                 Você Pagará
                             </div>
                             <div class="col-md-6 col-sm-6 text-end h6">
-                                <p class="price m-auto">R$ 9.998<span class="decimals align-top">12</span>
+                            <p class="price m-auto h5"><?= 'R$ ' . floor($this->content['order']->calcTotal()) ?><span class="decimals align-top"><?= ($this->content['order']->calcTotal() * 100) % 100; ?></span></p>
                             </div>
                         </div>
                     </div>

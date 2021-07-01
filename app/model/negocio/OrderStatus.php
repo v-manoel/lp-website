@@ -5,31 +5,33 @@ require_once __DIR__."/Order.php";
 require_once __DIR__."/../dao/OrderStatusDao.php";
 
 Class OrderStatus{
-	private $id;
-	private $status;
-	private $update_time;
-	private Employee $modifier;
-	private Order $order;
+	private $id = null;
+	private $status = ""; //paid - separated - checked - delivered
+	private $update_time = null;
+	private ?Employee $modifier = null;
+	private ?Order $order = null;
 	
-	public function findByID($id){
-
-	}
-	public function update(){
-
-	}
-	public function all(){
-		/*Se order estiver setado este método pode ser utilizado para retornar
-		 todos os status da order segundo a implementação do select no dao*/
-		
-		$dao = new OrderStatusDao();
-		$orders_status = $dao->select($this);
-
-		return $orders_status;
-	}
-
-
 	public function insert(){
+		$dao = new OrderStatusDao();
+		return $dao->insert($this);
+	}
 
+	public function update(){
+		$dao = new OrderStatusDao();
+		return $dao->update($this);
+	}
+
+	public function all(){
+ 		$dao = new OrderStatusDao();
+		$addresses = $dao->select($this);
+
+		return $addresses;
+	}
+
+	public function findByID(){
+		$dao = new OrderStatusDao();
+	 	$res = $dao->selectById($this);
+		return $res; 
 	}
 
 
@@ -131,5 +133,16 @@ Class OrderStatus{
 		$this->order = $order;
 
 		return $this;
+	}
+
+	public static function allByEmployee(Employee $employee){
+		$dao = new OrderStatusDao();
+		return $dao->selectByEmployee($employee);
+	}
+
+
+	public static function allByOrder(Order $order){
+		$dao = new OrderStatusDao();
+		return $dao->selectByOrder($order);
 	}
 }

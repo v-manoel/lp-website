@@ -36,7 +36,7 @@
                     <div class="my-2">
                         <p class="text-secondary text-decoration-line-through m-0 off-price"> <?= 'R$' . floor($product->getPrice()) ?><span class="decimals align-top"><?= ($product->getPrice() * 100) % 100; ?></span></p>
                         <p class="card-title price m-0"><?= 'R$ ' . floor($product->offerPrice()) ?><span class="decimals align-top"><?= ($product->offerPrice() * 100) % 100; ?></span>
-                            <span class="text-success off-rate"><?= $product->offerAsPerc(); ?> % OFF</span>
+                            <span class="text-success off-rate"> <?= $product->offerAsPerc(); ?>% OFF</span>
                         </p>
 
                         <p class="parcela text-success m-0"><?= '12x de R$ ' . floor($product->offerPrice()) ?><span class="decimals align-top"><?= ($product->offerPrice() * 100) % 100; ?></span>
@@ -68,7 +68,7 @@
                 $prod->setSource($product->getSource());
                 $products = $prod->all();
                 ?>
-                <div class="h4 p-2 section-title"><?= 'Mais de '.$product->getSource() ?></div>
+                <div class="h4 p-2 section-title"><?= 'Mais de ' . $product->getSource() ?></div>
 
                 <div class="items-carousel items-carousel-4">
                     <?php foreach ($products as $prod) { ?>
@@ -87,7 +87,7 @@
 
                                         <div class="card-body">
                                             <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getCategories()[0]->getName(); ?></p>
-                                            <!-- <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p> -->
+                                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p>
                                             <p class="text-secondary text-decoration-line-through m-0 off-price"><?= "R$ " . floor($prod->getPrice()); ?><span class="decimals align-top"><?= ($prod->getPrice() * 100) % 100; ?></span></p>
                                             <p class="card-title price m-0"><?= "R$ " . floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() * 100) % 100; ?></span>
                                                 <span class="text-success off-rate"><?= $prod->offerAsPerc() . "% OFF"; ?></span>
@@ -126,10 +126,11 @@
                         </div><!-- col -->
                     </div><!-- row -->
                     <p>Fornecido por <span class="text-warning" id="fornecedor"><?= $product->getSource(); ?></span></p>
-                    <form class="" action="#" method="POST">
-
-                        <label for="item-qtd">Quantidade:</label>
-                        <select class="selectpicker border-0 bg-transparent my-4" id="item-qtd" data-width="fit">
+                    <form id="newItemForm" action="<?= DIRPAGE.'cart/newItem'?>" method="POST">
+                        <input type="hidden" name="prod-id" value="<?= $product->getId(); ?>">
+                        
+                        <label for="item-qnty">Quantidade:</label>
+                        <select class="selectpicker border-0 bg-transparent my-4" id="item-qnty" name="item-qnty" data-width="fit">
                             <option class="order-option" value="1" selected>1 unidade</option>
                             <option class="order-option" value="2">2 unidades</option>
                             <option class="order-option" value="3">3 unidades</option>
@@ -139,8 +140,8 @@
                             <option class="order-option" value="6">mais de 6 unidades</option>
                         </select>
 
-                        <button class="btn btn-dark text-warning my-2 w-100 mt-5" type="submit">Comprar agora</button>
-                        <button class="btn btn-warning text-dark my-2 w-100" type="submit">Adicionar ao Carrinho</button>
+                        <button class="btn btn-dark text-warning my-2 w-100 mt-5" name="buy-now" type="submit">Comprar agora</button>
+                        <button class="btn btn-warning text-dark my-2 w-100" id="just-add" name="just-add" type="submit">Adicionar ao Carrinho</button>
                     </form>
                     <div class="row my-3">
                         <i class="bi bi-shield-check text-warning h5 col-lg-2 col-2 pr-0 m-auto"></i>
@@ -177,88 +178,87 @@
 </div><!-- container -->
 
 <section class="container products-carousel-section my-5">
-    <?php    
-        $bycategory = $product->allByCategory($product->getCategories()[0]);
-    ?> 
-    <div class="p-2 h2 section-title"> <?= 'Mais de '. $product->getCategories()[0]->getName() ?></div>
+    <?php
+    $bycategory = $product->allByCategory($product->getCategories()[0]);
+    ?>
+    <div class="p-2 h2 section-title"> <?= 'Mais de ' . $product->getCategories()[0]->getName() ?></div>
 
     <div class="items-carousel items-carousel-5 m-auto">
-    <?php foreach ($bycategory as $prod){?>
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <form action="<?php echo DIRPAGE.'product'; ?>" method="post">
-                <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br> 
-                <button type="submit" class="border-0 bg-transparent p-0">
-                    <div class="card align-items-center prod-card w-auto">
-                        <div class="card-header bg-white">
-                            <?php if(count($prod->getImgs()) > 0){ ?>
-                                <img class="card-img" src="<?= DIRIMG . $prod->getImgs()[0]; ?>" alt="...">
-                            <?php }else{?>
-                                <img class="card-img" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="...">
-                            <?php } ?>
-                        </div><!-- card header -->
-                        
-                        <div class="card-body">
-                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getCategories()[0]->getName(); ?></p><br>
-                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p>
-                            <p class="text-secondary text-decoration-line-through m-0 off-price"><?= "R$ ".floor($prod->getPrice()); ?><span class="decimals align-top"><?= ($prod->getPrice() *100)%100; ?></span></p>
-                            <p class="card-title price m-0"><?= "R$ ".floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() *100)%100; ?></span>
-                                <span class="text-success off-rate"><?= $prod->offerAsPerc()."% OFF"; ?></span>
-                            </p>
-                            <p class="parcela text-success m-0"><?= "12x de R$ ".floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() *100)%100; ?></span>
-                                sem juros
-                            </p>
-                            <p class="product-desc m-auto pt-1 text-center"><?= $prod->getTitle(); ?></p>
-                        </div><!-- card body -->
-                        
-                    </div><!-- card -->
-                </button>
-            </form>
-        </div><!-- item -->
-    <?php } ?>
+        <?php foreach ($bycategory as $prod) { ?>
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+                <form action="<?php echo DIRPAGE . 'product'; ?>" method="post">
+                    <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br>
+                    <button type="submit" class="border-0 bg-transparent p-0">
+                        <div class="card align-items-center prod-card w-auto">
+                            <div class="card-header bg-white">
+                                <?php if (count($prod->getImgs()) > 0) { ?>
+                                    <img class="card-img" src="<?= DIRIMG . $prod->getImgs()[0]; ?>" alt="...">
+                                <?php } else { ?>
+                                    <img class="card-img" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="...">
+                                <?php } ?>
+                            </div><!-- card header -->
+
+                            <div class="card-body">
+                                <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getCategories()[0]->getName(); ?></p><br>
+                                <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p>
+                                <p class="text-secondary text-decoration-line-through m-0 off-price"><?= "R$ " . floor($prod->getPrice()); ?><span class="decimals align-top"><?= ($prod->getPrice() * 100) % 100; ?></span></p>
+                                <p class="card-title price m-0"><?= "R$ " . floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() * 100) % 100; ?></span>
+                                    <span class="text-success off-rate"><?= $prod->offerAsPerc() . "% OFF"; ?></span>
+                                </p>
+                                <p class="parcela text-success m-0"><?= "12x de R$ " . floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() * 100) % 100; ?></span>
+                                    sem juros
+                                </p>
+                                <p class="product-desc m-auto pt-1 text-center"><?= $prod->getTitle(); ?></p>
+                            </div><!-- card body -->
+
+                        </div><!-- card -->
+                    </button>
+                </form>
+            </div><!-- item -->
+        <?php } ?>
     </div><!-- carousel -->
 </section>
 
 <section class="container products-carousel-section my-5">
     <?php
-        $prod_base = new Product();
-        $prod_base->setOffer(0.6);
-        $bycategory = $prod_base->all();
-    ?> 
-    <div class="p-2 h2 section-title"> <?= 'Mais de '. $prod_base->offerAsPerc() .'% de desconto' ?></div>
+    $prod_base = new Product();
+    $prod_base->setOffer(0.6);
+    $bycategory = $prod_base->all();
+    ?>
+    <div class="p-2 h2 section-title"> <?= 'Mais de ' . $prod_base->offerAsPerc() . '% de desconto' ?></div>
 
     <div class="items-carousel items-carousel-5 m-auto">
-    <?php foreach ($bycategory as $prod){?>
-        <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
-            <form action="<?php echo DIRPAGE.'product'; ?>" method="post">
-                <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br> 
-                <button type="submit" class="border-0 bg-transparent p-0">
-                    <div class="card align-items-center prod-card w-auto">
-                        <div class="card-header bg-white">
-                            <?php if(count($prod->getImgs()) > 0){ ?>
-                                <img class="card-img" src="<?= DIRIMG . $prod->getImgs()[0]; ?>" alt="...">
-                            <?php }else{?>
-                                <img class="card-img" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="...">
-                            <?php } ?>
-                        </div><!-- card header -->
-                        
-                        <div class="card-body">
-                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getCategories()[0]->getName(); ?></p><br>
-                            <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p>
-                            <p class="text-secondary text-decoration-line-through m-0 off-price"><?= "R$ ".floor($prod->getPrice()); ?><span class="decimals align-top"><?= ($prod->getPrice() *100)%100; ?></span></p>
-                            <p class="card-title price m-0"><?= "R$ ".floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() *100)%100; ?></span>
-                                <span class="text-success off-rate"><?= $prod->offerAsPerc()."% OFF"; ?></span>
-                            </p>
-                            <p class="parcela text-success m-0"><?= "12x de R$ ".floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() *100)%100; ?></span>
-                                sem juros
-                            </p>
-                            <p class="product-desc m-auto pt-1 text-center"><?= $prod->getTitle(); ?></p>
-                        </div><!-- card body -->
-                        
-                    </div><!-- card -->
-                </button>
-            </form>
-        </div><!-- item -->
-    <?php } ?>
+        <?php foreach ($bycategory as $prod) { ?>
+            <div class="item" onmouseout="CollapseItem(this, 'product-desc')" onmouseover="UncollapseItem(this, 'product-desc')">
+                <form action="<?php echo DIRPAGE . 'product'; ?>" method="post">
+                    <input type='hidden' name='product_id' id='product_id' value='<?= $prod->getId() ?>'><br>
+                    <button type="submit" class="border-0 bg-transparent p-0">
+                        <div class="card align-items-center prod-card w-auto">
+                            <div class="card-header bg-white">
+                                <?php if (count($prod->getImgs()) > 0) { ?>
+                                    <img class="card-img" src="<?= DIRIMG . $prod->getImgs()[0]; ?>" alt="...">
+                                <?php } else { ?>
+                                    <img class="card-img" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="...">
+                                <?php } ?>
+                            </div><!-- card header -->
+
+                            <div class="card-body">
+                                <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getCategories()[0]->getName(); ?></p><br>
+                                <p class="badge bg-warning text-dark tag p-1 m-0"><?= $prod->getSource(); ?></p>
+                                <p class="text-secondary text-decoration-line-through m-0 off-price"><?= "R$ " . floor($prod->getPrice()); ?><span class="decimals align-top"><?= ($prod->getPrice() * 100) % 100; ?></span></p>
+                                <p class="card-title price m-0"><?= "R$ " . floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() * 100) % 100; ?></span>
+                                    <span class="text-success off-rate"><?= $prod->offerAsPerc() . "% OFF"; ?></span>
+                                </p>
+                                <p class="parcela text-success m-0"><?= "12x de R$ " . floor($prod->offerPrice()); ?><span class="decimals align-top"><?= ($prod->offerPrice() * 100) % 100; ?></span>
+                                    sem juros
+                                </p>
+                                <p class="product-desc m-auto pt-1 text-center"><?= $prod->getTitle(); ?></p>
+                            </div><!-- card body -->
+
+                        </div><!-- card -->
+                    </button>
+                </form>
+            </div><!-- item -->
+        <?php } ?>
     </div><!-- carousel -->
 </section>
-

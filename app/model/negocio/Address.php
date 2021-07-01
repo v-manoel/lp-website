@@ -6,9 +6,9 @@ require_once __DIR__."/Customer.php";
 require_once __DIR__."/State.php";
 
 Class Address{
-	private $id;
-	private $state = null;
-	private $city = null;
+	private $id = null;
+	private ?State $state = null;
+	private ?City $city = null;
 	private $district = "";
 	private $street = "";
 	private $number = "";
@@ -16,7 +16,7 @@ Class Address{
 	private $name = "";
 	private $destinatary = "";
 	private $cep = "";
-	private $owner = null;
+	private ?Customer $owner = null;
 
 	
 	public function insert(){
@@ -29,16 +29,16 @@ Class Address{
 		return $dao->update($this);
 	}
 
-	public function all(){
+	public function all($only_active = true){
  		$dao = new AddressDao();
-		$addresses = $dao->select($this);
+		$addresses = $dao->select($this, $only_active);
 
 		return $addresses; 
 	}
 
-	public function findByID(){
+	public function findByID($only_active = true){
 		$dao = new AddressDao();
-		$res = $dao->selectById($this);
+		$res = $dao->selectById($this, $only_active);
 		return $res;
 	}
 	
@@ -252,9 +252,9 @@ Class Address{
 		return $this;
 	}
 
-	public static function allByCustomer(Customer $customer){
+	public static function allByCustomer(Customer $customer, $only_active = true){
 		$dao = new AddressDao();
-		return $dao->selectByCustomer($customer);
+		return $dao->selectByCustomer($customer, $only_active);
 	}
 
 	/**

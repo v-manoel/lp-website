@@ -9,15 +9,15 @@ Class Customer extends User{
 	private $total_sales = 0.0;
 	private $total_orders = 0;
 
-	public function findByID(){
+	public function findByID($only_active = true){
 		$dao = new CustomerDao();
-		$res = $dao->selectById($this);
+		$res = $dao->selectById($this,$only_active);
 		return $res;
 	}
 
-	public function all(){
+	public function all($only_active = true){
 		$dao = new CustomerDao();
-		$customers = $dao->select($this);
+		$customers = $dao->select($this,$only_active);
 		return $customers;
 	}
 

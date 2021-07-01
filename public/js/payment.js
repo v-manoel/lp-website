@@ -1,37 +1,34 @@
- function checkLoginUpdateFields(){
-    if(!(document.getElementById("npswd").value == document.getElementById("npswd_check").value) ){
-        alert("As novas senhas inseridas não conferem!");
-        document.getElementById("npswd_check").value = "";
-        document.getElementById("npswd").value = "";
-        return false;
-    }
-    return true;
+$(document).ready(function () {
+    $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+    });
 
-}
- 
+    $('#dismiss, .overlay').on('click', function () {
+        $('#sidebar').removeClass('active');
+        $('.overlay').removeClass('active');
+    });
 
-function showPassword(toggler, toggled){
-    document.getElementById(toggled).setAttribute('type','password');
-    toggler.classList.toggle('bi-eye');
-    toggler.classList.add('bi-eye-slash');
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').addClass('active');
+        $('.overlay').addClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
 
-}
+    $('#back-to-modal, .btn-close').on('click', function() {
+        $('#address-modal-body').show();
+        $('#address-modal-footer').show();
+        $('#new-payment-address-form').hide();
+    });
 
-function HidePassword(toggler, toggled){
-    document.getElementById(toggled).setAttribute('type','text');
-    toggler.classList.toggle('bi-eye-slash');
-    toggler.classList.add('bi-eye');
+    $('#new-payment-address-link').on('click', function() {
 
-}
-
-function confirmDeleteAccount() {
-    var pswd = prompt("Digite sua senha para confirmar");
-    if (pswd != null && pswd != "" ) {
-        document.getElementById("del_pswd").value = pswd;
-        return true;
-    }
-    return false;
-  }
+        $('#address-modal-body').hide();
+        $('#address-modal-footer').hide();
+        $('#new-payment-address-form').show();
+        
+    });
+});
 
 $(document).ready(function(){
 
@@ -50,28 +47,8 @@ $(document).ready(function(){
             }
         });
     });
-
 });
 
-
-
-function RateProduct(rate_btn) {
-    var form = rate_btn.parentElement.parentElement.id;
-    
-    var dados=$('#'+form).serialize();
-    var DIRPAGE="http://"+document.location.hostname+"/lapechincha"+"/";
-    $.ajax({
-        url: DIRPAGE+'account/EvalProduct/',
-        method: 'post',
-        dataType: 'html',
-        data: dados,
-        success: function(text){
-            
-        }
-    });
-    
-
-}
 
 function cardOption(card){
     if(card.getElementsByClassName("edittype")[0].hidden){
@@ -86,10 +63,14 @@ function cardOption(card){
 }
 
 $('#card-holder').on('input', function() {
+    $('#back-card').hide();
+    $('#front-card').show();
     $('#model-name').html($('#card-holder').val());
   });
 
 $('#card-expiration').on('input', function() {
+    $('#back-card').hide();
+    $('#front-card').show();
     var data = $('#card-expiration').val();
     data = data.substr(5,2) + '/' + data.substr(2,2);
     
@@ -97,6 +78,8 @@ $('#card-expiration').on('input', function() {
 });
 
 $('#card-number').on('input', function() {
+    $('#back-card').hide();
+    $('#front-card').show();
     var data = $('#card-number').val();
     if(data.length <= 3)
         $('#num-3').html(data);
@@ -106,4 +89,12 @@ $('#card-number').on('input', function() {
         $('#num-9').html(data.substr(6,8));
     else if(data.length <= 12)
         $('#num-12').html(data.substr(9,11));
+});
+
+$('#card-cvv').on('input', function() {
+
+    $('#front-card').hide();
+    $('#back-card').show();
+    $('#model-cvv').html($('#card-cvv').val());
+    
 });

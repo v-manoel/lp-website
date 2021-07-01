@@ -3,7 +3,7 @@
 require_once __DIR__."/../dao/EmployeeDao.php";
 
 Class Employee extends User{
-	private $department;
+	private $department = "";
 	//stats attributes
 	private $attendances_time = 0.0;
 	private $attendances_qnty = 0;
@@ -15,41 +15,38 @@ Class Employee extends User{
 
 	//Verifica se os usuário esta cadastrado no banco de dados
 	public function checkCredentials(){
-		$dao = new EmployeeDao();
-		$employees = $dao->select($this);
-
-		if(count($employees) == 1){
-			$this->setCpf($employees[0]->getCpf());
-			$this->setName($employees[0]->getName());
-			$this->setEmail($employees[0]->getEmail());
-			$this->setPswd($employees[0]->getPswd());
+		if($this->findByID()){
 			return true;
-		}else{
-			return false;
 		}
+		return false;
 	}
 	
-	public function findByID(){
+	public function findByID($only_active = true){
+		$dao = new EmployeeDao();
+		$res = $dao->selectById($this,$only_active);
+		return $res;
 	}
 
-	public function all(){
+	public function all($only_active = true){
 		$dao = new EmployeeDao();
-		$employees = $dao->select($this);
-
-		return $employees;
+		$customers = $dao->select($this,$only_active);
+		return $customers;
 	}
 
 	public function update(){
-
+		$dao = new EmployeeDao();
+		return $dao->update($this);
 	}
 
 	public function insert(){
-
-
+		$dao = new EmployeeDao();
+		return $dao->insert($this);
 	}
 
+
 	public function delete(){
-		
+		$dao = new EmployeeDao();
+		return $dao->delete($this);
 	}
 
 

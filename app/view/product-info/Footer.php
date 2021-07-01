@@ -10,3 +10,4 @@
  <script src="<?= DIRJS.'items5-carousel.js'; ?>"></script>
  <script src="<?= DIRJS.'items4-carousel.js'; ?>"></script>
  <script src="<?= DIRJS.'vertical-items-carousel.js'; ?>"></script>
+ <script src="<?= DIRJS.'cart.js'; ?>"></script>

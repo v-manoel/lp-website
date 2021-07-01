@@ -9,10 +9,10 @@ abstract Class User{
 	protected $birthday = null;
 	protected $genre = "";
 
-	public function findByID(){
+	public function findByID($only_active = true){
 
 	}
-	public function all(){
+	public function all($only_active = true){
 
 	}
 	

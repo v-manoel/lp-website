@@ -12,8 +12,8 @@ class ControllerAccount extends Render{
     public function __construct(){
         if(isset($_SESSION['user_login']) || isset($_COOKIE['user_login'])){
             $this->setTitle("La Pechincha Brasil");
-            $this->setDesc("Página inicial do sistema");
-            $this->setKeywords("inicio, home, pagina inicial");
+            $this->setDesc("Informações da conta do cliente");
+            $this->setKeywords("Conta, Meus Dados, Informaçoes");
             $this->setDir("cliente");
 
             $this->customer = new CustomerAccount(unserialize($_SESSION['user_login']));
@@ -296,4 +296,54 @@ class ControllerAccount extends Render{
             }
         }
     }
+
+    public function copyToCart($order_id)
+    {
+        $order = new Order();
+        $order->setId($order_id);
+        $order = $this->customer->copyOrder($order);
+        if($order){
+           /*  if(isset($_SESSION['cart'])){
+                $cart = unserialize($_SESSION['cart']);
+                foreach ($order->getItems() as $item) {
+                    $cart->addItem($item);
+                }
+                
+            }else */
+                $_SESSION['cart'] = serialize($order);
+            
+            header('Location:'.DIRPAGE.'cart/myCart', true,302);
+        }
+    }
+
+    public function EvalOrder()
+    {
+        if(isset($_POST['order-id'])){
+            $order = new Order();
+            $order->setId($_POST['order-id']);
+            $order = $this->customer->copyOrder($order);
+            if($order){
+                $order->setRate($_POST['order-rate']);
+                $order->setRate_description($_POST['order-rate-desc']);
+                $order->update(); //remove after
+            }
+            $this->page("myOrders");
+        }
+    }
+
+    public function EvalProduct()
+    {
+
+       if(isset($_POST['product-id'])){
+           $product = new Product();
+           $product->setId($_POST['product-id']);
+           if($product->findByID()){
+               $product->setRate($_POST['product-rate']);
+               $product->update(); //remove after
+               
+            }
+        }
+    }
+
+
 }

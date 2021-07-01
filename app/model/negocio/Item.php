@@ -1,35 +1,39 @@
 <?php 
 
 require_once __DIR__."/Product.php";
+require_once __DIR__."/Order.php";
+require_once __DIR__."/../dao/ItemDao.php"; 
 
 Class Item{
-	private $id;
-	private Product $product;
-	private $qnty;
-	private $price;
-	private $storaged_qnty;
-
-
-	public function delete_Item(){
-
-	}
-	public function findByID_item($id){
-
-	}
-	public function update(){
-	
-	}
-	public function all(){
-/* 		$dao = new ItemDao();
-		$item = $dao->select($this);
-
-		return $item; */
-	}
+	private $id = null;
+	private ?Product $product = null;
+	private $qnty = 0;
+	private $price = 0.0;
+	private $storaged_qnty = 0;
+	private ?Order $order = null; // OR private ?Order $order = null
 
 	public function insert(){
-	
+		$dao = new ItemDao();
+		return $dao->insert($this);
 	}
 
+	public function update(){
+		$dao = new ItemDao();
+		return $dao->update($this);
+	}
+
+	public function all(){
+ 		$dao = new ItemDao();
+		$addresses = $dao->select($this);
+
+		return $addresses;
+	}
+
+	public function findByID(){
+		$dao = new ItemDao();
+	 	$res = $dao->selectById($this);
+		return $res; 
+	}
 
 	/**
 	 * Get the value of id
@@ -135,4 +139,36 @@ Class Item{
 
 		return $this;
 	}
+
+	/**
+	 * Get the value of order
+	 */ 
+	public function getOrder()
+	{
+		return $this->order;
+	}
+
+	/**
+	 * Set the value of order
+	 *
+	 * @return  self
+	 */ 
+	public function setOrder($order)
+	{
+		$this->order = $order;
+
+		return $this;
+	}
+ 
+	public static function allByProduct(Product $product){
+		$dao = new ItemDao();
+		return $dao->selectByProduct($product);
+	}
+
+
+	public static function allByOrder(Order $order){
+		$dao = new ItemDao();
+		return $dao->selectByOrder($order);
+	}
+
 }

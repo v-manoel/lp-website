@@ -56,11 +56,6 @@
           <div class="col-3 col-lg-3 d-flex menu collapse" id="collapseExample">
 
             <?php if (isset($_SESSION['user_login'])) { ?>
-              <div class="m-auto mx-1 header-icon text-center" id="header_login">
-                <a role="button" type="button" class="btn dropdown" data-toggle="dropdown">
-                  <i class="bi bi-person-circle me-2 my-yellow"></i>
-                </a>
-              </div>
               <div class="m-auto header-icon ml-0" id="header_bell">
                 <div class="btn-group">
                   <a role="button" type="button" class="btn dropdown"  data-toggle="dropdown">
@@ -114,9 +109,11 @@
 
 
             <div class=" m-auto mx-1 header-icon" id="header_cart">
-              <a href="../cart/cart.html" class="my-yellow">
-                <i class="bi bi-basket2 my-yellow"></i>
-                <span class="badge bg-warning rounded-circle text-dark">4</span>
+              <a href="<?= DIRPAGE . 'cart/myCart'; ?>"  class="my-yellow ">
+                <i class="bi bi-basket2 my-yellow " style="font-size: 28px;"></i>
+                <?php if (isset($_SESSION['cart'])) { ?>
+                  <span class="badge bg-warning rounded text-dark"><?= (unserialize($_SESSION['cart']))->getProdQnty(); ?></span>
+                <?php } ?>
               </a>
             </div>
           </div><!-- col -->

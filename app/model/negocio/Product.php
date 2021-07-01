@@ -4,7 +4,7 @@ require_once __DIR__."/Category.php";
 require_once __DIR__."/../dao/ProductDao.php";
 
 Class Product{
-	private $id;
+	private $id = null;
 	private $title = "";
 	private $description = "";
 	private $imgs = array();
@@ -12,6 +12,7 @@ Class Product{
 	private $offer = 0.0;
 	private $categories = array();
 	private $source = "";
+	private $rate = 0;
 
 	//stats attributes
 	private $total_orders = 0;
@@ -19,15 +20,19 @@ Class Product{
 
 	public function findByID(){
 		$dao = new ProductDao();
-		$dao->selectById($this);
+		return $dao->selectById($this);
 
-		return $this;
 	}
 
 	public function all(){
 		$dao = new ProductDao();
 		$products = $dao->select($this);
 		return $products;
+	}
+
+	public function update(){
+		$dao = new ProductDao();
+		return $dao->update($this);
 	}
 
 	public function offerPrice(){
@@ -298,6 +303,26 @@ Class Product{
 		return $this;
 	}
 
+		/**
+	 * Get the value of rate
+	 */ 
+	public function getRate()
+	{
+		return $this->rate;
+	}
+
+	/**
+	 * Set the value of rate
+	 *
+	 * @return  self
+	 */ 
+	public function setRate($rate)
+	{
+		$this->rate = $rate;
+
+		return $this;
+	}
+
 	//static Functions
 
 	public static function cmpPrice($product1, $product2){
@@ -358,6 +383,8 @@ Class Product{
 
 		return $new_list;
 	}
+
+
 
 }
 

@@ -24,7 +24,7 @@ class CustomerDao{
             $_email = $customer->getEmail();
             $_pswd = $customer->getPswd();
             $_phone = $customer->getPhone();
-            $_genre =$customer->getGenre() == "Masculino" ? 'M' : 'F';
+            $_genre =$customer->getGenre() == "Masculino" ? 'M' : ("Feminino" ? 'F' : "");
             $_birthday = $customer->getBirthday();
 
 
@@ -39,7 +39,7 @@ class CustomerDao{
     public function selectById(Customer $customer, bool $only_active = true){
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM users WHERE email = :email and pswd = :pswd");
+            $stmt = $con->prepare("SELECT * FROM users WHERE email = :email AND pswd = :pswd");
             $stmt->bindParam(":email",$_email);
             $stmt->bindParam(":pswd",$_pswd);
             
@@ -50,7 +50,7 @@ class CustomerDao{
 
             if($stmt->rowCount() == 1){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                if($row['department'] == null && $row['is_active'] == $only_active){
+                if($row['department'] == null && !$only_active || $row['is_active'] == $only_active){
                     $customer->setCpf($row['cpf']);
                     $customer->setName($row['name']);
                     $customer->setPhone($row['phone']);
@@ -72,9 +72,9 @@ class CustomerDao{
         
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM users WHERE name like :name 
-            and cpf like :cpf and email like :email and phone like :phone
-            and genre like :genre and birthday like :birthday");
+            $stmt = $con->prepare("SELECT * FROM users WHERE name LIKE :name 
+            AND cpf LIKE :cpf AND email LIKE :email AND phone LIKE :phone
+            AND genre LIKE :genre AND birthday LIKE :birthday");
             $stmt->bindParam(":name",$_name);
             $stmt->bindParam(":cpf",$_cpf);
             $stmt->bindParam(":email",$_email);
@@ -83,7 +83,7 @@ class CustomerDao{
             $stmt->bindParam(":birthday",$_birthday);
             
             $_phone = '%'.$generic_customer->getPhone().'%';
-            $_genre =$generic_customer->getGenre() == "Masculino" ? 'M' : 'F';
+            $_genre =$generic_customer->getGenre() == "Masculino" ? 'M' : ("Feminino" ? 'F' : "");
             $_birthday = '%'.$generic_customer->getBirthday().'%';
             $_name = '%'. $generic_customer->getName() .'%';
             $_cpf = '%'. $generic_customer->getCpf() .'%';
@@ -93,7 +93,7 @@ class CustomerDao{
 
             $customers = array();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                if($row['department'] == null && $row['is_active'] == $only_active){
+                if($row['department'] == null && !$only_active || $row['is_active'] == $only_active){
                     $customer = new Customer();
                     $customer->setCpf($row['cpf']);
                     $customer->setEmail($row['email']);
@@ -114,7 +114,7 @@ class CustomerDao{
         
     }
 
-    public function delete($customer)
+    public function delete(Customer $customer)
     {
         try{
             $con = Connection::getConnection();
@@ -130,7 +130,7 @@ class CustomerDao{
         return true;
     }
 
-    public function update($customer)
+    public function update(Customer $customer)
     {
         try{
             $con = Connection::getConnection();
@@ -149,7 +149,7 @@ class CustomerDao{
             $_email = $customer->getEmail();
             $_pswd = $customer->getPswd();
             $_phone = $customer->getPhone();
-            $_genre =$customer->getGenre() == "Masculino" ? 'M' : 'F';
+            $_genre =$customer->getGenre() == "Masculino" ? 'M' : ("Feminino" ? 'F' : "");
             $_birthday = $customer->getBirthday();
             
 

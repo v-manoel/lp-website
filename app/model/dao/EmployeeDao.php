@@ -1,25 +1,34 @@
 <?php
 
 require_once __DIR__."/Connection.php";
-require_once __DIR__."/../negocio/Customer.php";
+require_once __DIR__."/../negocio/Employee.php";
+
 
 class EmployeeDao{
 
-
-    public function insert($customer){
+    public function insert(Employee $employee){
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("INSERT INTO users(name,cpf,email,pswd) values(:name, :cpf, :email, :pswd)");
+            $stmt = $con->prepare("INSERT INTO users(name,cpf,email,pswd,phone,genre,birthday,department) values(:name, :cpf, :email, :pswd, :phone, :genre, :birthday,:department)");
             $stmt->bindParam(":name",$_name);
             $stmt->bindParam(":cpf",$_cpf);
             $stmt->bindParam(":email",$_email);
             $stmt->bindParam(":pswd",$_pswd);
+            $stmt->bindParam(":phone",$_phone);
+            $stmt->bindParam(":genre",$_genre);
+            $stmt->bindParam(":birthday",$_birthday);
+            $stmt->bindParam(":department",$_department);
 
-            $_name = $customer->getName();
-            $_cpf = $customer->getCpf();
-            $_email = $customer->getEmail();
-            $_pswd = $customer->getPswd();
+            $_name = $employee->getName();
+            $_cpf = $employee->getCpf();
+            $_email = $employee->getEmail();
+            $_pswd = $employee->getPswd();
+            $_phone = $employee->getPhone();
+            $_genre =$employee->getGenre() == "Masculino" ? 'M' : ("Feminino" ? 'F' : "");
+            $_birthday = $employee->getBirthday();
+            $_department = $employee->getDepartment();
+
 
             $stmt->execute();            
 
@@ -29,36 +38,81 @@ class EmployeeDao{
         return true;
     }
 
-    public function select($generic_customer){
-        
+    public function selectById(Employee $employee, bool $only_active = true){
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM customer WHERE _name like :
-            name and cpf like :_cpf and pswd like :_pswd and email like :_email");
-            $stmt->bindParam(":_name",$_name);
-            $stmt->bindParam(":_cpf",$_cpf);
-            $stmt->bindParam(":_pswd",$_pswd);
-            $stmt->bindParam(":_email",$_email);
+            $stmt = $con->prepare("SELECT * FROM users WHERE email = :email and pswd = :pswd");
+            $stmt->bindParam(":email",$_email);
+            $stmt->bindParam(":pswd",$_pswd);
             
-            $_name = '%'. $generic_customer->getName() .'%';
-            $_cpf = '%'. $generic_customer->getCpf() .'%';
-            $_pswd = '%'. $generic_customer->getPswd() .'%';
-            $_email = '%'. $generic_customer->getEmail() .'%';
+            $_email = $employee->getEmail();
+            $_pswd = $employee->getPswd();
 
             $stmt->execute();
 
-            $customers = array();
-            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $customer = new Customer();
-                $customer->setCpf($row['cpf']);
-                $customer->setEmail($row['email']);
-                $customer->setPswd($row['pswd']);
-                $customer->setName($row['name']);
+            if($stmt->rowCount() == 1){
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($row['department'] != null){
+                    $employee->setCpf($row['cpf']);
+                    $employee->setName($row['name']);
+                    $employee->setPhone($row['phone']);
+                    $employee->setGenre($row['genre']);
+                    $employee->setBirthday($row['birthday']);
+                    $employee->setDepartment($row['department']);
+
+                    return $employee;
+                }
+            }
             
-                array_push($customers,$customer);
+        } catch(PDOException $err){
+            return null;
+        }
+
+        return null;
+    }
+
+    public function select(Employee $generic_employee, bool $only_active = true){
+        
+        try{
+            $con = Connection::getConnection();
+            $stmt = $con->prepare("SELECT * FROM users WHERE name LIKE :name 
+            AND cpf LIKE :cpf AND email LIKE :email AND phone LIKE :phone
+            AND genre LIKE :genre AND birthday LIKE :birthday AND department LIKE :department");
+            $stmt->bindParam(":name",$_name);
+            $stmt->bindParam(":cpf",$_cpf);
+            $stmt->bindParam(":email",$_email);
+            $stmt->bindParam(":phone",$_phone);
+            $stmt->bindParam(":genre",$_genre);
+            $stmt->bindParam(":birthday",$_birthday);
+            $stmt->bindParam(":department",$_department);
+            
+            $_phone = '%'.$generic_employee->getPhone().'%';
+            $_genre =$generic_employee->getGenre() == "Masculino" ? 'M' : ("Feminino" ? 'F' : "");
+            $_birthday = '%'.$generic_employee->getBirthday().'%';
+            $_name = '%'. $generic_employee->getName() .'%';
+            $_cpf = '%'. $generic_employee->getCpf() .'%';
+            $_email = '%'. $generic_employee->getEmail() .'%';
+            $_department =  '%'. $generic_employee->getDepartment() .'%';
+            
+            $stmt->execute();
+
+            $employees = array();
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                if($row['department'] != null){
+                    $employee = new Employee();
+                    $employee->setCpf($row['cpf']);
+                    $employee->setEmail($row['email']);
+                    $employee->setName($row['name']);
+                    $employee->setPhone($row['phone']);
+                    $employee->setGenre($row['genre']);
+                    $employee->setBirthday($row['birthday']);
+                    $employee->setDepartment($row['department']);
+                
+                    array_push($employees,$employee);
+                }
             }
 
-            return $customers;
+            return $employees;
 
         } catch(PDOException $err){
             return array();
@@ -66,37 +120,45 @@ class EmployeeDao{
         
     }
 
-    public function delete($cpf)
+    public function delete(Employee $employee)
     {
         try{
             $con = Connection::getConnection();
+            $stmt = $con->prepare("UPDATE users SET is_active = 0 WHERE cpf=:cpf");
+            $stmt->bindParam(":cpf",$_cpf);
             
-            $stmt = $con->prepare("DELETE FROM customer WHERE cpf=:cpf");
-            $stmt->bindParam("cpf",$cpf);
-
-
+            $_cpf = $employee->getCpf();
             $stmt->execute();    
+
         }catch(PDOException $err){
             return false;
         }
         return true;
     }
 
-    public function update($customer)
+    public function update(Employee $employee)
     {
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("UPDATE customer SET name:=name, cpf:=cpf, email:=email, pswd:=pswd)");
+            $stmt = $con->prepare("UPDATE users SET name=:name, email=:email, pswd=:pswd, phone=:phone, genre=:genre, birthday=:birthday, department=:department WHERE cpf=:cpf");
             $stmt->bindParam(":name",$_name);
             $stmt->bindParam(":cpf",$_cpf);
             $stmt->bindParam(":email",$_email);
             $stmt->bindParam(":pswd",$_pswd);
+            $stmt->bindParam(":phone",$_phone);
+            $stmt->bindParam(":genre",$_genre);
+            $stmt->bindParam(":birthday",$_birthday);
+            $stmt->bindParam(":department",$_department);
 
-            $_name = $customer->getName();
-            $_cpf = $customer->getCpf();
-            $_email = $customer->getEmail();
-            $_pswd = $customer->getPswd();
+            $_name = $employee->getName();
+            $_cpf = $employee->getCpf();
+            $_email = $employee->getEmail();
+            $_pswd = $employee->getPswd();
+            $_phone = $employee->getPhone();
+            $_genre =$employee->getGenre() == "Masculino" ? 'M' : ("Feminino" ? 'F' : "");
+            $_birthday = $employee->getBirthday();
+            $_department = $employee->getDepartment();
 
             $stmt->execute();            
 

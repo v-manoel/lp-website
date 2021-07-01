@@ -10,6 +10,14 @@ class AddressDao{
 
 
     public function insert(Address $address){
+        if($address->getOwner()){
+            return $this->insertWithOwner($address);
+        }else{
+            return $this->insertNoOwner($address);
+        }   
+    }
+
+    public function insertWithOwner(Address $address){
         try{
             $con = Connection::getConnection();
             
@@ -36,6 +44,41 @@ class AddressDao{
 
             $stmt->execute();
 
+            $address->setId($con->lastInsertId());
+
+        } catch(PDOException $err){
+            return false;
+        }
+        return true;
+    }
+
+    public function insertNoOwner(Address $address){
+        try{
+            $con = Connection::getConnection();
+            
+            $stmt = $con->prepare("INSERT INTO bd_pechincha.addresses(street, district, number, description, cep, id_city, name, destinatary) values(:street, :district, :number, :description, :cep, :id_city, :name, :destinatary)");
+            $stmt->bindParam(":street", $_street);
+            $stmt->bindParam(":district", $_district);
+            $stmt->bindParam(":number", $_number);
+            $stmt->bindParam(":description", $_description);
+            $stmt->bindParam(":cep", $_cep);
+            $stmt->bindParam(":id_city", $_id_city);
+            $stmt->bindParam(":name", $_name);
+            $stmt->bindParam(":destinatary", $_destinatary);
+
+            $_street = $address->getStreet();
+            $_district = $address->getDistrict();
+            $_number = $address->getNumber();
+            $_description = $address->getDescription();
+            $_cep = $address->getCep();
+            $_id_city = $address->getCity()->getId();
+            $_name = $address->getName();
+            $_destinatary = $address->getDestinatary();
+
+            $stmt->execute();
+
+            $address->setId($con->lastInsertId());
+
         } catch(PDOException $err){
             return false;
         }
@@ -56,7 +99,7 @@ class AddressDao{
             if($stmt->rowCount() == 1){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if($row['is_active'] == $only_active){
+                if(!$only_active || $row['is_active'] == $only_active){
                     $address->setStreet($row['street']);
                     $address->setDistrict($row['district']);
                     $address->setNumber($row['number']);
@@ -73,7 +116,7 @@ class AddressDao{
 
                     $customer = new Customer();
                     $customer->setCpf($row['user_cpf']);
-                    $customer->findByID();
+                    $customer->findByID($only_active);
                     $address->setOwner($customer);
 
                     return $address;
@@ -91,7 +134,7 @@ class AddressDao{
         
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM addresses WHERE street LIKE :street, district LIKE :district, number LIKE :number, description LIKE :description, cep LIKE :cep, id_city == :id_city, user_cpf = :user_cpf, name LIKE :name, destinatary LIKE :destinatary");
+            $stmt = $con->prepare("SELECT * FROM addresses WHERE street LIKE :street, district LIKE :district, number LIKE :number, description LIKE :description, cep LIKE :cep, id_city = :id_city, user_cpf = :user_cpf, name LIKE :name, destinatary LIKE :destinatary");
             $stmt->bindParam(":street", $_street);
             $stmt->bindParam(":district", $_district);
             $stmt->bindParam(":number", $_number);
@@ -116,7 +159,7 @@ class AddressDao{
 
             $addresses = array();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                if($row['is_active'] == $only_active){
+                if(!$only_active || $row['is_active'] == $only_active){
                     $address = new Address();
                     $address->setId($row['id']);
                     $address->setStreet($row['street']);
@@ -134,7 +177,7 @@ class AddressDao{
 
                     $customer = new Customer();
                     $customer->setCpf($row['user_cpf']);
-                    $customer->findByID();
+                    $customer->findByID($only_active);
                     $address->setOwner($customer);
 
                     array_push($addresses,$address);
@@ -162,7 +205,7 @@ class AddressDao{
 
             $addresses = array();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                if($row['is_active'] == $only_active){
+                if(!$only_active || $row['is_active'] == $only_active){
                     $address = new Address();
                     $address->setId($row['id']);
                     $address->setStreet($row['street']);

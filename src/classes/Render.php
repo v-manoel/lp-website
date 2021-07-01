@@ -62,18 +62,18 @@ abstract class Render{
     }
 
     //Exibe uma página para exibir informacoes de redirecionamento para o usuario
-    public function messagePage($message="",$dest_page="",$must_render = true){
+    public function messagePage($message="", $dest_page="", $must_render = true, $dimiss_page=""){
         if($must_render){
             $this->renderLayout();
         }
         echo '
-        <div class="h-100 row align-items-center" >
+        <div class="h-100 row align-items-center">
         <div class="position-absolute top-0 col text-center" tabindex="999">
 
             <div class="card mx-auto shadow-lg" style="max-width: 564px; margin-top: 15%">
             <div class="card-header text-right my-bg-dark">
                 <h5 class="card-title m-auto text-center text-warning">Messagem Informativa</h5>
-                <a class=" position-absolute top-0 mt-1" style="right: 6px;" href = "'.$dest_page.'">
+                <a class=" position-absolute top-0 mt-1" style="right: 6px;" href =" '.$dimiss_page.'">
                 <i class="bi bi-x h2 font-weight-bolder text-white"></i>
                 </a>
             </div>

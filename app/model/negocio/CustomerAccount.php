@@ -17,7 +17,7 @@ Class CustomerAccount{
 		$this->customer = $customer;
 		$this->addresses = Address::allByCustomer($this->getCustomer());
 		$this->cards = CreditCard::allByCustomer($this->getCustomer());
-		//$this->orders = CustomerOrderDAO loads all customer address
+		$this->orders =Order::allByCustomer($this->getCustomer());
 
 	}
 
@@ -81,11 +81,12 @@ Class CustomerAccount{
 	}
 
 
-	public function copyOrder($order){
+	public function copyOrder(Order $order){
 		foreach ($this->orders as $ord) {
 			if($ord->getId() == $order->getId())
 				return $ord; //$_SESSION['Cart'] = $order
 		}
+		return null;
 	}
 
 

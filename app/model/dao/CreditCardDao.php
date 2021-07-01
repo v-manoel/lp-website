@@ -44,7 +44,7 @@ class CreditCardDao{
             if($stmt->rowCount() == 1){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if($row['is_active'] == $only_active){
+                if(!$only_active || $row['is_active'] == $only_active){
                     $card->setHolder($row['holder']);
                     $card->setCvv($row['cvv']);
                     $card->setExpiration($row['expiration']);
@@ -79,7 +79,7 @@ class CreditCardDao{
 
             $cards = array();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                if($row['is_active'] == $only_active){
+                if(!$only_active || $row['is_active'] == $only_active){
                     $card = new CreditCard();
                     $card->setNumber($row['number']);
                     $card->setHolder($row['holder']);
@@ -113,7 +113,7 @@ class CreditCardDao{
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                 $card = new CreditCard();
                 $card->setNumber($row['card_number']);
-                $card = $card->findByID();
+                $card = $card->findByID($only_active);
 
                 if($card)
                     array_push($cards,$card);

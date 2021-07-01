@@ -14,9 +14,9 @@ Class CreditCard{
 		return $dao->insert($this);
 	}
 
-	public function findByID(){
+	public function findByID($only_active = true){
 	 	$dao = new CreditCardDao();
-		$res = $dao->selectById($this);
+		$res = $dao->selectById($this, $only_active);
 		return $res; 
 	}
 
@@ -25,9 +25,9 @@ Class CreditCard{
 		return $dao->update($this); 
 	}
 
-	public function all(){
+	public function all($only_active = true){
  		$dao = new CreditCardDao();
-		$addresses = $dao->select($this);
+		$addresses = $dao->select($this, $only_active);
 
 		return $addresses;  
    }
@@ -126,8 +126,8 @@ Class CreditCard{
 		return $this;
 	}
 
- 	public static function allByCustomer(Customer $customer){
+ 	public static function allByCustomer(Customer $customer, $only_active = true){
 		$dao = new CreditCardDao();
-		return $dao->selectByCustomer($customer);
+		return $dao->selectByCustomer($customer, $only_active);
 	} 
 }

@@ -5,9 +5,9 @@ require_once __DIR__."/State.php";
 
 Class City{
 
-	private $id;
+	private $id = null;
 	private $name = "";
-	private $state = null;
+	private ?State $state = null;
 
 		
 	public function findByID(){
