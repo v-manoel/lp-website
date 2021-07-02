@@ -134,7 +134,7 @@ class AddressDao{
         
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM addresses WHERE street LIKE :street, district LIKE :district, number LIKE :number, description LIKE :description, cep LIKE :cep, id_city = :id_city, user_cpf = :user_cpf, name LIKE :name, destinatary LIKE :destinatary");
+            $stmt = $con->prepare("SELECT * FROM addresses WHERE street LIKE :street AND district LIKE :district AND number LIKE :number AND description LIKE :description AND cep LIKE :cep AND id_city = :id_city AND user_cpf = :user_cpf AND name LIKE :name AND destinatary LIKE :destinatary");
             $stmt->bindParam(":street", $_street);
             $stmt->bindParam(":district", $_district);
             $stmt->bindParam(":number", $_number);
@@ -153,7 +153,7 @@ class AddressDao{
             $_id_city = '%'. $generic_address->getCity()->getId() .'%';
             $_name = '%'. $generic_address->getName() .'%';
             $_destinatary = '%'. $generic_address->getDestinatary() .'%';
-            $_user_cpf =  '%'.$generic_address->getOwner()->getCpf().'%';
+            $_user_cpf =  $generic_address->getOwner() ? '%'.$generic_address->getOwner()->getCpf().'%' : '%';
             
             $stmt->execute();
 

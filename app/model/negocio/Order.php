@@ -117,7 +117,7 @@ Class Order{
 	
 	public function evaluate($rate, $rate_description)
 	{
-		if($this->status->getStatus() == "delivered"){
+		if(ucfirst($this->status->getStatus()) == "Delivered"){
 			$this->rate = $rate;
 			$this->rate = $rate_description;
 			$this->update();

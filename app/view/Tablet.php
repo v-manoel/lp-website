@@ -30,15 +30,15 @@
 </head>
 
 <body>
-    <div class="tablet container-fluid p-0">
+    <div class="tablet container-fluid p-0 bg-dark">
         <div class="content container-fluid m-0">
             <!-- Header begin -->
             <div class="row header align-items-center p-1 bg-warning">
                 <div class="col-md-4">
                     <a href="#">
-                        <img id="header_logo_left" alt="logo" src="../../commom/img/logos/coinlogo2.svg" width="40px" />
+                        <img id="header_logo_left" alt="logo" src="<?= DIRIMG . 'logos/coinlogo2.svg'; ?>" width="40px" />
 
-                        <img id="header_logo_right" alt="" src="../../commom/img/logos/brand.png"
+                        <img id="header_logo_right" alt="" src="<?= DIRIMG . 'logos/brand.png'; ?>"
                             style="height:30px;width:80px; margin-left: 10px; margin-right: 30px; margin-top: 5px;" />
                     </a>
                 </div>
@@ -59,8 +59,9 @@
                 <?php echo $this->addMain(); ?>
             </div>
 
+            <div class="Footer">
             <?php echo $this->addFooter(); ?>
-
+            </div>
         </div><!-- Content -->
     </div><!-- Tablet -->
 

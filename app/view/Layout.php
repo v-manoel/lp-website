@@ -85,7 +85,7 @@
                     <li>
                       <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="<?= DIRPAGE . 'home/logout'; ?>">
+                    <li><a class="dropdown-item" href="<?= DIRPAGE . 'login/logout'; ?>">
                         <i class="bi bi-door-open-fill my-dark me-2"></i>
                         Sair
                       </a></li>

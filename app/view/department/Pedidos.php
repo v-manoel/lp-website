@@ -27,27 +27,29 @@
 <form action="" method="post">
     <div class="container orders-list">
 
-        <div class="row item text-center p-2">
+        <?php foreach ($this->content['orders'] as $order) { ?>
+        <div class="row item text-center p-2 border-bottom">
             <div class="col-md-1 m-auto"><i class="bi bi-box-seam h5"></i></div>
             <div class="col-md-2 m-auto">
-                #<span class="prod-id">198254</span>
+                #<span class="prod-id"><?= $order->getId() ?></span>
             </div>
             <div class="col-md-2 m-auto">
-                <span class="prod-date">00/10/00</span>
+                <span class="prod-date"><?= date("d/m/Y H:i", strtotime($order->getDate())); ?></span>
             </div>
             <div class="col-md-2 m-auto">
-                <span class="prod-date">00/00/00</span>
+                <span class="prod-date"><?= date("d/m/Y H:i", strtotime($order->getStatus()->getUpdate_time())); ?></span>
             </div>
             <div class="col-md-2 m-auto">
-                <span class="prod-qtd">9999</span>
+                <span class="prod-qtd"><?= count($order->getItems()) ?></span>
             </div>
             <div class="col-md-2 m-auto">
-                <span class="prod-status bg-success p-1 text-white">Disponível</span>
+                <span class="prod-status bg-success p-1 text-white"><?= $order->getStatus()->getStatus() ?></span>
             </div>
             <div class="col-md-1 m-auto h5 form-check">
                 <input class="form-check w-100" type="radio" name="order1" id="order1">
             </div>
         </div>
+        <?php } ?>
 
         <hr class="m-1 h-25 text-secondary w-100">
 

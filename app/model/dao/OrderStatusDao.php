@@ -67,13 +67,13 @@ class OrderStatusDao{
 
     public function select(OrderStatus $generic_status){
         $_status = '%'. $generic_status->getStatus() .'%';
-        $_update_time = '%'. $generic_status->getModifier()->getCpf() .'%';
+        $_update_time = $generic_status->getModifier() ? '%'. $generic_status->getModifier()->getCpf() .'%' : '%';
         $_update_time = '%'. $generic_status->getUpdate_time() .'%';
-        $_id_order = '%'. $generic_status->getOrder()->getId() .'%';
+        $_id_order = $generic_status->getOrder() ? '%'. $generic_status->getOrder()->getId() .'%' : '%';
 
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM orderStatus WHERE status LIKE :status, update_time LIKE :update_time, user_cpf LIKE :user_cpf, id_order LIKE :id_order");
+            $stmt = $con->prepare("SELECT * FROM orderStatus WHERE status LIKE :status AND update_time LIKE :update_time AND user_cpf LIKE :user_cpf AND id_order LIKE :id_order");
             $stmt->bindParam(":status",$_status);
             $stmt->bindParam(":update_time",$_update_time);
             $stmt->bindParam(":user_cpf",$_update_time);

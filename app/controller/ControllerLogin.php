@@ -68,4 +68,12 @@ class ControllerLogin extends Render{
         $this->addMain();
         $this->addFooter();
     }
+
+    public function logout(){
+        if(isset($_SESSION['user_login']))
+        {
+        session_destroy();
+        header('Location:'.DIRPAGE.'home', true,302);
+        }
+    }
 }

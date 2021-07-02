@@ -29,7 +29,7 @@
 
       <div class="col-12 row p-1 text-end px-2 mt-1 text-decoration-none">
         <div class="col-6 text-start">
-        <?php if($order->getStatus()->getStatus() == "Delivered"){ ?>
+        <?php if(ucfirst($order->getStatus()->getStatus()) == "Delivered"){ ?>
           <button class="btn text-primary p-1" data-bs-toggle="modal" data-bs-target="<?= '#order-rate-modal' . $order->getId(); ?>">
             Avaliar Pedido
           </button>
@@ -109,7 +109,7 @@
 
                 <div class="col-md-3 m-auto">
                   <div class="text-center">
-                  <?php if($order->getStatus()->getStatus() == "Delivered"){ ?>
+                  <?php if(ucfirst($order->getStatus()->getStatus()) == "Delivered"){ ?>
                     <p>Avalie este Item:</p>
                     <form action="" method="POST" id="<?= $item->getProduct()->getId()?>">
                     <input type='hidden' name='product-id' id='<?= 'prod'.$item->getProduct()->getId() ?>' value='<?= $item->getProduct()->getId() ?>'>
@@ -151,7 +151,7 @@
             <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-1 bg-secondary">
               <div class="w-100 text-center py-1 px-2">Entregue via: <span class="text-small text-primary">@LP
                   Express</span></div>
-              <div class="w-100 text-center py-1 px-2">Status: <span class="text-small text-primary"><?= $order->getStatus()->getStatus(); ?></span></div>
+              <div class="w-100 text-center py-1 px-2">Status: <span class="text-small text-primary"><?= $order->getStatus()->onGoingStatus(); ?></span></div>
               <div class="w-100 text-center py-1 px-2">Atualizado: <span class="text-small text-primary">
               <?= date("d/m/Y H:i", strtotime($order->getStatus()->getUpdate_time())); ?>
                   </span></div>

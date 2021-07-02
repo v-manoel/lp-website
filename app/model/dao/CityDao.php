@@ -119,12 +119,12 @@ class CityDao{
         
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM cities WHERE name LIKE :name  and ");
+            $stmt = $con->prepare("SELECT * FROM cities WHERE name LIKE :name  AND id_state LIKE :id_state");
             $stmt->bindParam(":name",$_name);
             $stmt->bindParam(":id_state", $_id_state);
             
             $_name = '%'. $generic_city->getName() .'%';
-            $_id_state = $generic_city->getState()->getId();
+            $_id_state = $generic_city->getState() ? $generic_city->getState()->getId() : '%';
 
             $stmt->execute();
 

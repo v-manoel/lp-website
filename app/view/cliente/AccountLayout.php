@@ -48,7 +48,7 @@
                     <?php } ?>
                 </li>
             </a>
-            <a class="text-decoration-none mt-4" href="<?= DIRPAGE . 'home/logout'; ?>">
+            <a class="text-decoration-none mt-4" href="<?= DIRPAGE . 'login/logout'; ?>">
                 <li class="list-group-item bg-transparent pl-3 ">
                     <i class="bi bi-door-open-fill my-dark me-2"></i>
                     Sair

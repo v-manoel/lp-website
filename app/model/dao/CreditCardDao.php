@@ -64,7 +64,7 @@ class CreditCardDao{
         
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM cards WHERE number LIKE :number, holder LIKE :holder, cvv LIKE :cvv, expiration LIKE :expiration");
+            $stmt = $con->prepare("SELECT * FROM cards WHERE number LIKE :number AND holder LIKE :holder AND cvv LIKE :cvv AND expiration LIKE :expiration");
             $stmt->bindParam(":number", $_number);
             $stmt->bindParam(":holder", $_holder);
             $stmt->bindParam(":cvv", $_cvv);

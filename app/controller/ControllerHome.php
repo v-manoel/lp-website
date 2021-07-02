@@ -15,16 +15,6 @@ class ControllerHome extends Render{
         $this->renderLayout();
     }
 
-    public function logout(){
-        if(isset($_SESSION['user_login']))
-        {
-        session_destroy();
-        echo '<script>'.'window.location.reload()'.'</script>';
-        $this->setDir("home");
-        $this->renderLayout();
-        }
-    }
-
     public function addMain()
     {
         $prod_base = new Product();

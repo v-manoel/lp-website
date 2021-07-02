@@ -35,6 +35,19 @@ Class OrderStatus{
 	}
 
 
+	public function onGoingStatus()
+	{
+		//paid - separated - checked - delivered
+		switch (ucfirst($this->status)) {
+			case 'Paid':
+				return "Separating";
+			case 'Separated':
+				return "Checking";
+			case 'Checked':
+				return "Delivering";
+		}
+	}
+
 	/**
 	 * Get the value of id
 	 */ 

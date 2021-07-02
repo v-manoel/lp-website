@@ -10,13 +10,7 @@ require_once __DIR__."/../negocio/OrderStatus.php";
 class OrderDao{
 
 
-    public function insert(Order $order){
-        var_dump($order->getDate());
-        var_dump($order->calcTotal());
-        var_dump($order->getPayment()->getNumber());
-        var_dump($order->getOwner()->getCpf());
-        var_dump($order->getDestination()->getId());
-        
+    public function insert(Order $order){        
         try{
             $con = Connection::getConnection();
             
@@ -103,7 +97,7 @@ class OrderDao{
         
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM orders WHERE date LIKE :date, price >= :price, rate >= :rate, card_number LIKE :card_number, user_cpf LIKE :user_cpf, address_id LIKE :address_id, rate_description LIKE :rate_description");
+            $stmt = $con->prepare("SELECT * FROM orders WHERE date LIKE :date AND price >= :price AND rate >= :rate AND card_number LIKE :card_number AND user_cpf LIKE :user_cpf AND address_id LIKE :address_id AND rate_description LIKE :rate_description");
             $stmt->bindParam(":date", $_date);
             $stmt->bindParam(":price", $_price);
             $stmt->bindParam(":rate", $_rate);
@@ -111,15 +105,14 @@ class OrderDao{
             $stmt->bindParam(":user_cpf", $_user_cpf);
             $stmt->bindParam(":address_id", $_address_id);
             $stmt->bindParam(":rate_description", $_rate_description);
-
+            
             $_date = '%'. $generic_order->getDate() .'%';
-            $_price = $generic_order->calcTotal();
+            $_price = $generic_order->getPrice();
             $_rate = $generic_order->getRate();
-            $_card_number = '%'. $generic_order->getPayment()->getNumber() .'%';
-            $_user_cpf = '%'. $generic_order->getOwner()->getCpf() .'%';
-            $_address_id = '%'. $generic_order->getDestination()->getId() .'%';
+            $_card_number = !$generic_order->getPayment() ? '%' : '%'. $generic_order->getPayment()->getNumber() .'%';
+            $_user_cpf = !$generic_order->getOwner() ? '%' : '%'. $generic_order->getOwner()->getCpf() .'%';
+            $_address_id = !$generic_order->getDestination() ? '%' : '%'. $generic_order->getDestination()->getId() .'%';
             $_rate_description = '%'. $generic_order->getRate_description() .'%';
-        
             
             $stmt->execute();
             
