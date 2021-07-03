@@ -184,7 +184,7 @@
                   </div>
                   <h4 class="step-title">Qualidade Checada</h4>
                 </div><!-- step -->
-                <?php if(count($order->allStatus()) > 3){ ?>
+                <?php if(count($order->allStatus()) > 3 && $order->getStatus()->getStatus() == "Delivered"){ ?>
                 <div class="step completed">
                 <?php }else{ ?>
                 <div class="step ">

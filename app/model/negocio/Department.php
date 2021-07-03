@@ -1,43 +1,29 @@
 <?php
 
-require './Order.php';
-require './Employee.php';
+require_once __DIR__."/Order.php";
+require_once __DIR__."/Employee.php";
 
 Abstract Class Department{
-	protected Order $orders;
-	protected Order $selected_order;
+	private String $name = "";
+	protected $orders = array();
 	
 
 	public function __construct()
 	{
 		//builds the orders list when a new object is istantiated
-		$orders = new Order();
-		$orders = $orders->all();
+		
 	}
 
-	public function ToNext_Department(Employee $employee, $date){
+	public function ToNext_Department(Employee $employee, Order $order, $date){
 		//Send order to next department changing this status
 	}
 
-
-	/**
-	 * Get the value of selected_order
-	 */ 
-	public function getSelected_order()
+	public function OrdersByMyDep($orders)
 	{
-		return $this->selected_order;
-	}
-
-	/**
-	 * Set the value of selected_order
-	 *
-	 * @return  self
-	 */ 
-	public function setSelected_order($selected_order)
-	{
-		$this->selected_order = $selected_order;
-
-		return $this;
+		$orders = new Order();
+		$orders = $orders->all();
+		$this->OrdersByMyDep($orders);
+		$this->orders = $orders;
 	}
 
 	/**
@@ -58,5 +44,13 @@ Abstract Class Department{
 		$this->orders = $orders;
 
 		return $this;
+	}
+
+	/**
+	 * Get the value of name
+	 */ 
+	public function getName()
+	{
+		return $this->name;
 	}
 }

@@ -142,7 +142,7 @@ class OrderStatusDao{
     public function selectByEmployee(Employee $modifier){
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM orderStatus WHERE user_cpf = :user_cpf");
+            $stmt = $con->prepare("SELECT * FROM orderStatus WHERE user_cpf = :user_cpf ORDER BY update_time DESC");
             $stmt->bindParam(":user_cpf", $_user_cpf);
 
             $_user_cpf = $modifier->getCpf();

@@ -74,3 +74,32 @@
   position: absolute;
   left: 0;
 }
+
+.my-bg-purple{
+  background-color: #894fab;
+}
+
+.my-bg-orange{
+  background-color: #ff8112;
+}
+
+.my-bg-dark
+{
+    background-color: #141314
+}
+
+.my-dark{
+    color: #141314;
+}
+
+.my-bg-gray{
+    background-color: rgba(170, 167, 167, 0.623);
+}
+
+.my-bg-light-gray{
+    background-color: #e9ecef;
+}
+
+.my-gray{
+    color: rgba(170, 167, 167, 0.623);
+}

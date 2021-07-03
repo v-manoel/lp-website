@@ -10,7 +10,7 @@ Class Employee extends User{
 
 
 	public function WorksIn($department){
-		return ($this->department == $department);
+		return ($this->department == $department || $this->department == "Gerente" || $this->department == "Entrega");
 	}
 
 	//Verifica se os usuário esta cadastrado no banco de dados
@@ -49,6 +49,37 @@ Class Employee extends User{
 		return $dao->delete($this);
 	}
 
+	public function isInMyDepartment(Order $order) : bool
+	{
+		if(ucfirst($this->department) == "Gerente" || ucfirst($this->department) == "Entrega")
+			return true;
+		if(ucfirst($order->getStatus()->onGoingStatus()) == "Preparing" && 
+			ucfirst($this->department) == "Preparacao")
+			return true;
+		if(ucfirst($order->getStatus()->onGoingStatus()) == "Checking" && 
+			ucfirst($this->department) == "Conferencia")
+			return true;
+		if(ucfirst($order->getStatus()->onGoingStatus()) == "Delivering" && 
+			ucfirst($this->department) == "Entrega")
+			return true;
+		return false;
+	}
+
+	public function OrdersByMyDep($orders)
+	{
+		$my_orders = array();
+		$others = array();
+
+		foreach ($orders as $order) {
+			if($this->isInMyDepartment($order)){
+				array_push($my_orders,$order);
+			}else{
+				array_push($others,$order);
+			}
+		}
+
+		return array_merge($my_orders,$others);
+	}
 
 	/**
 	 * Get the value of department

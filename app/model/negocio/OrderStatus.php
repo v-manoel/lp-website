@@ -6,7 +6,7 @@ require_once __DIR__."/../dao/OrderStatusDao.php";
 
 Class OrderStatus{
 	private $id = null;
-	private $status = ""; //paid - separated - checked - delivered
+	private $status = ""; //paid - prepared - checked - delivered
 	private $update_time = null;
 	private ?Employee $modifier = null;
 	private ?Order $order = null;
@@ -37,11 +37,11 @@ Class OrderStatus{
 
 	public function onGoingStatus()
 	{
-		//paid - separated - checked - delivered
+		//paid - prepared - checked - delivered
 		switch (ucfirst($this->status)) {
 			case 'Paid':
-				return "Separating";
-			case 'Separated':
+				return "Preparing";
+			case 'Prepared':
 				return "Checking";
 			case 'Checked':
 				return "Delivering";

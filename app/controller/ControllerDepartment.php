@@ -1,13 +1,17 @@
 <?php 
 
-
 require_once __DIR__."/../model/negocio/Order.php";
 require_once __DIR__."/../model/negocio/Employee.php";
+require_once __DIR__."/../model/negocio/Department.php";
+require_once __DIR__."/../model/negocio/Preparation.php";
+require_once __DIR__."/../model/negocio/Check.php";
+require_once __DIR__."/../model/negocio/Delivery.php";
 
 class ControllerDepartment extends Render{
 
     private $requested_page;
     private ?Employee $employee = null;
+    private Department $department;
 
     public function __construct(){
 
@@ -38,16 +42,10 @@ class ControllerDepartment extends Render{
                 break;
             case "Menu":
                 $this->requested_page = "Menu";
-                break;
-            case "Preparacao":
-                $this->requested_page = "Preparacao";
-                break;
-            case "Conferencia":
+                break; 
+            case "Teste":
                 $this->requested_page = "Conferencia";
                 break;
-            case "Entrega":
-                $this->requested_page = "Entrega";
-                break;  
             case "Pedidos":
                 $this->LoadAllOrders();
                 $this->requested_page = "Pedidos";
@@ -73,10 +71,64 @@ class ControllerDepartment extends Render{
         
     }
 
+    public function CurrentOrder(){
+
+        if(isset($_SESSION['dep-order'])){
+            $this->content['order'] = unserialize($_SESSION['dep-order']);
+            
+            if($this->employee->getDepartment() == "Gerente"){
+                switch (ucfirst($this->content['order']->getStatus()->getStatus())) {
+                    case 'Paid':
+                        $this->requested_page = "Preparacao";
+                        break;
+                    case 'Prepared':
+                        $this->requested_page = "Conferencia";
+                        break;
+                    case 'Checked':
+                        $this->requested_page = "Entrega";
+                        break;
+                    case 'Delivered':
+                        $this->requested_page = "Entrega";
+                        break;                   
+
+                }
+            }else{
+                $this->requested_page = $this->employee->getDepartment();
+            }
+            $this->renderLayout();
+        }else{
+            $dest_page = DIRPAGE.'department/page/menu';
+            $this->messagePage("Selecione um pedido primeiro !",$dest_page,true );
+        }
+
+    }
+
+    public function SetEmployeeOrder()
+    {
+        if(isset($_POST['order-id']) && !isset($_SESSION['dep-order'])){
+            $order = new Order();
+            $order->setId($_POST['order-id']);
+            if($order->findByID()){
+                $_SESSION['dep-order'] = serialize($order);
+                header('Location:'.DIRPAGE.'department/page/menu', true,302);
+            }
+        }else{
+            header('Location:'.DIRPAGE.'department/page/pedidos', true,302);
+        }
+    }
+
     public function LoadAllOrders(){
         $order = new Order();
         $this->content['orders'] = $order->all();
     }
+
+    public function SortOrder()
+    {
+        $order = new Order();
+        $this->content['orders'] = $this->employee->OrdersByMyDep($order->all());
+        header('Location:'.DIRPAGE.'department/page/pedidos', true,302);
+    }
+
 
 
     public function Logar(){
@@ -88,7 +140,7 @@ class ControllerDepartment extends Render{
             if($employee->checkCredentials()){
                 $this->employee = $employee;
                 $dest_page = DIRPAGE.'department/page/menu';
-                $this->messagePage("Bom trabalho".$this->employee->NamePieces()[0]." !",$dest_page,true);
+                $this->messagePage("Bom trabalho ".$this->employee->NamePieces()[0]." !",$dest_page,true);
             
             }else{
                 $dest_page = DIRPAGE.'department';
@@ -103,10 +155,81 @@ class ControllerDepartment extends Render{
     public function Logout(){
         if(isset($_SESSION['employee']))
         {
+            if(isset($_SESSION['dep-order']))
+                unset($_SESSION['dep-order']);    
             unset($_SESSION['employee']);
             $this->employee = null;
             header('Location:'.DIRPAGE.'department', true,302);
         }
+    }
+
+    public function Prepare(){
+        if(isset($_SESSION['dep-order']) && $this->employee->WorksIn("Preparacao") && isset($_POST['prepare-button'])){
+            $preparation = new Preparation();
+            //Update items storaged qnty
+            foreach ($_POST['stored'] as $key => $value) {
+                $item = new Item();
+                $product = new Product();
+                $product->setId($key);
+                $item->setProduct($product);
+                $item->setOrder(unserialize($_SESSION['dep-order']));
+                if($item->findByID()){
+                    $preparation->storagedItemQnty($item,$value);
+                }
+            }
+                $this->NextOrderStep($preparation);
+        
+        }
+    }
+
+    public function Check(){
+        if(isset($_SESSION['dep-order']) && $this->employee->WorksIn("Conferencia")){
+            $check = new Check();
+            $order = unserialize($_SESSION['dep-order']);
+            var_dump($check);
+            if(isset($_POST['toBack']) && !$check->checkOrderDisponibility($order)){
+                $order = unserialize($_SESSION['dep-order']);
+                $start = $order->getStatus()->getUpdate_time();
+                $start = strtotime($start);
+                //End point of our date range.
+                $end = strtotime("+30 day", $start);
+                //Custom range.
+                $date = mt_rand($start, $end);
+                $date = date("Y-m-d H:i:s", $date);
+                $check->ToBefore_Department($this->employee,$order,$date);
+                unset($_SESSION['dep-order']);
+                header('Location:'.DIRPAGE.'department/page/menu', true,302);
+            }else{
+                $this->NextOrderStep($check);
+            }
+        }
+    }
+
+    public  function Delivery()
+    {
+        if(isset($_SESSION['dep-order']) && $this->employee->WorksIn("Entrega")){
+            $delivery = new Delivery();
+            $this->NextOrderStep($delivery);
+        }
+    }
+
+    protected function NextOrderStep(Department $department){
+        //Gen a random date based on atual status date
+        if(isset($_SESSION['dep-order'])){
+            $order = unserialize($_SESSION['dep-order']);
+            $start = $order->getStatus()->getUpdate_time();
+            $start = strtotime($start);
+            //End point of our date range.
+            $end = strtotime("+30 day", $start);
+            //Custom range.
+            $date = mt_rand($start, $end);
+            $date = date("Y-m-d H:i:s", $date);
+
+            $department->ToNext_Department($this->employee,$order,$date);
+            unset($_SESSION['dep-order']);
+            header('Location:'.DIRPAGE.'department/page/menu', true,302);
+        }
+
     }
 
 }

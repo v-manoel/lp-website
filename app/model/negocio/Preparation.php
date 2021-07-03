@@ -1,35 +1,47 @@
 <?php
 
-require './Department.php';
-require './OrderStatus.php';
-require './Item.php';
+require_once __DIR__."/Department.php";
+require_once __DIR__."/OrderStatus.php";
+require_once __DIR__."/Item.php";
 
 Class Preparation extends Department{
 
-	public function ToNext_Department(Employee $employee, $date){
+	function __construct(){
+		parent::__construct();
+		$name = "Preparation";
+	}
+
+	public function ToNext_Department(Employee $employee, $order, $date){
 		//Send order to next department changing this status
 		$new_status = new OrderStatus;
-		$new_status->setOrder($this->selected_order);
+		$new_status->setOrder($order);
 		$new_status->setModifier($employee);
 		$new_status->setUpdate_time($date);
-		$new_status->setStatus("checking");
-		$new_status->insert();
+		$new_status->setStatus("Prepared");
+		
+		return $new_status->insert();
+	}
+
+	public function OrdersByMyDep($orders)
+	{
+		$this->orders = array();
+		$others = array();
+
+		foreach ($orders as $order) {
+			if(ucfirst($order->getStatus()->onGoingStatus()) == "Preparing"){
+				array_push($this->orders,$order);
+			}else{
+				array_push($others,$order);
+			}
+		}
+
+		return array_merge($this->orders,$others);
 	}
 
 	public function storagedItemQnty(Item $item, $storaged_qnty)
 	{
-		if(in_array($item, $this->selected_order->getItems())){
 			$item->setStoraged_qnty($storaged_qnty);
 			$item->update();
-		}
 	}
 	
-	public function checkOrderDisponibility(){
-		$orderItems = $this->selected_order->getItems();
-		foreach($orderItems as $item){
-			if($item->getQnty() > $item->getStoraged_qnty())
-				return false;
-		}
-		return true;
-	}
 }

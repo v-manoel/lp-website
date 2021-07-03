@@ -180,9 +180,13 @@ class ItemDao{
         try{
             $con = Connection::getConnection();
 
-            $stmt = $con->prepare("UPDATE items SET storaged_qnty=:storaged_qnty");
+            $stmt = $con->prepare("UPDATE items SET storaged_qnty=:storaged_qnty WHERE id_order = :id_order AND id_product = :id_product");
+            $stmt->bindParam(":id_order", $_id_order);
+            $stmt->bindParam(":id_product",$_id_product);
             $stmt->bindParam(":storaged_qnty", $_storaged_qnty);
             
+            $_id_order = !$item->getOrder()? '%' : $item->getOrder()->getId();
+            $_id_product = !$item->getProduct()? '%' : $item->getProduct()->getId();
             $_storaged_qnty = $item->getStoraged_qnty();
 
 
