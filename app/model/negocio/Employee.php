@@ -15,7 +15,8 @@ Class Employee extends User{
 
 	//Verifica se os usuário esta cadastrado no banco de dados
 	public function checkCredentials(){
-		if($this->findByID()){
+		$dao = new EmployeeDao();
+		if($res = $dao->selectByCredentials($this)){
 			return true;
 		}
 		return false;

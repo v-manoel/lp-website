@@ -17,6 +17,7 @@ Class Product{
 	//stats attributes
 	private $total_orders = 0;
 	private $total_sales = 0.0;
+	private $total_qnty = 0;
 
 	public function findByID(){
 		$dao = new ProductDao();
@@ -304,6 +305,26 @@ Class Product{
 	}
 
 		/**
+	 * Get the value of total_qnty
+	 */ 
+	public function getTotal_qnty()
+	{
+		return $this->total_qnty;
+	}
+
+	/**
+	 * Set the value of total_qnty
+	 *
+	 * @return  self
+	 */ 
+	public function setTotal_qnty($total_qnty)
+	{
+		$this->total_qnty = $total_qnty;
+
+		return $this;
+	}
+
+		/**
 	 * Get the value of rate
 	 */ 
 	public function getRate()
@@ -383,8 +404,5 @@ Class Product{
 
 		return $new_list;
 	}
-
-
-
 }
 

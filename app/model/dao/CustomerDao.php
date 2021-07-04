@@ -36,7 +36,7 @@ class CustomerDao{
         return true;
     }
 
-    public function selectById(Customer $customer, bool $only_active = true){
+    public function selectByCredentials(Customer $customer, bool $only_active = true){
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM users WHERE email = :email AND pswd = :pswd");
@@ -52,6 +52,36 @@ class CustomerDao{
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if($row['department'] == null && !$only_active || $row['is_active'] == $only_active){
                     $customer->setCpf($row['cpf']);
+                    $customer->setName($row['name']);
+                    $customer->setPhone($row['phone']);
+                    $customer->setGenre($row['genre']);
+                    $customer->setBirthday($row['birthday']);
+
+                    return $customer;
+                }
+            }
+            
+        } catch(PDOException $err){
+            return null;
+        }
+
+        return null;
+    }
+
+    public function selectById(Customer $customer, bool $only_active = true){
+        try{
+            $con = Connection::getConnection();
+            $stmt = $con->prepare("SELECT * FROM users WHERE cpf = :cpf");
+            $stmt->bindParam(":cpf",$_cpf);
+
+            $_cpf = $customer->getCpf();
+
+            $stmt->execute();
+
+            if($stmt->rowCount() == 1){
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($row['department'] == null && !$only_active || $row['is_active'] == $only_active){
+                    $customer->setEmail($row['email']);
                     $customer->setName($row['name']);
                     $customer->setPhone($row['phone']);
                     $customer->setGenre($row['genre']);

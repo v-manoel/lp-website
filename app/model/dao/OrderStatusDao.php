@@ -45,9 +45,11 @@ class OrderStatusDao{
 
                 $order = new Order();
                 $order->setId($row['id_order']);
+                $order->findByID();
 
                 $modifier = new Employee();
                 $modifier->setCpf($row['user_cpf']);
+                $modifier->findByID();
 
                 $status->setOrder($order);
                 $status->setModifier($modifier);
@@ -87,9 +89,11 @@ class OrderStatusDao{
 
                 $order = new Order();
                 $order->setId($row['id_order']);
+                $order->findByID();
 
                 $modifier = new Employee();
                 $modifier->setCpf($row['user_cpf']);
+                $modifier->findByID();
 
                 $status->setOrder($order);
                 $status->setModifier($modifier);
@@ -123,6 +127,7 @@ class OrderStatusDao{
 
                 $modifier = new Employee();
                 $modifier->setCpf($row['user_cpf']);
+                $modifier->findByID();
 
                 $status->setOrder($order);
                 $status->setModifier($modifier);
@@ -155,6 +160,7 @@ class OrderStatusDao{
 
                 $order = new Order();
                 $order->setId($row['id_order']);
+                $order->findByID();
 
                 $status->setOrder($order);
                 $status->setModifier($modifier);

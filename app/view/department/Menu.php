@@ -23,6 +23,18 @@
             </a>
         </div>
     </div>
+
+    <?php if(unserialize($_SESSION['employee'])->getDepartment() == "Gerente"){ ?>
+    <div class="col-md-4 text-center mb-5">
+        <div class="menu-icon container bg-warning shadow-lg">
+            <a href="<?= DIRPAGE.'admin/page/home' ?>" class="text-decoration-none text-dark">
+                <i class="bi bi-clipboard-data"></i>
+                <div class="icon-title h5">Relatórios</div>
+            </a>
+        </div>
+    </div>
+    <?php } ?>
+
     <div class="col-md-4 text-center mb-5">
         <div class="menu-icon container bg-warning shadow-lg">
             <a href="#" class="text-decoration-none text-dark">
@@ -31,5 +43,5 @@
             </a>
         </div>
     </div>
-
+    
 </div>

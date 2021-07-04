@@ -1,0 +1,49 @@
+body{
+    background: rgb(255,226,53) !important;
+    background: linear-gradient(90deg, rgba(255,226,53,1) 0%, rgba(253,198,29,1) 50%, rgba(251,198,61,1) 100%) !important;}
+
+.sidepanel-inner, .nav-item
+{
+    background-color: #212529 !important;
+}
+
+.nav-link,.stats-figure
+{
+    color: #ffc107 !important;
+}
+
+.stat-cell
+{
+    color: #212529;
+}
+
+.nav-link.active
+{
+    color: #212529 !important;
+    background: linear-gradient(90deg, rgba(251,198,61,1) 0%, rgba(253,198,29,1) 50%, rgba(255,226,53,1) 100%) !important;
+    border-left: 6px solid rgba(255, 255, 255, 0.835) !important;
+}
+
+.app-card
+{
+    background-color: white !important;
+    color: #212529 !important;
+}
+
+.app-card-title
+{
+    color: #212529 !important;
+}
+
+.price
+{
+ font-size: 1.9rem;
+}
+
+.decimals
+{
+    font-size: 70%;
+    position: relative;
+    top: 1px;
+
+}

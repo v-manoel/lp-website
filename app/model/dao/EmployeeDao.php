@@ -38,7 +38,7 @@ class EmployeeDao{
         return true;
     }
 
-    public function selectById(Employee $employee, bool $only_active = true){
+    public function selectByCredentials(Employee $employee, bool $only_active = true){
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM users WHERE email = :email and pswd = :pswd");
@@ -54,6 +54,38 @@ class EmployeeDao{
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if($row['department'] != null){
                     $employee->setCpf($row['cpf']);
+                    $employee->setName($row['name']);
+                    $employee->setPhone($row['phone']);
+                    $employee->setGenre($row['genre']);
+                    $employee->setBirthday($row['birthday']);
+                    $employee->setDepartment($row['department']);
+
+                    return $employee;
+                }
+            }
+            
+        } catch(PDOException $err){
+            return null;
+        }
+
+        return null;
+    }
+
+    public function selectById(Employee $employee, bool $only_active = true){
+        try{
+            $con = Connection::getConnection();
+            $stmt = $con->prepare("SELECT * FROM users WHERE cpf = :cpf");
+            $stmt->bindParam(":cpf",$_cpf);
+
+            
+            $_cpf = $employee->getCpf();
+
+            $stmt->execute();
+
+            if($stmt->rowCount() == 1){
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($row['department'] != null){
+                    $employee->setEmail($row['email']);
                     $employee->setName($row['name']);
                     $employee->setPhone($row['phone']);
                     $employee->setGenre($row['genre']);

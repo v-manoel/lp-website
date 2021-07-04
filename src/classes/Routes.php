@@ -37,7 +37,8 @@ class Routes{
             "payment"=>"ControllerPayment",
             "department"=>"ControllerDepartment",
             "login"=>"ControllerLogin",
-            "account"=>"ControllerAccount"
+            "account"=>"ControllerAccount",
+            "admin"=>"ControllerManager"
         );
 
         if(array_key_exists($index, $this->route)){//Se a url esta no array

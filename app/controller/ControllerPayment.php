@@ -97,9 +97,9 @@ class ControllerPayment extends Render{
             }
 
             //Start point of our date range.
-            $start = strtotime("29 June 2021 00:00:00");
+            $start = strtotime("1 July 2021 00:00:00");
             //End point of our date range.
-            $end = strtotime("31 December 2040 00:00:00");
+            $end = strtotime("31 July 2021 00:00:00");
             //Custom range.
             $timestamp = mt_rand($start, $end);
             //Print it out.
