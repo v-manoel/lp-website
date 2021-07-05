@@ -7,7 +7,7 @@
                 <input type='hidden' name='product_id' id='product_id' value='<?= $item->getProduct()->getId() ?>'><br> 
                     <button type="submit" class="border-0 bg-transparent p-0">
                         <?php if(count($item->getProduct()->getImgs()) > 0){ ?>
-                            <img class="w-75" src="<?= $item->getProduct()->getImgs()[0]; ?>" alt="example" style="min-width: 75px;">
+                            <img class="w-75" src="<?= DIRIMG . $item->getProduct()->getImgs()[0]; ?>" alt="example" style="min-width: 75px;">
                         <?php }else{ ?>
                             <img class="w-75" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="example" style="min-width: 75px;">
                         <?php } ?>

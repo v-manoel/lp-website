@@ -45,7 +45,7 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-warning text-dark float-md-end">Continuar</button>
+                    <button type="submit" name="user-card" class="btn btn-warning text-dark float-md-end">Continuar</button>
                 </form>
             <?php } else { ?>
                 <div class="row py-4 bg-white rounded-bottom input-label shadow-lg">
@@ -56,7 +56,7 @@
                                 <label class="mx-2" for="card-holder">Nome do títular</label>
                             </div>
                             <div class="form-floating col-9 mb-2 f-1">
-                                <input type="text" class="form-control p-0 px-2 m-auto field-size " required id="card-number" name="card-number" placeholder="************" minlength="12" maxlength="12" value="">
+                                <input type="text" class="form-control p-0 px-2 m-auto field-size " required id="card-number" name="card-number" placeholder="************" minlength="16" maxlength="16" value="">
                                 <label class="mx-2" for="card-number">Número</label>
                             </div>
                             <div class="form-floating col-3 mb-2 f-1">
@@ -69,17 +69,17 @@
                                 <label class="mx-2" for="card-expiration">Validade</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-warning text-dark float-md-end">Continuar</button>
+                        <button type="submit" name="new-card" class="btn btn-warning text-dark float-md-end">Continuar</button>
                     </form>
                     <div class="col-md-6 mt-5" id="front-card">
                         <div class="iterativeCard newcard" id="card-model">
                             <div class="flagCard bi bi-layers-half h2 text-center text-white"> </div>
 
                             <div class="h4 text-light text-center mt-4 number" id="model-number">
-                                <span class="mx-2" id="num-3">* * *</span>
-                                <span class="mx-2" id="num-6">* * *</span>
-                                <span class="mx-2" id="num-9">* * *</span>
-                                <span class="mx-2" id="num-12">* * *</span>
+                                <span class="mx-2" id="num-4">* * * *</span>
+                                <span class="mx-2" id="num-8">* * * *</span>
+                                <span class="mx-2" id="num-12">* * * *</span>
+                                <span class="mx-2" id="num-16">* * * *</span>
                             </div>
                             <div class="text-light mt-3 text-center text-monospace data">
                                 <span class="float-left ml-3" id="model-name">NOME E SOBRENOME</span>

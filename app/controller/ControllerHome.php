@@ -15,8 +15,32 @@ class ControllerHome extends Render{
         $this->renderLayout();
     }
 
+    public function LoadHomeContent(){
+        //Get Some Products in offer
+        $prod_base = new Product();
+        $cat = new Category();
+
+        //Set Products with 60% off or more
+        $prod_base->setOffer(0.6);
+        $this->content["offer"] = $prod_base->all();
+
+        //Get Some Categories Products
+        $cat = new Category();
+        $cat = $cat->all();
+
+        //Set 3 random categories products
+        shuffle($cat);
+        $this->content["cat"] = array();
+        array_push($this->content["cat"],[$cat[0]->getName() => $prod_base->allByCategory($cat[0])]);
+        array_push($this->content["cat"],[$cat[1]->getName() => $prod_base->allByCategory($cat[1])]);
+        array_push($this->content["cat"],[$cat[2]->getName() => $prod_base->allByCategory($cat[3])]);
+    
+    }
+
     public function addMain()
     {
+        $this->LoadHomeContent();
+        
         $prod_base = new Product();
         $cat = new Category();
 

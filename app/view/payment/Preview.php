@@ -2,11 +2,12 @@
     <div class="row">
         <div class="col-md-7 payment-method">
             <h4 class="mb-4">Como você prefere pagar ?</h4>
+            <form id="card-form" action="<?= DIRPAGE.'payment/PaymentMethod'?>" method="POST">
             <?php if($this->content['order']->getPayment()){?>
             <div class="mb-3">
                 <h6 class="mb-3">Cartão Selecionado</h6>
-                <div class="form-check payment-option align-items-center border-1 border-bottom text-white bg-dark rounded shadow-lg">
-                    <input class="form-check-input" type="radio" name="card-number" id="atual-card" value="atual-card">
+                <div class="form-check payment-option align-items-center border-1 text-dark bg-warning bg-gradient rounded shadow-lg">
+                    <input class="form-check-input" type="radio" name="card-number" id="atual-card" value="keep">
                     <label class="form-check-label row align-items-center" for="atual-card">
                         <div class="col-md-1">
                             <i class="bi bi-credit-card-fill h4"></i>
@@ -21,7 +22,7 @@
             <div>
                 <h6 class="mb-3">Com cartão de crédito </h6>
                 <div class="container-fluid">
-                <form id="card-form" action="<?= DIRPAGE.'payment/PaymentMethod'?>" method="POST">
+                
                     <?php if($this->content['order']->getOwner()){?>
                         <?php foreach (CreditCard::allByCustomer($this->content['order']->getOwner()) as $card) { ?>
                         <div class="form-check payment-option align-items-center border-1 border-bottom">
@@ -39,7 +40,7 @@
                     <?php } ?>
                     
                     <div class="form-check payment-option align-items-center">
-                        <input class="form-check-input" type="radio" name="card-number" id="other-card" value="0">
+                        <input class="form-check-input" type="radio" name="card-number" id="other-card" value="new">
                         <label class="form-check-label row align-items-center" for="other-card">
                             <div class="col-md-1">
                                 <i class="bi bi-credit-card-fill h4"></i>

@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     $("#sidebar").mCustomScrollbar({
         theme: "minimal"
@@ -81,14 +82,20 @@ $('#card-number').on('input', function() {
     $('#back-card').hide();
     $('#front-card').show();
     var data = $('#card-number').val();
-    if(data.length <= 3)
-        $('#num-3').html(data);
-    else if(data.length <= 6)
-        $('#num-6').html(data.substr(3,5));
-    else if(data.length <= 9)
-        $('#num-9').html(data.substr(6,8));
+    if(data.length <= 4)
+        $('#num-4').html(data);
+    else if(data.length <= 8)
+        $('#num-8').html(data.substr(4,7));
     else if(data.length <= 12)
-        $('#num-12').html(data.substr(9,11));
+        $('#num-12').html(data.substr(8,12));
+    else if(data.length <= 16)
+        $('#num-16').html(data.substr(12,15));
+});
+
+$('#cep').on('input', function() {
+    var data = $('#cep').val();
+    if(data.length == 5)
+        $('#cep').val($('#cep').val()+"-");
 });
 
 $('#card-cvv').on('input', function() {
@@ -98,3 +105,4 @@ $('#card-cvv').on('input', function() {
     $('#model-cvv').html($('#card-cvv').val());
     
 });
+

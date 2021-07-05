@@ -34,7 +34,7 @@
       </div>
 
       <div class="form-floating col-9 mb-3 f-4">
-        <input type="text" class="form-control p-0 px-2 m-auto field-size " required name="cep" id="cep" placeholder="Ex.: 000000-000" value="<?= $this->content['addr']->getCep(); ?>">
+        <input type="text" class="form-control p-0 px-2 m-auto field-size cep" required name="cep" id="cep" placeholder="Ex.: 000000-000" value="<?= $this->content['addr']->getCep(); ?>">
         <label class="mx-2" for="cep">CEP</label>
       </div>
 

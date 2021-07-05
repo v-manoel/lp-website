@@ -5,10 +5,10 @@
       <div class="flagCard bi bi-layers-half h2 text-center text-white"> </div>
 
       <div class="h4 text-light text-center mt-5 mb-2 number">
-        <span class="me-2"><?= $card->getNumber()[0].' '.$card->getNumber()[1].' '.$card->getNumber()[2] ?></span>
-        <span class="me-2"><?= $card->getNumber()[3].' '.$card->getNumber()[4].' '.$card->getNumber()[5] ?></span>
-        <span class="me-2"><?= $card->getNumber()[6].' '.$card->getNumber()[7].' '.$card->getNumber()[8] ?></span>
-        <span class="me-2"><?= $card->getNumber()[9].' '.$card->getNumber()[10].' '.$card->getNumber()[11] ?></span>
+        <span class="me-2"><?= $card->getNumber()[0].''.$card->getNumber()[1].''.$card->getNumber()[2].''.$card->getNumber()[3] ?></span>
+        <span class="me-2"><?= $card->getNumber()[4].''.$card->getNumber()[5].''.$card->getNumber()[6].''.$card->getNumber()[7] ?></span>
+        <span class="me-2"><?= $card->getNumber()[8].''.$card->getNumber()[9].''.$card->getNumber()[10].''.$card->getNumber()[11] ?></span>
+        <span class="me-2"><?= $card->getNumber()[12].''.$card->getNumber()[13].''.$card->getNumber()[14].''.$card->getNumber()[15] ?></span>
       </div>
       <form action="<?= DIRPAGE.'account/page/delCard'?>" method="POST" class="edittype my-auto text-center h5 text-white" hidden>
           <input type="hidden" name="card-id" value="<?= $card->getNumber() ?>">
@@ -26,10 +26,10 @@
       <div class="flagCard bi bi-layers-half h2 text-center text-white"> </div>
 
       <div class="h4 text-light text-center mt-5 mb-2 number">
-        <span class="me-2">* * *</span>
-        <span class="me-2">* * *</span>
-        <span class="me-2">* * *</span>
-        <span class="">* * *</span>
+        <span class="me-2">* * * *</span>
+        <span class="me-2">* * * *</span>
+        <span class="me-2">* * * *</span>
+        <span class="">* * * *</span>
       </div>
       <div class="edittype text-center mt-4 h4 text-white" hidden>
         <a class="text-decoration-none text-white" href="<?= DIRPAGE.'account/page/newCard'?>"> Cadastrar </a>

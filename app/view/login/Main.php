@@ -52,7 +52,7 @@
           </p>
           <p class="my-1">
             <label class="mb-0" for="nome_cad">Seu CPF</label>
-            <input id="cpf_cad" class="p-1 m-0 w-100" name="cpf_cad" required="required" type="text" placeholder="cpf" />
+            <input id="cpf_cad" class="cpf p-1 m-0 w-100 " name="cpf_cad" required="required" type="text" placeholder="cpf" minlength="11" maxlength="11"/>
           </p>
 
           <p class="my-1">
@@ -62,7 +62,7 @@
 
           <p class="my-1">
             <label class="mb-0" for="pswd_cad">Sua senha</label>
-            <input id="pswd_cad" class="p-1 m-0 w-100" name="pswd_cad" required="required" type="password" placeholder="ex. 1234" />
+            <input id="pswd_cad" class="p-1 m-0 w-100" name="pswd_cad" required="required" type="password" placeholder="ex. 1234" minlength="4" maxlength="8" />
           </p>
 
           <p class="w-50 mx-auto py-1 mt-4 mb-2">

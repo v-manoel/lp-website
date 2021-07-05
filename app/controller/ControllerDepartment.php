@@ -186,7 +186,6 @@ class ControllerDepartment extends Render{
         if(isset($_SESSION['dep-order']) && $this->employee->WorksIn("Conferencia")){
             $check = new Check();
             $order = unserialize($_SESSION['dep-order']);
-            var_dump($check);
             if(isset($_POST['toBack']) && !$check->checkOrderDisponibility($order)){
                 $order = unserialize($_SESSION['dep-order']);
                 $start = $order->getStatus()->getUpdate_time();

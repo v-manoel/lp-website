@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col-md-2 text-center m-0">
                                     <?php if (count($item->getProduct()->getImgs()) > 0) { ?>
-                                        <img width="75%" src="<?= $item->getProduct()->getImgs()[0]; ?>" alt="<?= $item->getProduct()->getTitle(); ?>">
+                                        <img width="75%" src="<?= DIRIMG . $item->getProduct()->getImgs()[0]; ?>" alt="<?= $item->getProduct()->getTitle(); ?>">
                                     <?php } else { ?>
                                         <img width="75%" src="<?= DIRIMG . 'examples/produtos.svg'; ?>" alt="<?= $item->getProduct()->getTitle(); ?>">
                                     <?php } ?>
@@ -86,7 +86,7 @@
                             <?php } ?>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="<?= DIRPAGE . 'payment/ResetPayment' ?>" class="text-primary text-decoration-none">alterar</a>
+                            <a href="<?= DIRPAGE . 'payment/page/preview' ?>" class="text-primary text-decoration-none">alterar</a>
                         </div>
                     </div>
                 </div>
@@ -181,133 +181,143 @@
 
             <div class="modal-body" id="address-modal-body">
                 <?php if ($this->content['order']->getOwner()) { ?>
-                    <div class="user-enderecos">
-                        <h6>Em um dos seus endereços</h6>
+
+                    <?php if ($this->content['order']->getDestination()) { ?>
+                        <div class="user-enderecos">
+                        <h6>Endereço selecionado</h6>
                         <div class="container-fluid">
+                            <div class="form-check endereco-option align-items-center text-dark bg-warning bg-gradient rounded shadow-lg">
+                                <input class="form-check-input mt-3" type="radio" name="atual-addr" id="atual-addr">
+                                <label class="form-check-label row" for="atual-addr">
+                                    <div class="row">
+                                        <span class=" h6 col-md-6"><?= $this->content['order']->getDestination()->getName(); ?></span>
+                                        <span class="col-md-6 text-end"><?= $this->content['order']->getDestination()->getStreet(); ?></span>
+                                    </div>
+                                    <div class="row">
+                                        <span class="col-md-6"><?= $this->content['order']->getDestination()->getCep() . '  |  ' . $this->content['order']->getDestination()->getCity()->getName(); ?></span>
+                                        <span class="col-md-6 text-end text-primary"><?= $this->content['order']->getDestination()->getDestinatary(); ?></span>
+                                    </div>
+                                </label>
+                            </div><!-- form-check -->
+                        </div>
+                        </div>
+                        <?php } ?>
 
-                            <form id="addr-form" action="<?= DIRPAGE . 'payment/ChangeDestination'; ?>" method="POST">
-                                <?php foreach (Address::allByCustomer($this->content['order']->getOwner()) as $addr) { ?>
-                                    <div class="form-check endereco-option align-items-center">
-                                        <input class="form-check-input mt-3" type="radio" name="order-addr" id="<?= 'addr-' . $addr->getId(); ?>" value="<?= $addr->getId(); ?>">
-                                        <label class="form-check-label row" for="<?= 'addr-' . $addr->getId(); ?>">
-                                            <div class="row">
-                                                <span class=" h6 col-md-6"><?= $addr->getName(); ?></span>
-                                                <span class="col-md-6 text-end"><?= $addr->getStreet(); ?></span>
-                                            </div>
-                                            <div class="row">
-                                                <span class="col-md-6"><?= $addr->getCep() . '  |  ' . $addr->getCity()->getName(); ?></span>
-                                                <span class="col-md-6 text-end text-primary"><?= $addr->getDestinatary(); ?></span>
-                                            </div>
-                                        </label>
-                                    </div><!-- form-check -->
-                                <?php } ?>
-                                <div class="form-check endereco-option align-items-center">
-                                    <input class="form-check-input mt-3" type="radio" name="atual-addr" id="atual-addr">
-                                    <label class="form-check-label row" for="atual-addr">
-                                        <div class="row">
-                                            <span class=" h6 col-md-6"><?= $this->content['order']->getDestination()->getName(); ?></span>
-                                            <span class="col-md-6 text-end"><?= $this->content['order']->getDestination()->getStreet(); ?></span>
+                        <div class="user-enderecos">
+                            <h6>Em um dos seus endereços</h6>
+                            <div class="container-fluid">
+
+                                <form id="addr-form" action="<?= DIRPAGE . 'payment/ChangeDestination'; ?>" method="POST">
+                                    <?php foreach (Address::allByCustomer($this->content['order']->getOwner()) as $addr) { ?>
+                                        <div class="form-check endereco-option align-items-center">
+                                            <input class="form-check-input mt-3" type="radio" name="order-addr" id="<?= 'addr-' . $addr->getId(); ?>" value="<?= $addr->getId(); ?>">
+                                            <label class="form-check-label row" for="<?= 'addr-' . $addr->getId(); ?>">
+                                                <div class="row">
+                                                    <span class=" h6 col-md-6"><?= $addr->getName(); ?></span>
+                                                    <span class="col-md-6 text-end"><?= $addr->getStreet(); ?></span>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="col-md-6"><?= $addr->getCep() . '  |  ' . $addr->getCity()->getName(); ?></span>
+                                                    <span class="col-md-6 text-end text-primary"><?= $addr->getDestinatary(); ?></span>
+                                                </div>
+                                            </label>
+                                        </div><!-- form-check -->
+                                    <?php } ?>
+
+                                </form>
+
+
+                                <a class="btn text-primary text-decoration-none" href="<?= DIRPAGE . 'account/page/myAddress' ?>">Editar endereços</a>
+
+                            </div><!-- container -->
+                        </div><!-- user-enderecos -->
+                    <?php } ?>
+                    <div class="cep-entry">
+                        <h6>Em um novo lugar</h6>
+                        <div class="container-fluid mb-0">
+
+                            <form class="align-items-center">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-floating" style="margin-left: -10px;">
+                                            <input type="text" class="form-control" id="informcep" placeholder="">
+                                            <label for="floatingInputGrid">Informar um CEP</label>
                                         </div>
-                                        <div class="row">
-                                            <span class="col-md-6"><?= $this->content['order']->getDestination()->getCep() . '  |  ' . $this->content['order']->getDestination()->getCity()->getName(); ?></span>
-                                            <span class="col-md-6 text-end text-primary"><?= $this->content['order']->getDestination()->getDestinatary(); ?></span>
-                                        </div>
-                                    </label>
-                                </div><!-- form-check -->
-                            </form>
-
-
-                            <a class="btn text-primary text-decoration-none" href="<?= DIRPAGE . 'account/page/myAddress' ?>">Editar endereços</a>
-
-                        </div><!-- container -->
-                    </div><!-- user-enderecos -->
-                <?php } ?>
-                <div class="cep-entry">
-                    <h6>Em um novo lugar</h6>
-                    <div class="container-fluid mb-0">
-
-                        <form class="align-items-center">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-floating" style="margin-left: -10px;">
-                                        <input type="text" class="form-control" id="informcep" placeholder="">
-                                        <label for="floatingInputGrid">Informar um CEP</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-warning text-dark">Usar</button>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="link-warning">Não sei meu CEP</div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-warning text-dark">Usar</button>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="link-warning">Não sei meu CEP</div>
-                                </div>
+                            </form>
+                            <a class="btn text-primary text-decoration-none" id="new-payment-address-link">Adicionar endereço completo</a>
+                        </div><!-- container -->
+                    </div><!-- cep-entry -->
+                    </div><!-- modal body -->
+
+                    <div class="modal-footer" id="address-modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" form="addr-form" class="btn btn-primary">Salvar modificações</button>
+                    </div><!-- modal footer -->
+
+                    <form action="<?= DIRPAGE . 'payment/ChangeDestination'; ?>" class="p-2 bg-white rounded-bottom" method="post" id="new-payment-address-form">
+                        <div class="row px-3 py-2">
+                            <div class="form-floating col-6 mb-3 f-1">
+                                <input type="text" class="form-control p-0 px-2 m-auto field-size " id="name" name="name" placeholder="Ex.: Casa" value="">
+                                <label class="mx-2" for="name">Apelido do endereço</label>
                             </div>
-                        </form>
-                        <a class="btn text-primary text-decoration-none" id="new-payment-address-link">Adicionar endereço completo</a>
-                    </div><!-- container -->
-                </div><!-- cep-entry -->
-            </div><!-- modal body -->
+                            <div class="form-floating col-10 mb-3 f-6">
+                                <input type="text" class="form-control p-0 px-2 m-auto field-size " id="street" name="street" placeholder="Ex.: travessa sempre verde" value="">
+                                <label class="mx-2" for="street">Rua</label>
+                            </div>
+                            <div class="form-floating col-2 mb-3 f-2 ">
+                                <input type="text" class="form-control p-0 px-2 m-auto field-size " required name="number" id="number" placeholder="Ex.: 15" value="">
+                                <label class="mx-2" for="number">Nº</label>
+                            </div>
 
-            <div class="modal-footer" id="address-modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" form="addr-form" class="btn btn-primary">Salvar modificações</button>
-            </div><!-- modal footer -->
+                            <div class=" mb-3 f-3 col-3">
+                                <select class="form-select py-2" id="state" name="state" required>
+                                    <option value="" selected disabled hidden>UF</option>
+                                    <?php $state = new State();
+                                    foreach ($state->all() as $state) { ?>
+                                        <option value="<?= $state->getId() ?>"><?= $state->getUf() ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
 
-            <form action="<?= DIRPAGE . 'payment/ChangeDestination'; ?>" class="p-2 bg-white rounded-bottom" method="post" id="new-payment-address-form">
-                <div class="row px-3 py-2">
-                    <div class="form-floating col-6 mb-3 f-1">
-                        <input type="text" class="form-control p-0 px-2 m-auto field-size " id="name" name="name" placeholder="Ex.: Casa" value="">
-                        <label class="mx-2" for="name">Apelido do endereço</label>
-                    </div>
-                    <div class="form-floating col-10 mb-3 f-6">
-                        <input type="text" class="form-control p-0 px-2 m-auto field-size " id="street" name="street" placeholder="Ex.: travessa sempre verde" value="">
-                        <label class="mx-2" for="street">Rua</label>
-                    </div>
-                    <div class="form-floating col-2 mb-3 f-2 ">
-                        <input type="text" class="form-control p-0 px-2 m-auto field-size " required name="number" id="number" placeholder="Ex.: 15" value="">
-                        <label class="mx-2" for="number">Nº</label>
-                    </div>
+                            <div class="form-floating col-9 mb-3 f-4">
+                                <input type="text" class="form-control p-0 px-2 m-auto field-size cep" minlength="9" maxlength="9" required name="cep" id="cep" placeholder="Ex.: 000000-000" value="">
+                                <label class="mx-2" for="cep">CEP</label>
+                            </div>
 
-                    <div class=" mb-3 f-3 col-3">
-                        <select class="form-select py-2" id="state" name="state" required>
-                            <option value="" selected disabled hidden>UF</option>
-                            <?php $state = new State();
-                            foreach ($state->all() as $state) { ?>
-                                <option value="<?= $state->getId() ?>"><?= $state->getUf() ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
+                            <div class=" mb-3 f-3 col-9">
+                                <select class="form-select py-2" id="city" name="city" required>
+                                    <option value="" selected disabled hidden>Selecione um estado primeiro</option>
+                                </select>
+                            </div>
 
-                    <div class="form-floating col-9 mb-3 f-4">
-                        <input type="text" class="form-control p-0 px-2 m-auto field-size " required name="cep" id="cep" placeholder="Ex.: 000000-000" value="">
-                        <label class="mx-2" for="cep">CEP</label>
-                    </div>
+                            <div class="form-floating col-5 mb-3 f-5">
+                                <input type="text" class="form-control p-0 px-2 m-auto field-size " id="district" name="district" placeholder="Ex.: Periperi" value="">
+                                <label class="mx-2" for="district">Bairro</label>
+                            </div>
+                            <div class="form-floating col-7 mb-3 f-5">
+                                <input type="text" class="form-control p-0 px-2 m-auto field-size " id="destinatary" name="destinatary" placeholder="Ex.: João Almeida" value="">
+                                <label class="mx-2" for="destinatary">Destinatário</label>
+                            </div>
 
-                    <div class=" mb-3 f-3 col-9">
-                        <select class="form-select py-2" id="city" name="city" required>
-                            <option value="" selected disabled hidden>Selecione um estado primeiro</option>
-                        </select>
-                    </div>
+                            <div class="col-12 mb-3 f-6">
+                                <textarea class="form-control py-2 px-2 m-auto" id="description" name="description" rows="4" placeholder="Descreva as caracteristicas desse endereço"></textarea>
+                            </div>
 
-                    <div class="form-floating col-5 mb-3 f-5">
-                        <input type="text" class="form-control p-0 px-2 m-auto field-size " id="district" name="district" placeholder="Ex.: Periperi" value="">
-                        <label class="mx-2" for="district">Bairro</label>
-                    </div>
-                    <div class="form-floating col-7 mb-3 f-5">
-                        <input type="text" class="form-control p-0 px-2 m-auto field-size " id="destinatary" name="destinatary" placeholder="Ex.: João Almeida" value="">
-                        <label class="mx-2" for="destinatary">Destinatário</label>
-                    </div>
+                            <div class="text-right col-12 mt-4 mb-3">
+                                <button type="reset" id="back-to-modal" class="btn btn-outline-danger mx-4">Cancelar</button>
+                                <button type="submit" name="new-address" class="btn btn-primary float-none">Confirmar</button>
+                            </div>
+                        </div>
+                    </form>
 
-                    <div class="col-12 mb-3 f-6">
-                        <textarea class="form-control py-2 px-2 m-auto" id="description" name="description" rows="4" placeholder="Descreva as caracteristicas desse endereço"></textarea>
-                    </div>
-
-                    <div class="text-right col-12 mt-4 mb-3">
-                        <button type="reset" id="back-to-modal" class="btn btn-outline-danger mx-4">Cancelar</button>
-                        <button type="submit" name="new-address" class="btn btn-primary float-none">Confirmar</button>
-                    </div>
-                </div>
-            </form>
-
-        </div><!-- modal content -->
-    </div><!-- modal dialog -->
-</div><!-- modal -->
+            </div><!-- modal content -->
+        </div><!-- modal dialog -->
+    </div><!-- modal -->

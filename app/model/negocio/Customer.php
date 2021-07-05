@@ -40,7 +40,7 @@ Class Customer extends User{
 	//Verifica se os usuário esta cadastrado no banco de dados
 	public function checkCredentials(){
 		$dao = new CustomerDao();
-		if($res = $dao->selectByCredentials($this)){
+		if($dao->selectByCredentials($this) != null){
 			return true;
 		}
 		return false;

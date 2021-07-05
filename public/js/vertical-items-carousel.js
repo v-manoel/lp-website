@@ -3,10 +3,11 @@ const vslider = $('.vertical-items-carousel');
 vslider.slick({
     dots: false,
     arrows: false,
-    speed: 300,
-    slidesToShow: 5,
+    speed: 200,
+    slidesToShow: 6,
     slidesToScroll: 1,
     vertical: true,
+    infinite: true,
     responsive: [
       {
         breakpoint: 990,

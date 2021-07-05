@@ -33,11 +33,7 @@ class ControllerAccount extends Render{
                 break;
             case 'myAddress':
                 $this->requested_page = "Enderecos";
-                if(count($this->customer->getAddresses()) == 0){
-                    $dest_page = DIRPAGE.'account/page/newAddress';
-                    $this->messagePage("Você não possui nenhum endereço cadastrado ! <br> <br> 
-                    Clique no botão abaixo <br> para cadastrar um novo ponto de entrega",$dest_page );
-                }
+
                 break;
             case 'myOrders':
                 $this->requested_page = "Compras";
@@ -162,11 +158,11 @@ class ControllerAccount extends Render{
             //updates user' session reference
             $_SESSION['user_login'] = serialize($this->customer->getCustomer());
        
-            $dest_page = DIRPAGE.'account/page/myRegister';
-            $this->messagePage("Dados Atualizados com Sucesso !",$dest_page );
+            $dest_page = DIRPAGE.'account/page/myData';
+            $this->messagePage("Dados Atualizados com Sucesso !",$dest_page);
             
         }else{
-            $dest_page = DIRPAGE.'account/page/myRegister';
+            $dest_page = DIRPAGE.'account/page/myData';
             $this->messagePage("Erro no Processo de Atualização !",$dest_page );
         }
         
@@ -334,12 +330,12 @@ class ControllerAccount extends Render{
     public function EvalProduct()
     {
 
-       if(isset($_POST['product-id'])){
-           $product = new Product();
-           $product->setId($_POST['product-id']);
-           if($product->findByID()){
-               $product->setRate($_POST['product-rate']);
-               $product->update(); //remove after
+       if(isset($_POST['item-id'])){
+           $item = new Item();
+           $item->setId($_POST['item-id']);
+           if($item->findByID()){
+               $item->setRate($_POST['item-rate']);
+               $item->update(); //remove after
                
             }
         }

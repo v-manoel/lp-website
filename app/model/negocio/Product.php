@@ -1,6 +1,7 @@
 <?php 
 
 require_once __DIR__."/Category.php";
+require_once __DIR__."/Item.php";
 require_once __DIR__."/../dao/ProductDao.php";
 
 Class Product{
@@ -12,7 +13,6 @@ Class Product{
 	private $offer = 0.0;
 	private $categories = array();
 	private $source = "";
-	private $rate = 0;
 
 	//stats attributes
 	private $total_orders = 0;
@@ -61,6 +61,29 @@ Class Product{
 		$products = $dao->allByCategory($category);
 		
 		return $products;
+	}
+
+	public function NumSold()
+	{
+		$sold = 0;
+		foreach(Item::allByProduct($this) as $item) {
+			$sold += $item->getQnty();
+		}
+		return $sold;
+	}
+
+	public function AverageRating()
+	{
+		$rate = 0;
+		$prod_in_items = Item::allByProduct($this);
+		if(count($prod_in_items)){
+			foreach($prod_in_items  as $item) {
+				$rate += $item->getRate();
+			}
+		
+			$rate = floor($rate/count($prod_in_items));
+		} 
+		return $rate;
 	}
 
 	
@@ -324,25 +347,7 @@ Class Product{
 		return $this;
 	}
 
-		/**
-	 * Get the value of rate
-	 */ 
-	public function getRate()
-	{
-		return $this->rate;
-	}
 
-	/**
-	 * Set the value of rate
-	 *
-	 * @return  self
-	 */ 
-	public function setRate($rate)
-	{
-		$this->rate = $rate;
-
-		return $this;
-	}
 
 	//static Functions
 

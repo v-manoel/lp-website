@@ -11,6 +11,7 @@ Class Item{
 	private $price = 0.0;
 	private $storaged_qnty = 0;
 	private ?Order $order = null; // OR private ?Order $order = null
+	private $rate = 0;
 
 	public function insert(){
 		$dao = new ItemDao();
@@ -156,6 +157,26 @@ Class Item{
 	public function setOrder($order)
 	{
 		$this->order = $order;
+
+		return $this;
+	}
+
+			/**
+	 * Get the value of rate
+	 */ 
+	public function getRate()
+	{
+		return $this->rate;
+	}
+
+	/**
+	 * Set the value of rate
+	 *
+	 * @return  self
+	 */ 
+	public function setRate($rate)
+	{
+		$this->rate = $rate;
 
 		return $this;
 	}

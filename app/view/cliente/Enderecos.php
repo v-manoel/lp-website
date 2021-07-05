@@ -1,4 +1,11 @@
 <div class="accordion col-5 mt-5 ml-4 mr-3" id="accordionExample">
+  <?php if(count($this->customer->getAddresses()) == 0){ ?>
+    <div class="shadow-lg my-auto p-5 rounded  text-center bg-warning">      
+    <h4>Você ainda não possui endereços cadastrados</h4>
+    <h6 class="mt-5 mb-3">Selecione a opção ao lado para nos informar seus pontos de entrega favoritos !</h6>
+    <i class="h1 bi bi-emoji-smile mt-4"></i>
+    </div>
+  <?php }else{ ?>  
   <?php foreach ($this->customer->getAddresses() as $addr) { ?>
   <div class="accordion-item p-0">
     <form action="<?= DIRPAGE.'account/page/newAddress'?>" method="post">
@@ -57,6 +64,7 @@
       </div>
     </form>
   </div>
+  <?php } ?>
   <?php } ?>
 </div>
 <div class="row container-fluid p-0 m-0 col-2">

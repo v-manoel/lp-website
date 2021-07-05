@@ -94,7 +94,7 @@
                   <input type='hidden' name='product_id' id='product_id' value='<?= $item->getProduct()->getId() ?>'>
                   <button type="submit" class="border-0 bg-transparent p-0">
                     <?php if (count($item->getProduct()->getImgs()) > 0) { ?>
-                      <img src="<?= $item->getProduct()->getImgs()[0]; ?>" width="75%" alt="produto">
+                      <img src="<?= DIRIMG . $item->getProduct()->getImgs()[0]; ?>" width="75%" alt="produto">
                     <?php } else { ?>
                       <img src="<?= DIRIMG . 'examples/produtos.svg'; ?>" width="75%" alt="produto">
                     <?php } ?>
@@ -112,13 +112,13 @@
                   <?php if(ucfirst($order->getStatus()->getStatus()) == "Delivered"){ ?>
                     <p>Avalie este Item:</p>
                     <form action="" method="POST" id="<?= $item->getProduct()->getId()?>">
-                    <input type='hidden' name='product-id' id='<?= 'prod'.$item->getProduct()->getId() ?>' value='<?= $item->getProduct()->getId() ?>'>
+                    <input type='hidden' name='item-id' id='<?= 'prod'.$item->getId() ?>' value='<?= $item->getId() ?>'>
                     <div class="rating h4">
                       <?php for ($i = 5; $i >= 1; $i--) { ?>
-                        <?php if ($i == $item->getProduct()->getRate()) { ?>
-                          <input type="radio" checked name="product-rate" value="<?= $item->getProduct()->getRate(); ?>" id="<?= $item->getProduct()->getId(); ?>"><label for="<?= $item->getProduct()->getId(); ?>">☆</label>
+                        <?php if ($i == $item->getRate()) { ?>
+                          <input type="radio" checked name="item-rate" value="<?= $item->getRate(); ?>" id="<?= $item->getId(); ?>"><label for="<?= $item->getId(); ?>">☆</label>
                         <?php } else { ?>
-                          <input type="radio" name="product-rate" onclick="RateProduct(this)" value="<?= $i ?>" id="<?= $item->getProduct()->getId().'prod'.$i ?>"><label for="<?= $item->getProduct()->getId().'prod'.$i ?>">☆</label>
+                          <input type="radio" name="item-rate" onclick="RateProduct(this)" value="<?= $i ?>" id="<?= $item->getId().'prod'.$i ?>"><label for="<?= $item->getId().'prod'.$i ?>">☆</label>
                         <?php } ?>
                       <?php } ?>
                     </div>
@@ -209,7 +209,7 @@
   <div class="col-12 mt-5 mx-1 pt-0 pb-4 px-0 ml-4 text-left container-fluid">
     <img class="mt-2 mb-2" width="86px" id="header_logo_left" alt="logo" src="<?= DIRIMG . 'logos/coinlogo2.svg'; ?>" />
     <h5 class="fw-normal mt-auto text-secondary">Bem vindo <?= $this->customer->getCustomer()->NamePieces()[0]; ?>!!</h5>
-    <h6 class="fw-normal text-dark">Revesa seus pedidos no @LaPechincha</h6>
+    <h6 class="fw-normal text-dark">Revise e Avalie seus pedidos no @LaPechincha</h6>
   </div>
 </div>
 </div>

@@ -367,3 +367,36 @@ footer .search-pagination .page-link:hover{
     border: #ced4da solid 1px !important;
     color: #495057 !important;
 }
+
+.rating {
+    flex-direction: row-reverse;
+    justify-content: center
+  }
+  
+  .rating>input {
+    display: none
+  }
+  
+  .rating>label {
+    position: relative;
+    width: 1em;
+  
+    color: #FFD600;
+    cursor: pointer
+  }
+  
+  
+  
+  .rating>label:hover:before,
+  .rating>label:hover~label:before {
+    opacity: 1 !important
+  }
+  
+  .rating>input:checked~label:before {
+    opacity: 1
+  }
+  
+  .rating:hover>input:checked~label:before {
+    opacity: 0.4
+  }
+  

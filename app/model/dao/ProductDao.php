@@ -11,20 +11,18 @@ class ProductDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("INSERT INTO products(title,description,price,offer,source,rate) values(:title, :description, :price, :offer, :source, :rate)");
+            $stmt = $con->prepare("INSERT INTO products(title,description,price,offer,source) values(:title, :description, :price, :offer, :source)");
             $stmt->bindParam(":title",$_title);
             $stmt->bindParam(":description",$_description);
             $stmt->bindParam(":price",$_price);
             $stmt->bindParam(":offer",$_offer);
             $stmt->bindParam(":source",$_source);
-            $stmt->bindParam(":rate",$_rate);
 
             $_title = $product->getTitle();
             $_description = $product->getDescription();
             $_price = $product->getPrice();
             $_offer = $product->getOffer();
             $_source = $product->getSource();
-            $_rate = $product->getRate();
 
 
             $stmt->execute();
@@ -82,7 +80,7 @@ class ProductDao{
                     $product->setPrice($row['price']);
                     $product->setOffer($row['offer']);
                     $product->setSource($row['source']);
-                    $product->setRate($row['rate']);
+                    
                     
                     //Set product images
                     $img_stmt = $con->prepare("SELECT * FROM images WHERE id_product = :product_id");
@@ -120,22 +118,19 @@ class ProductDao{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM products WHERE title LIKE :title 
             AND description LIKE :description AND price >= :price AND offer >= :offer 
-            AND source LIKE :source AND rate >= :rate");
+            AND source LIKE :source");
             $stmt->bindParam(":title",$_title);
             $stmt->bindParam(":description",$_description);
             $stmt->bindParam(":price",$_price);
             $stmt->bindParam(":offer",$_offer);
             $stmt->bindParam(":source",$_source);
-            $stmt->bindParam(":rate",$_rate);
-            
-            
+
             $_title = '%'. $generic_product->getTitle() .'%';
             $_description = '%'. $generic_product->getDescription() .'%';
             $_price = $generic_product->getPrice();
             $_offer = $generic_product->getOffer();
             $_source = '%'. $generic_product->getSource() .'%';
-            $_rate = $generic_product->getRate();
-            
+
             $stmt->execute();
             $products = array();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -147,7 +142,7 @@ class ProductDao{
                     $product->setPrice($row['price']);
                     $product->setOffer($row['offer']);
                     $product->setSource($row['source']);
-                    $product->setRate($row['rate']);
+                    
 
                     $_id = $product->getId();
                     
@@ -234,22 +229,21 @@ class ProductDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("UPDATE products SET title=:title, description=:description, price=:price, offer=:offer, source=:source, rate=:rate WHERE id=:id");
+            $stmt = $con->prepare("UPDATE products SET title=:title, description=:description, price=:price, offer=:offer, source=:source WHERE id=:id");
             $stmt->bindParam(":id",$_id);
             $stmt->bindParam(":title",$_title);
             $stmt->bindParam(":description",$_description);
             $stmt->bindParam(":price",$_price);
             $stmt->bindParam(":offer",$_offer);
             $stmt->bindParam(":source",$_source);
-            $stmt->bindParam(":rate",$_rate);
             
+
             $_id = $product->getId();
             $_title = $product->getTitle();
             $_description = $product->getDescription();
             $_price = $product->getPrice();
             $_offer = $product->getOffer();
             $_source = $product->getSource();
-            $_rate = $product->getRate();
             
             $stmt->execute();            
 

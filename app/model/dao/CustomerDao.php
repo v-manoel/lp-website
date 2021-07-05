@@ -50,7 +50,7 @@ class CustomerDao{
 
             if($stmt->rowCount() == 1){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                if($row['department'] == null && !$only_active || $row['is_active'] == $only_active){
+                if($row['department'] == null && (!$only_active || $row['is_active'] == $only_active)){
                     $customer->setCpf($row['cpf']);
                     $customer->setName($row['name']);
                     $customer->setPhone($row['phone']);

@@ -28,7 +28,7 @@
     </div>
     <div class="col-md-6 mt-2">
       <label for="phone" class="form-label text-secondary my-0">Celular</label>
-      <input type="text" class="form-control" id="phone" name="phone" value="<?= $this->customer->getCustomer()->getPhone(); ?>">
+      <input type="text" class="form-control phone" minlength="11" id="phone" name="phone" value="<?= $this->customer->getCustomer()->getPhone(); ?>">
     </div>
     <div class="col-md-6 mt-2">
       <label for="birthday" class="form-label text-secondary my-0">Data de Nascimento</label>

@@ -154,7 +154,10 @@ abstract Class User{
 	 */ 
 	public function setBirthday($birthday)
 	{
-		$this->birthday = $birthday;
+		if($birthday)
+			$this->birthday = $birthday;
+		else
+			$this->birthday = Null;
 
 		return $this;
 	}

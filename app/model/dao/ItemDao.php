@@ -12,18 +12,20 @@ class ItemDao{
         try{
             $con = Connection::getConnection();
             
-            $stmt = $con->prepare("INSERT INTO bd_pechincha.items(id_order, id_product, price, qnty, storaged_qnty) values(:id_order, :id_product, :price, :qnty, :storaged_qnty)");
+            $stmt = $con->prepare("INSERT INTO bd_pechincha.items(id_order, id_product, price, qnty, storaged_qnty, rate) values(:id_order, :id_product, :price, :qnty, :storaged_qnty, :rate)");
             $stmt->bindParam(":id_order", $_id_order);
             $stmt->bindParam(":id_product", $_id_product);
             $stmt->bindParam(":price", $_price);
             $stmt->bindParam(":qnty", $_qnty);
             $stmt->bindParam(":storaged_qnty", $_storaged_qnty);
+            $stmt->bindParam(":rate",$_rate);
 
             $_id_order = $item->getOrder()->getId();
             $_id_product = $item->getProduct()->getId();
             $_price = $item->getPrice();
             $_qnty = $item->getQnty();
             $_storaged_qnty = $item->getStoraged_qnty();
+            $_rate = $item->getRate();
 
             $stmt->execute();
 
@@ -60,6 +62,7 @@ class ItemDao{
                         $item->setQnty($row['qnty']);
                         $item->setPrice($row['price']);
                         $item->setStoraged_qnty($row['storaged_qnty']);
+                        $item->setRate($row['rate']);
                         return $item;
                     }  
             }
@@ -140,12 +143,14 @@ class ItemDao{
         
         try{
             $con = Connection::getConnection();
-            $stmt = $con->prepare("SELECT * FROM items WHERE price >= :price AND qnty >= :qnty");
+            $stmt = $con->prepare("SELECT * FROM items WHERE price >= :price AND qnty >= :qnty  AND rate >= :rate");
             $stmt->bindParam(":price", $_price);
             $stmt->bindParam(":qnty", $_qnty);
+            $stmt->bindParam(":rate",$_rate);
 
             $_price = $generic_item->getPrice();
             $_qnty = $generic_item->getQnty();
+            $_rate = $generic_item->getRate();
             
             $stmt->execute();
 
@@ -163,6 +168,7 @@ class ItemDao{
                     $item->setQnty($row['qnty']);
                     $item->setPrice($row['price']);
                     $item->setStoraged_qnty($row['storaged_qnty']);
+                    $item->setRate($row['rate']);
                     array_push($items,$item);
                 }  
             }
@@ -180,14 +186,16 @@ class ItemDao{
         try{
             $con = Connection::getConnection();
 
-            $stmt = $con->prepare("UPDATE items SET storaged_qnty=:storaged_qnty WHERE id_order = :id_order AND id_product = :id_product");
+            $stmt = $con->prepare("UPDATE items SET storaged_qnty=:storaged_qnty, rate=:rate WHERE id_order = :id_order AND id_product = :id_product");
             $stmt->bindParam(":id_order", $_id_order);
             $stmt->bindParam(":id_product",$_id_product);
             $stmt->bindParam(":storaged_qnty", $_storaged_qnty);
+            $stmt->bindParam(":rate",$_rate);
             
             $_id_order = !$item->getOrder()? '%' : $item->getOrder()->getId();
             $_id_product = !$item->getProduct()? '%' : $item->getProduct()->getId();
             $_storaged_qnty = $item->getStoraged_qnty();
+            $_rate = $item->getRate();
 
 
             $stmt->execute();            

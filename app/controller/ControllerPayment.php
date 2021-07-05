@@ -57,25 +57,29 @@ class ControllerPayment extends Render{
 
     public function PaymentMethod(){
         if(isset($_POST['card-number'])){
-            if($_POST['card-number'] != 0){
-                $card = new CreditCard();
-                $card->setNumber($_POST['card-number']);
-                if($card->findByID()){
-                    $this->order->setPayment($card);
-                    $this->content['order'] = $this->order;
-                }
+            if(ucfirst($_POST['card-number']) == "Keep")
+            {
+                header('Location:'.DIRPAGE.'payment/page/review', true,302);
             }else{
-                $this->order->setPayment(null);
+                if(ucfirst($_POST['card-number']) != "New"){
+                    $card = new CreditCard();
+                    $card->setNumber($_POST['card-number']);
+                    if($card->findByID()){
+                        $this->order->setPayment($card);
+                        $this->content['order'] = $this->order;
+                    }
+                }else{
+                    $this->order->setPayment(null);
+                }
+                header('Location:'.DIRPAGE.'payment/page/confirm', true,302);
             }
-            $this->page("confirm");
         }else
-            $this->page("preview");
+        header('Location:'.DIRPAGE.'payment/page/preview', true,302);
     
     }
 
     public function ResetPayment()
     {
-        $this->order->setPayment(null);
         $this->page("preview");
     }
 
@@ -193,9 +197,10 @@ class ControllerPayment extends Render{
                 $this->order->setPayment($card);
                     
             }
-            $this->page("review");
+            header('Location:'.DIRPAGE.'payment/page/review', true,302);
+        }else{
+            header('Location:'.DIRPAGE.'payment/page/confirm', true,302);
         }
-        $this->page("confirm");
     }
 
     public function addMain()

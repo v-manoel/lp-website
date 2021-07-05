@@ -21,9 +21,6 @@ class ControllerProdInfo extends Render{
 
     }
 
-    public function exibir(){
-        
-    }
 
     public function addMain()
     {
@@ -31,6 +28,15 @@ class ControllerProdInfo extends Render{
         $product = new Product();
         $product->setId($_POST['product_id']);
         $product->findByID();
+        $this->content['product'] = $product;
+
+        $prod = new Product();
+        $prod->setSource($this->content['product']->getSource());
+        $this->content['source'] = $prod->all();
+
+        $this->content['main-cat'] = $this->content['product']->allByCategory($this->content['product']->getCategories()[0]);
+         
+
         if(file_exists(DIRREQ."app/view/{$this->getDir()}/Main.php")){
             require(DIRREQ."app/view/{$this->getDir()}/Main.php");
         }
