@@ -330,9 +330,14 @@ class ControllerAccount extends Render{
     public function EvalProduct()
     {
 
-       if(isset($_POST['item-id'])){
+       if(isset($_POST['prod-id']) && isset($_POST['order-id'])){
+           $prod = new Product();
+           $prod->setId($_POST['prod-id']);
+           $order = new Order();
+           $order->setId($_POST['order-id']);
            $item = new Item();
-           $item->setId($_POST['item-id']);
+           $item->setOrder($order);
+           $item->setProduct($prod);
            if($item->findByID()){
                $item->setRate($_POST['item-rate']);
                $item->update(); //remove after

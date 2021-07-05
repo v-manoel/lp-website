@@ -1,6 +1,6 @@
 <div class="col-6 row">
 <?php foreach ($this->customer->getCards() as $card) { ?>
-  <div class="col-md-6 mt-5 ">
+  <div class="col-md-6 mt-5 mb-0 ">
     <div class="iterativeCard delcard" onmouseover="cardOption(this)" onmouseout="cardOption(this)" id="">
       <div class="flagCard bi bi-layers-half h2 text-center text-white"> </div>
 

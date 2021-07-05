@@ -27,8 +27,8 @@
                         <p class="prod-title h4 m-0"><?= $this->content['product']->getTitle(); ?></p>
                         <p class="rating h4 text-start">
                             <?php for ($i = 5; $i >= 1; $i--) { ?>
-                                <?php if ($i == $this->content['product']->AverageRating()) { ?>
-                                <input type="radio" disabled checked name="item-rate" value="<?= $this->content['product']->AverageRating(); ?>" id="<?= $this->content['product']->getId(); ?>"><label for="<?= $this->content['product']->getId(); ?>">☆</label>
+                                <?php if ($i == $this->content['product']->getRate()) { ?>
+                                <input type="radio" disabled checked name="item-rate" value="<?= $this->content['product']->getRate(); ?>" id="<?= $this->content['product']->getId(); ?>"><label for="<?= $this->content['product']->getId(); ?>">☆</label>
                                 <?php } else { ?>
                                 <input type="radio" disabled name="item-rate" value="<?= $i ?>" id="<?= $this->content['product']->getId().'prod'.$i ?>"><label for="<?= $this->content['product']->getId().'prod'.$i ?>">☆</label>
                                 <?php } ?>
@@ -37,8 +37,8 @@
                     </div>
                     <div class="my-2">
                         <p class="text-secondary text-decoration-line-through m-0 off-price"> <?= 'R$' . floor($this->content['product']->getPrice()) ?><span class="decimals align-top"><?= ($this->content['product']->getPrice() * 100) % 100; ?></span></p>
-                        <p class="card-title price m-0"><?= 'R$ ' . floor($this->content['product']->offerPrice()) ?><span class="decimals align-top"><?= ($this->content['product']->offerPrice() * 100) % 100; ?></span>
-                            <span class="text-success off-rate"> <?= $this->content['product']->offerAsPerc(); ?>% OFF</span>
+                        <p class="card-title price m-0 h4"><?= 'R$ ' . floor($this->content['product']->offerPrice()) ?><span class="decimals align-top"><?= ($this->content['product']->offerPrice() * 100) % 100; ?></span>
+                            <span class="text-success off-rate h6"> <?= $this->content['product']->offerAsPerc(); ?>% OFF</span>
                         </p>
 
                         <p class="parcela text-success m-0"><?= '12x de R$ ' . floor($this->content['product']->offerPrice()) ?><span class="decimals align-top"><?= ($this->content['product']->offerPrice() * 100) % 100; ?></span>
@@ -49,16 +49,7 @@
                         <?php } ?>
                     </div>
                     <div class="my-2">
-                        <p class="m-0">Informações sobre o produto</p>
-                        <ul class="pl-3">
-                            <li>Some information</li>
-                            <li>Some information</li>
-                            <li>Some information</li>
-                            <li>Some information</li>
-                            <li>Some information</li>
-                            <li>Some information</li>
-                            <li>Some information</li>
-                        </ul>
+                       
                     </div><!-- list -->
 
                 </div><!-- col -->

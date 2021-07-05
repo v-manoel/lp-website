@@ -103,3 +103,9 @@
 .my-gray{
     color: rgba(170, 167, 167, 0.623);
 }
+
+.my-bg-paper{
+  background-color: white;
+  background-image: url("../img/old-paper-bg.jpg");
+  background-repeat: no-repeat;
+}

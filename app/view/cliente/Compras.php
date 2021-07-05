@@ -111,14 +111,15 @@
                   <div class="text-center">
                   <?php if(ucfirst($order->getStatus()->getStatus()) == "Delivered"){ ?>
                     <p>Avalie este Item:</p>
-                    <form action="" method="POST" id="<?= $item->getProduct()->getId()?>">
-                    <input type='hidden' name='item-id' id='<?= 'prod'.$item->getId() ?>' value='<?= $item->getId() ?>'>
+                    <form action="" method="POST" id="<?= $order->getId().'-'.$item->getProduct()->getId()?>">
+                    <input type='hidden' name='prod-id' id='<?= 'prod'.$item->getProduct()->getId() ?>' value='<?= $item->getProduct()->getId() ?>'>
+                    <input type='hidden' name='order-id' id='<?= 'order'.$order->getId() ?>' value='<?= $order->getId() ?>'>
                     <div class="rating h4">
                       <?php for ($i = 5; $i >= 1; $i--) { ?>
                         <?php if ($i == $item->getRate()) { ?>
-                          <input type="radio" checked name="item-rate" value="<?= $item->getRate(); ?>" id="<?= $item->getId(); ?>"><label for="<?= $item->getId(); ?>">☆</label>
+                          <input type="radio" checked name="item-rate" value="<?= $item->getRate(); ?>" id="<?= $order->getId().'-',$item->getProduct()->getId(); ?>"><label for="<?= $order->getId().'-'.$item->getProduct()->getId(); ?>">☆</label>
                         <?php } else { ?>
-                          <input type="radio" name="item-rate" onclick="RateProduct(this)" value="<?= $i ?>" id="<?= $item->getId().'prod'.$i ?>"><label for="<?= $item->getId().'prod'.$i ?>">☆</label>
+                          <input type="radio" name="item-rate" onclick="RateProduct(this)" value="<?= $i ?>" id="<?= $order->getId().'prod'.$i.'-'.$item->getProduct()->getId() ?>"><label for="<?= $order->getId().'prod'.$i.'-'.$item->getProduct()->getId() ?>">☆</label>
                         <?php } ?>
                       <?php } ?>
                     </div>
@@ -164,7 +165,7 @@
                   </div>
                   <h4 class="step-title">Pedido Confirmado</h4>
                 </div><!-- step -->
-                <?php if(count($order->allStatus()) > 1){ ?>
+                <?php if($order->getStatus()->isCompleted("Paid")){ ?>
                 <div class="step completed">
                 <?php }else{ ?>
                 <div class="step ">
@@ -174,7 +175,7 @@
                   </div>
                   <h4 class="step-title">Pedido Processado</h4>
                 </div><!-- step -->
-                <?php if(count($order->allStatus()) > 2){ ?>
+                <?php if($order->getStatus()->isCompleted("Prepared")){ ?>
                 <div class="step completed">
                 <?php }else{ ?>
                 <div class="step ">
@@ -184,7 +185,7 @@
                   </div>
                   <h4 class="step-title">Qualidade Checada</h4>
                 </div><!-- step -->
-                <?php if(count($order->allStatus()) > 3 && $order->getStatus()->getStatus() == "Delivered"){ ?>
+                <?php if($order->getStatus()->isCompleted("Checked")){ ?>
                 <div class="step completed">
                 <?php }else{ ?>
                 <div class="step ">

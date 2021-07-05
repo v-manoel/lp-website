@@ -28,6 +28,7 @@ class ControllerProdInfo extends Render{
         $product = new Product();
         $product->setId($_POST['product_id']);
         $product->findByID();
+        $product->AverageRating();
         $this->content['product'] = $product;
 
         $prod = new Product();

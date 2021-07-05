@@ -75,6 +75,7 @@ class ControllerDepartment extends Render{
 
         if(isset($_SESSION['dep-order'])){
             $this->content['order'] = unserialize($_SESSION['dep-order']);
+            $this->content['status'] = array_reverse(OrderStatus::allByOrder($this->content['order']));
             
             if($this->employee->getDepartment() == "Gerente"){
                 switch (ucfirst($this->content['order']->getStatus()->getStatus())) {
@@ -126,7 +127,8 @@ class ControllerDepartment extends Render{
     {
         $order = new Order();
         $this->content['orders'] = $this->employee->OrdersByMyDep($order->all());
-        header('Location:'.DIRPAGE.'department/page/pedidos', true,302);
+        $this->requested_page = "Pedidos";
+        $this->renderLayout();
     }
 
 

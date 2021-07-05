@@ -48,6 +48,11 @@ Class OrderStatus{
 		}
 	}
 
+	public function isCompleted($status){
+		$steps = ["Paid" => 0, "Prepared" => 1, "Checked" => 2, "Delivered"=>3];
+		return $steps[ucfirst($this->status)] > $steps[ucfirst($status)];
+	}
+
 	/**
 	 * Get the value of id
 	 */ 

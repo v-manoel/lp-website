@@ -256,3 +256,8 @@ body{margin-top:20px;}
 .bg-faded, .bg-secondary {
     background-color: #f5f5f5 !important;
 }
+
+.status-info:hover{
+    color:#007bff;
+    cursor:default;
+}

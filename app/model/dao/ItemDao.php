@@ -95,6 +95,7 @@ class ItemDao{
                         
                 $item->setOrder($order);
                 $item->setStoraged_qnty($row['storaged_qnty']);
+                $item->setRate($row['rate']);
 
                 array_push($items,$item);
                   
@@ -128,6 +129,7 @@ class ItemDao{
                     $item->setQnty($row['qnty']);
                     $item->setPrice($row['price']);
                     $item->setStoraged_qnty($row['storaged_qnty']);
+                    $item->setRate($row['rate']);
                     array_push($items,$item);
                 }  
             }

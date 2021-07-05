@@ -5,7 +5,6 @@ require_once __DIR__."/Order.php";
 require_once __DIR__."/../dao/ItemDao.php"; 
 
 Class Item{
-	private $id = null;
 	private ?Product $product = null;
 	private $qnty = 0;
 	private $price = 0.0;
@@ -34,26 +33,6 @@ Class Item{
 		$dao = new ItemDao();
 	 	$res = $dao->selectById($this);
 		return $res; 
-	}
-
-	/**
-	 * Get the value of id
-	 */ 
-	public function getId()
-	{
-		return $this->id;
-	}
-
-	/**
-	 * Set the value of id
-	 *
-	 * @return  self
-	 */ 
-	public function setId($id)
-	{
-		$this->id = $id;
-
-		return $this;
 	}
 
 	/**

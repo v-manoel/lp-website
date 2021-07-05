@@ -76,7 +76,6 @@ class CategoryDao{
     }
 
     public function select(Category $generic_category){
-        
         try{
             $con = Connection::getConnection();
             $stmt = $con->prepare("SELECT * FROM categories WHERE name LIKE :name ");

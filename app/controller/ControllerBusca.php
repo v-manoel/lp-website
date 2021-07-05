@@ -34,7 +34,7 @@ class ControllerBusca extends Render{
         }
         if(isset($_GET['category'])){
             $category = new Category();
-            $category->setName($_GET['category']);
+            $category->setName(ucwords($_GET['category']));
             $category->findByName();
             $product->addCategory($category);
             $_SESSION['search_string'] = $_GET['category'];
@@ -49,13 +49,13 @@ class ControllerBusca extends Render{
             }
 
             $category = new Category();
-            $category->setName($_GET['search_string']);
-            if($category->findByName())
-                $product->addCategory($category);
+            $category->setName(ucwords($_GET['search_string']));
+            foreach ($category->all() as $cat) {   
+                    $product->addCategory($cat);
+                }
             
             $_SESSION['search_string'] = $_GET['search_string'];
         }
-
         return $product->allBySimilarity();
     }
 

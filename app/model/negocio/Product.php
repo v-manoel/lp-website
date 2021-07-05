@@ -14,10 +14,12 @@ Class Product{
 	private $categories = array();
 	private $source = "";
 
+
 	//stats attributes
 	private $total_orders = 0;
 	private $total_sales = 0.0;
 	private $total_qnty = 0;
+	private $rate = 0;
 
 	public function findByID(){
 		$dao = new ProductDao();
@@ -74,16 +76,16 @@ Class Product{
 
 	public function AverageRating()
 	{
-		$rate = 0;
+		$this->rate = 0;
 		$prod_in_items = Item::allByProduct($this);
 		if(count($prod_in_items)){
 			foreach($prod_in_items  as $item) {
-				$rate += $item->getRate();
+				$this->rate += $item->getRate();
 			}
-		
-			$rate = floor($rate/count($prod_in_items));
+
+			$this->rate = intval(floor($this->rate/count($prod_in_items)));
 		} 
-		return $rate;
+		return $this->rate;
 	}
 
 	
@@ -118,8 +120,7 @@ Class Product{
 			//Equals or more expensive
 			$products = array_merge($products,$product->all());
 		}
-
-
+		
 		foreach ($this->categories as $category) {
 			$products = array_merge($products, $this->allByCategory($category));
 		}
@@ -408,6 +409,26 @@ Class Product{
 		
 
 		return $new_list;
+	}
+
+	/**
+	 * Get the value of rate
+	 */ 
+	public function getRate()
+	{
+		return $this->rate;
+	}
+
+	/**
+	 * Set the value of rate
+	 *
+	 * @return  self
+	 */ 
+	public function setRate($rate)
+	{
+		$this->rate = $rate;
+
+		return $this;
 	}
 }
 
