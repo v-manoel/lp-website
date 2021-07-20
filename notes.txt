@@ -1,4 +1,0 @@
-1 - array map de object =: value
-2 - auto sort array
-3 - stats fields in commom modal classes
-4 - loads all orders and sort them into model class or loads sorted orders using sql
